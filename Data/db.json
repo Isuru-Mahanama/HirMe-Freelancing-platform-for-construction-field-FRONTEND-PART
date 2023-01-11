@@ -1,0 +1,12 @@
+{
+    "portfolio":[
+        {
+            "name":" Dimitri Marco",
+            "job":"Strutural Engineer",
+            "about":"Freelancer providing services for programming and design contentneeds. Join me down below and let's get cracking!",
+            "services":" Since the beginning of my journey as a freelance designer and developer, I've done remote work for agencies consulted forstartups and collaborated with talanted people to create digital products for both business and consumer use. I offer from a wide range of services, including brand design, programming and teaching.",
+            "service_1_title":"Beautiful Designs",
+            "service_desc_1":"Creating elegant designs suited for your needs following core design theory."
+        }
+    ]
+}
