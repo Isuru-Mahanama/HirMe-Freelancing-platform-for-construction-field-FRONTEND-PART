@@ -13,10 +13,11 @@ import UserNameIndex from './Pages/AccountSetUp/UserNameIndex';
 import LoginAsIndex from './Pages/AccountSetUp/AccountTypeIndex'
 import Welcome from './Pages/AccountSetUp/WelcomeForHires';
 import FirstPageForWorker from './Pages/Worker/AccountPageForWorker';
-import SetUpPageIndex from './Pages/setUpPageIndex';
 import Portfolio from './components/Portfolio/portfolioFirst';
 import FirstPageForHire from './Pages/Hire/AccountPageForHire';
 import WorkApplications from './Pages/Worker/ApplicationWorker';
+import ApplicationHire from './Pages/Hire/ApplicationHirepersonal';
+import ApplicationHire2 from './Pages/Hire/ApplicationHire2';
 
 
 function App() {
@@ -86,6 +87,13 @@ function App() {
             </Route>
            
             <Route exact path="/portfolioWorker" element={<FirstPageForWorker/>} >
+            
+            </Route>
+            <Route exact path="/applicationhire" element={<ApplicationHire/>} >
+            
+            </Route>
+              
+            <Route exact path="/applicationHire2" element={<ApplicationHire2/>} >
             
             </Route>
               

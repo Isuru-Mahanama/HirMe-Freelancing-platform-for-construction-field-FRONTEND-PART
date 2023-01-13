@@ -4,7 +4,7 @@
 
 .inputForm{
     width:1000px;
-    height: 600px;
+    height: 1000px;
     margin-left: 4cm;
     margin-bottom: 0cm;
     border:25px ;
@@ -13,6 +13,8 @@
     outline: rgb(230, 224, 224);
     box-sizing: border-box;
     margin-right: 4cm;
+
+   
     
     
     
@@ -79,13 +81,14 @@
     width:400px;
     margin-left:2cm;
     margin-right: 1cm;
+    color:rgb(8, 120, 211);
     
 }
 .inputBox input{
     width:100%;
     padding:10px;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    background:rgb(9, 2, 46);
+    border: 1px solid rgba(247, 239, 242, 0.911);
+    background: rgb(9, 2, 46);
     border-radius: 20px;
     outline: black;
     color:rgb(157, 184, 206);
@@ -93,6 +96,20 @@
     margin-bottom: 1cm;
     height: 55px;
 }
+
+.inputBox select{
+    width:100%;
+    padding-top: 34px;
+    border: 1px solid rgba(247, 239, 242, 0.911);
+    background: rgb(156, 150, 187);
+    border-radius: 20px;
+    outline: rgb(63, 60, 60);
+    color:#75d6da;
+    font-size:1em;
+    margin-bottom: 1cm;
+    height: 75px;
+}
+
 
 .inputBox span{
     position:absolute;
@@ -129,5 +146,48 @@
 .inputBox input:valid,
 .inputBox input:focus
 {
-    border: 1px solid #00dfc4;
+    border: 1px solid rgba(247, 239, 242, 0.911);
+    font-family: 'Rouge Script', cursive;
 }
+
+
+
+input::placeholder{
+    position:absolute;
+    left:0;
+    padding:10px;
+    font-size:1em;
+    color: #878b87;
+    pointer-events: none;
+    text-transform: uppercase;
+     font-family:'Rouge Script', cursive;
+  
+ }
+
+ .inputBox select:valid,
+.inputBox select:focus
+{
+    border: 1px solid rgba(247, 239, 242, 0.911);
+    font-family: 'Rouge Script', cursive;
+    background-color:rgb(9, 2, 46);
+}
+
+  .select-wrapper {
+    background-color: #082b34;
+    font-family:'Rouge Script', cursive;
+    color: #00dfc4; 
+    
+  
+  }
+
+.inputBox2{
+    position:relative;
+    width:400px;
+    margin-left:1.5cm;
+    margin-right: 1cm;
+    color:rgb(8, 120, 211);
+    font-style: bold;
+    margin-bottom: 27px;
+    padding-right: 15px;
+}
+

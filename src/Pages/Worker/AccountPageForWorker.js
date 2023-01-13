@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import ProgressCircle from "../../components/progressBar";
+
 
 const FirstPageForWorker = () => {
     let history = useNavigate();
@@ -49,9 +49,7 @@ const FirstPageForWorker = () => {
              
                 <div class="h-full border-2 border-dashed border-gray-200" aria-hidden="true">
                 
-                <ProgressCircle progress={50} />
-
-
+              
 
 
                 <button class="button" onClick={()=>handleSignUp()}>Set Up Your Account!!!...</button>
