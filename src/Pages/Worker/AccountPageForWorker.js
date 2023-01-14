@@ -11,7 +11,7 @@ const FirstPageForWorker = () => {
     }
     const handlePortfolio=()=>{
         
-        history("/portfolioWorker");
+        history("/portfolio");
     }
     
     

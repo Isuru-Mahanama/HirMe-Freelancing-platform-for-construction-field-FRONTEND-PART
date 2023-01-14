@@ -18,6 +18,7 @@ import FirstPageForHire from './Pages/Hire/AccountPageForHire';
 import WorkApplications from './Pages/Worker/ApplicationWorker';
 import ApplicationHire from './Pages/Hire/ApplicationHirepersonal';
 import ApplicationHire2 from './Pages/Hire/ApplicationHire2';
+import ApplicationWork2 from './Pages/Worker/ApplicationWork2';
 
 
 function App() {
@@ -94,6 +95,9 @@ function App() {
             </Route>
               
             <Route exact path="/applicationHire2" element={<ApplicationHire2/>} >
+            
+            </Route>
+            <Route exact path="/applicationWork2" element={<ApplicationWork2/>} >
             
             </Route>
               

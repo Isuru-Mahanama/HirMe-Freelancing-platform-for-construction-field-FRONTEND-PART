@@ -1,10 +1,11 @@
 .background{
     background-color: rgb(9, 2, 46);
+    
 }
 
 .inputForm{
     width:1000px;
-    height: 1000px;
+    height: auto;
     margin-left: 4cm;
     margin-bottom: 0cm;
     border:25px ;
@@ -13,13 +14,61 @@
     outline: rgb(230, 224, 224);
     box-sizing: border-box;
     margin-right: 4cm;
-
-   
-    
     
     
 }
+ 
+.multiselect{
+    width: "50%";
+    justify-content: "center";
+    display: "flex";
+    color: red;
+    background: red;
+}
+.add{
+    background-color: rgb(64, 70, 69);
+    border-radius: 50%;
+    height: 50px;
+    width:50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:1px solid rgb(5, 14, 15);
+    transition:0.4s ease;
     
+   
+}
+hr {
+    border: none;
+    border-top: 1px dotted rgb(31, 41, 39);
+    color: #fff;
+    background-color: rgb(58, 55, 55);
+    height: 3px;
+    width: 100%;
+  }
+  hr.dotted {
+    border: none;
+    border-top: 1px dotted rgb(12, 12, 12);
+    color: #fff;
+    background-color: rgb(58, 55, 55);
+    height: 3px;
+    width: 100%;
+  }
+.space{
+    padding-top: 40px;
+}        
+.add-item{
+    font-family: 'Rouge Script', cursive;
+    color:#10a9db;
+   
+}
+
+.add:hover {
+   
+    transform: scale(1.1);
+    background-color: rgb(21, 221, 188);
+   
+}
 .buttons{
     margin-left: 15cm;
 }
@@ -99,6 +148,7 @@
 
 .inputBox select{
     width:100%;
+  
     padding-top: 34px;
     border: 1px solid rgba(247, 239, 242, 0.911);
     background: rgb(156, 150, 187);
@@ -110,7 +160,9 @@
     height: 75px;
 }
 
-
+.inputB{
+    width:10px;
+}
 .inputBox span{
     position:absolute;
     left:0;
@@ -121,6 +173,7 @@
     text-transform: uppercase;
      font-family:'Rouge Script', cursive;
      transition:0.5s;
+     padding-left: 25px;
 }
 
 .inputBox input:valid ~span,
@@ -134,6 +187,42 @@
     border-right: 1px solid #00dfc4;
     letter-spacing: 0.2em;
     
+}
+
+.dateTo{
+    display: flex;
+}
+.multiselect {
+    font-family:'Rouge Script', cursive;
+    color: #7dd3fc;
+    width:900px;
+    padding-left:75px;
+    background: rgb(9, 2, 46);
+    border-radius: 20px;
+    outline: black;
+    color:rgb(3, 4, 5);
+    font-size:1em;
+    margin-bottom: 1cm;
+    height: 55px;
+}
+.date{
+    font-family:'Rouge Script', cursive;
+  
+  
+    padding:10px;
+    font-size:1em;
+    color: #878b87;
+    pointer-events: none;
+    text-transform: uppercase;
+     
+   
+}
+.inputBox:nth-child(2) select:valid ~ span,
+.inputBox:nth-child(2) select:focus ~ span
+{
+    background-color: #00dfc4;
+    color:#000000;
+    border-radius: 2px;
 }
 
 .inputBox:nth-child(2) input:valid ~ span,
@@ -164,12 +253,25 @@ input::placeholder{
   
  }
 
+ select::placeholder{
+    position:absolute;
+    left:0;
+    padding:10px;
+    font-size:1em;
+    color: #878b87;
+    pointer-events: none;
+    text-transform: uppercase;
+     font-family:'Rouge Script', cursive;
+  
+ }
+
  .inputBox select:valid,
 .inputBox select:focus
 {
     border: 1px solid rgba(247, 239, 242, 0.911);
     font-family: 'Rouge Script', cursive;
     background-color:rgb(9, 2, 46);
+    transform:translateX(15px) translateY(-29px);
 }
 
   .select-wrapper {

@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import { VscLocation } from "react-icons/vsc";
 import 'react-phone-number-input/style.css';
 import { FcReadingEbook } from "react-icons/fc";
+
 class ApplicationHire2 extends React.Component {
     constructor(props){
         super(props);
