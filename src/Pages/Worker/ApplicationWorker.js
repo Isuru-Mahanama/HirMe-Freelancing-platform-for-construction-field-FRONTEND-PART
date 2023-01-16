@@ -14,10 +14,18 @@ import { FcBusinesswoman } from "react-icons/fc";
 import {  FcBusinessman } from "react-icons/fc"
 import 'react-phone-number-input/style.css';
 import ProgressBar from "../../components/progressbar/progressbar";
-import { Languages } from "../../components/phonenumber/phonenumber";
+import { Languages ,Timezone,PhoneNumber } from "../../components/components/components";
 
 class WorkApplications extends React.Component {
-    state = {  } 
+    constructor(props){
+        super(props);
+        this.value ={};
+    }
+    
+    
+    setValue(){
+        this.setState({});
+    }
     render() { 
         return (
             <div className="background">
@@ -96,11 +104,12 @@ class WorkApplications extends React.Component {
                 </div>
                 <div className="inputBoxForm">
                 <div >
-               
+                <PhoneNumber></PhoneNumber>
                  </div>
 
-                
-              
+                 <div  >
+                <Timezone></Timezone>
+                 </div>
                  </div>
                
                 <div className="inputBox">

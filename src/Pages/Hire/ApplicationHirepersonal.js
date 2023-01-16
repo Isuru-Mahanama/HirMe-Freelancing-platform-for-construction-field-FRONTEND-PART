@@ -13,7 +13,7 @@ import { VscLocation } from "react-icons/vsc";
 import { FcBusinesswoman } from "react-icons/fc";
 import {  FcBusinessman } from "react-icons/fc"
 import 'react-phone-number-input/style.css';
-import {Languages, PhoneNumber,Timezone} from "../../components/phonenumber/phonenumber";
+import {Languages, PhoneNumber,Timezone} from "../../components/components/components";
 class ApplicationHire extends React.Component {
     constructor(props){
         super(props);

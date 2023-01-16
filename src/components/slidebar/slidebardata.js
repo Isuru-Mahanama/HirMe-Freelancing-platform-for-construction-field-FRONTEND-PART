@@ -36,7 +36,14 @@ export const SlidebarData =[
     {
         title: "Messages",
         icon: <VscMail />,
-        link:"/Messanges",
+        link:"/message",
+
+    }
+    ,
+    {
+        title: "Scheduling",
+        icon: <VscMail />,
+        link:"/Scheduling",
 
     }
     

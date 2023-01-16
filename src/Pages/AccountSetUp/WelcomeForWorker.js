@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
+import './image.css'
 
-const WelcomeForWorker = () => {
+const WelcomeForeWorker = () => {
 
     let history = useNavigate();
     
@@ -32,12 +33,12 @@ const WelcomeForWorker = () => {
        
         </div>
         <div style={{display : "flex" , flexDirection :'row' , alignItems: 'center', justifyContent: 'center'}}>
-        <img class=" rounded-full " src="/images/1_c.jpeg" alt="" width="220" height="550"/>
-        <img class=" rounded-full " src="/images/2_c.jpeg" alt="" width="220" height="550"/>
-        <img class=" rounded-full " src="/images/3_c.jpeg" alt="" width="220" height="550"/>
-        <img class=" rounded-full " src="/images/4_c.jpeg" alt="" width="220" height="550"/>
-        <img class=" rounded-full " src="/images/5_c.jpeg" alt="" width="220" height="550"/>
-        <img class=" rounded-full " src="/images/6_c.jpeg" alt="" width="220" height="550"/>
+        <img class=" rounded-full image " src="/images/1_c.jpeg" alt="" width="220" height="550"/>
+        <img class=" rounded-full image" src="/images/2_c.jpeg" alt="" width="220" height="550"/>
+        <img class=" rounded-full image" src="/images/3_c.jpeg" alt="" width="220" height="500"/>
+        <img class=" rounded-full image" src="/images/4_c.jpeg" alt="" width="220" height="500"/>
+        <img class=" rounded-full image" src="/images/5_c.jpeg" alt="" width="220" height="500"/>
+        <img class=" rounded-full image" src="/images/6_c.jpeg" alt="" width="220" height="500"/>
         </div>
         <div class="text-white text-center text-4xl">
         <button class="button text-white text-center text-4xl"  onClick={()=>getStarted()} >Get Started</button>
@@ -46,5 +47,4 @@ const WelcomeForWorker = () => {
      );
 }
  
-export default WelcomeForWorker;
-
+export default WelcomeForeWorker;

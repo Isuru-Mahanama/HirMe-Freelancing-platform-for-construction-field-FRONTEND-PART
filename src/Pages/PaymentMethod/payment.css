@@ -1,0 +1,30 @@
+.pay-1{
+    position:relative;
+    width:400px;
+    height: 400px;
+    margin-left:13cm;
+    margin-right: 12cm;
+    margin-top: 3cm;
+  font-weight:bolder;
+    border: 5px;
+    border-color: rgb(31, 38, 139);
+    
+}
+.bg-color{
+    background-color: rgb(9, 2, 46);
+   font-size: larger;
+   height: 600px;
+}
+
+
+.circle-payment{
+    background-color: rgb(95, 209, 224);
+    border-radius: 50%;
+    height: 100px;
+    width:100px;
+    
+    justify-content: center;
+    align-items: center;
+    border:3px solid rgb(33, 125, 138);
+    transition:0.4s ease;
+}

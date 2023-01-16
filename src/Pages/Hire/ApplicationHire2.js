@@ -37,7 +37,7 @@ class ApplicationHire2 extends React.Component {
                 <div className="text" ><FcReadingEbook className="middle moddle"/>Edducation</div>
                 <div className="textsubtitle ">This information will be displayed publicly so be careful what you share.</div> 
                 <div className="inputForm">
-                <div className="textsubtitle2"> Edducation Information</div>
+                <div className="textsubtitle2"> Education Information</div>
                <div className="inputBoxForm">
                 <div class="inputBox">
                 <span></span> 

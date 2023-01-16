@@ -5,7 +5,7 @@ const SignupIndex = () => {
     
     return ( 
         <div class ="bg-slate-800">
-        <div className="AppContainer " >
+        <div  >
             <div className="TopContainer">
                 <div className="backDrop"> </div>
                     <div className ="HeaderContainer">

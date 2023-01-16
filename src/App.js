@@ -6,19 +6,22 @@ import Home from './Pages/Home';
 import BecomeASeller from './Pages/BecomeSeller';
 import PostAProject from './Pages/PostProject/postAProject'
 import SignupIndex from './Pages/SignUpAndLogin/SignupIndex';
-import WelcomeForWorker from './Pages/AccountSetUp/WelcomeForWorker';
+import WelcomeForWorker from './Pages/AccountSetUp/WelcomeForWorker'
 import ProfileSignin from './components/ProfileSignin';
 import { useState } from 'react';
 import UserNameIndex from './Pages/AccountSetUp/UserNameIndex';
 import LoginAsIndex from './Pages/AccountSetUp/AccountTypeIndex'
 import Welcome from './Pages/AccountSetUp/WelcomeForHires';
-import FirstPageForWorker from './Pages/Worker/AccountPageForWorker';
+
 import Portfolio from './components/Portfolio/portfolioFirst';
 import FirstPageForHire from './Pages/Hire/AccountPageForHire';
 import WorkApplications from './Pages/Worker/ApplicationWorker';
 import ApplicationHire from './Pages/Hire/ApplicationHirepersonal';
 import ApplicationHire2 from './Pages/Hire/ApplicationHire2';
 import ApplicationWork2 from './Pages/Worker/ApplicationWork2';
+import AccountPageWorker from './Pages/Worker/AccountPageForWorker';
+import TakeMoney from './Pages/PaymentMethod/Payments';
+import { Message } from './components/components/components';
 
 
 function App() {
@@ -83,14 +86,16 @@ function App() {
             
             </Route>
               
-            <Route exact path="/firstPageforworker" element={<FirstPageForWorker/>} >
+            <Route exact path="/firstPageforworker" element={<AccountPageWorker />} >
             
             </Route>
            
-            <Route exact path="/portfolioWorker" element={<FirstPageForWorker/>} >
+           
+            <Route exact path="/applicationhire" element={<ApplicationHire/>} >
             
             </Route>
-            <Route exact path="/applicationhire" element={<ApplicationHire/>} >
+
+            <Route exact path="/message" element={<Message/>} >
             
             </Route>
               
@@ -98,6 +103,9 @@ function App() {
             
             </Route>
             <Route exact path="/applicationWork2" element={<ApplicationWork2/>} >
+            
+            </Route>
+            <Route exact path="/payments" element={<TakeMoney/>} >
             
             </Route>
               

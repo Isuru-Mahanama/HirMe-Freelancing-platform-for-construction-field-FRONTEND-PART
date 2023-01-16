@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import { FaChessBoard} from "react-icons/fa";
 import  "./Navbar.css";
-import Button from './Button';
+
 
 
 function Navbar(props) {

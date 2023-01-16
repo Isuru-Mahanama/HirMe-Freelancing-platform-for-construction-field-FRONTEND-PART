@@ -24,9 +24,14 @@ class FirstPageForHire extends React.Component {
           <button className="b1" >Set up your account!!!</button>
           </Link>
        
+         <Link  to="/applicationhire">
+          <button className="b1" >Edit your profile!!!</button>
+          </Link>
      
-    
+         
+       
         </div>
+      
       </div>
 
     );

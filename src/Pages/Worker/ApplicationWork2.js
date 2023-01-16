@@ -9,7 +9,7 @@ import { MdReceipt} from "react-icons/md";
 import 'react-phone-number-input/style.css';
 import { FcReadingEbook } from "react-icons/fc";
 import { IoAddCircleSharp} from "react-icons/io5";
-import { CategoryPicker, DataPicker } from "../../components/phonenumber/phonenumber";
+import { CategoryPicker, DataPicker } from "../../components/components/components";
 
 
 class ApplicationWork2 extends React.Component {

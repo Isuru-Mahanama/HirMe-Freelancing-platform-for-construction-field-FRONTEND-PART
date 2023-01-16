@@ -6,7 +6,7 @@ const AccountBox = () => {
     
     return ( 
         <div class ="backgroundLoginSignup">
-        <div className="AppContainer">
+        <div >
             <div className="TopContainer">
                 <div className="backDrop"> </div>
                     <div className ="HeaderContainer">
