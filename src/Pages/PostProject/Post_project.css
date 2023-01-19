@@ -5,7 +5,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: rgb(9, 2, 46);;
+    background-color:#c98069;
     box-shadow: 0 0 2px rgba(15, 15, 15, 0.28);
     position: relative;
     overflow: hidden;
@@ -21,7 +21,7 @@
  }
 
  .text2{  color: #f7fff9;
-  font-family: 'Rouge Script', cursive;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 25px;
   font-weight: normal;
   outline: #f7fff9;
@@ -34,7 +34,7 @@
  }
   
  .text3{  color: #f7fff9;
-  font-family: 'Rouge Script', cursive;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 18px;
   font-weight: normal;
   outline: #f7fff9;
@@ -58,14 +58,15 @@
  .size input{
   width:100%;
   padding:10px;
-  border: 1px solid rgba(247, 239, 242, 0.911);
-  background: rgb(9, 2, 46);
+  border: 2px solid #3a1003;
+  background: #FFFEE6;
   border-radius: 20px;
   outline: black;
-  color:rgb(157, 184, 206);
+  color:rgb(10, 4, 0);
   font-size:1em;
   margin-bottom: 1cm;
   height: 200px;
+  font-weight: 700;
  }
 
  .size span{
@@ -73,23 +74,24 @@
   left:0;
   padding:10px;
   font-size:1em;
-  color: #878b87;
+  color: #000000;
   pointer-events: none;
   text-transform: uppercase;
-   font-family:'Rouge Script', cursive;
+   font-family:Georgia, 'Times New Roman', Times, serif;
    transition:0.5s;
    padding-left: 25px;
+   font-weight: 700;
 }
 
 .size input:valid ~span,
 .size input:focus ~span
 {
-  color:#00dfc4;
+  color:#000000;
   transform:translateX(15px) translateY(-29px);
   font-size: 0.65em;
   padding: 0 10px;
-  border-left: 1px solid #00dfc4;
-  border-right: 1px solid #00dfc4;
+  border-left: 1px solid #000000;
+  border-right: 1px solid #000000;
   letter-spacing: 0.2em;
   
 }
@@ -98,6 +100,63 @@
 .size input:focus
 {
     border: 1px solid rgba(247, 239, 242, 0.911);
-    font-family: 'Rouge Script', cursive;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+
+.size2{
+  position:relative;
+  width:auto;
+  margin-left:2cm;
+  margin-right: 1cm;
+  color:rgb(8, 120, 211);
+  
+}
+ .size2 input{
+  width:100%;
+  padding:10px;
+  border: 2px solid #3a1003;
+  background: #FFFEE6;
+  border-radius: 20px;
+  outline: black;
+  color:rgb(10, 4, 0);
+  font-size:1em;
+  margin-bottom: 1cm;
+  height: 75px;
+  font-weight: 700;
+ }
+
+ .size2 span{
+  position:absolute;
+  left:0;
+  padding:10px;
+  font-size:1em;
+  color: #000000;
+  pointer-events: none;
+  text-transform: uppercase;
+   font-family:Georgia, 'Times New Roman', Times, serif;
+   transition:0.5s;
+   padding-left: 25px;
+   font-weight: 700;
+}
+
+.size2 input:valid ~span,
+.size2 input:focus ~span
+{
+  color:#000000;
+  transform:translateX(15px) translateY(-29px);
+  font-size: 0.65em;
+  padding: 0 10px;
+  border-left: 1px solid #000000;
+  border-right: 1px solid #000000;
+  letter-spacing: 0.2em;
+  
+}
+
+.size2 input:valid,
+.size2 input:focus
+{
+    border: 1px solid rgba(247, 239, 242, 0.911);
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 

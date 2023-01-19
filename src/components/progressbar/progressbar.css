@@ -6,7 +6,7 @@
     align-items: center;
     height:100vh ;
    
-    color: rgb(0, 255, 234);
+    color: rgb(255, 255, 255);
 }
 
 .content{
@@ -27,7 +27,7 @@
    
     content: " ";
     position: absolute;
-    background-color:rgb(171, 213, 235) ;
+    background-color:rgb(17, 1, 11) ;
     top:50%;
     left:0;
     transform: translateY(-50%);
@@ -51,21 +51,24 @@
 }
 
 .circle{
-    background-color: rgb(3, 3, 14);
+    background-color: #99563f;
     border-radius: 50%;
-    height: 50px;
-    width:50px;
+    height: 60px;
+    width:70px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border:3px solid rgb(33, 125, 138);
+    border:3px solid #fffdfb;
     transition:0.4s ease;
+    color:  #ffffff;
+    font-weight: 700;
+    font-size: 20px;
 }
 
 .circle.active{
-    border-color: rgb(33, 125, 138);
-    background-color: aqua;
-    color: rgb(3, 3, 14);
+    border-color: #391306;
+    background-color: #f7d6cc;
+    color: rgb(14, 6, 3);
 }
 
 .buttons{

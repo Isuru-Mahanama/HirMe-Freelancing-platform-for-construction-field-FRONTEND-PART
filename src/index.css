@@ -6,7 +6,12 @@
 
 .backgroundLoginSignup{
 
-  background-color: #051040;
+  background: linear-gradient(
+    58deg,
+    #c98069 30%,
+    rgb(19, 13, 0) 100%
+  );
+  background-color:#c98069;
 }
 .AppContainer{
   width: 100%;
@@ -59,8 +64,8 @@
   background: rgb(12, 12, 10);
   background: linear-gradient(
     58deg,
-    rgb(8, 8, 8) 20%,
-    rgb(119, 114, 102) 100%
+    #501d0c 40%,
+    rgb(19, 13, 0) 100%
   );
   
 }
@@ -94,7 +99,8 @@
 }
 
 .texts{
-  font-family: 'Rouge Script', cursive;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 700;
 }
 
 .BoxContainer_2{ 
@@ -103,6 +109,7 @@
   flex-direction: column;
   align-items: center;
   margin-top: 10px;
+  
 }
 
 .FormContainer{
@@ -118,6 +125,7 @@
   font-weight: 500;
   text-decoration: none;
   margin:0.6em;
+ 
 }
 .BoldLink{ 
   
@@ -182,6 +190,18 @@ Input:not(:last-of-type){
     padding: 1px 15%;
   display: flex;
   flex-direction: column;
+  
+    
+   }
+
+   
+  .InnerContainer2 {
+    width: 95%;
+    padding: 1px 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 5cm;
     
    }
   
@@ -209,6 +229,7 @@ Input:not(:last-of-type){
     border-radius: 15px;
     box-shadow: 0 9px #999;
     margin: 0.2em;
+    
   }
   
   .button:hover {background-color: #898e3e}

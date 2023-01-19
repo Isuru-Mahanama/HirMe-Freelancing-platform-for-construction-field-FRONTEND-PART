@@ -29,12 +29,20 @@ class PostAProject extends React.Component {
        
         </div>
         <div className="">
+        <div class="size2">
+            <input type="text" required className=""></input>
+            <span><VscAccount />Small description about your project</span>
+            
+        </div>
+        
+       
   
         <div class="size">
             <input type="text" required className=""></input>
             <span><VscAccount />Tell us more about your project</span>
             
         </div>
+
         
        
         </div>

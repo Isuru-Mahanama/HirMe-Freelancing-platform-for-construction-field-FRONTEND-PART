@@ -17,9 +17,9 @@ const AccountBox = () => {
                         </div>
                     </div>
             </div>
-            <div className="InnerContainer">
+            
             <LoginForm></LoginForm>
-            </div>
+        
             
         </div>
         </div>

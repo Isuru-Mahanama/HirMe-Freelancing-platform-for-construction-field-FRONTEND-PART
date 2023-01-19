@@ -1,5 +1,5 @@
 .background{
-    background-color: rgb(9, 2, 46);
+    background-color:#c98069;
     
 }
 
@@ -10,8 +10,8 @@
     margin-bottom: 0cm;
     border:25px ;
     border-radius: 20px;
-    border: 1px solid rgba(114, 224, 224, 0.25);
-    outline: rgb(230, 224, 224);
+    border: 2px solid #FFFEE6;
+    outline: #391306;
     box-sizing: border-box;
     margin-right: 4cm;
     
@@ -40,9 +40,9 @@
 }
 hr {
     border: none;
-    border-top: 1px dotted rgb(31, 41, 39);
+    border-top: 1px dotted rgb(41, 36, 31);
     color: #fff;
-    background-color: rgb(58, 55, 55);
+    background-color: #391306;;
     height: 3px;
     width: 100%;
   }
@@ -50,7 +50,7 @@ hr {
     border: none;
     border-top: 1px dotted rgb(12, 12, 12);
     color: #fff;
-    background-color: rgb(58, 55, 55);
+    background-color: #391306;
     height: 3px;
     width: 100%;
   }
@@ -58,15 +58,16 @@ hr {
     padding-top: 40px;
 }        
 .add-item{
-    font-family: 'Rouge Script', cursive;
-    color:#10a9db;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color:#391306;
+    font-weight: 700;
    
 }
 
 .add:hover {
    
     transform: scale(1.1);
-    background-color: rgb(21, 221, 188);
+    background-color: rgb(235, 240, 239);
    
 }
 .buttons{
@@ -74,9 +75,9 @@ hr {
 }
 .text{
     color: #f7fff9;
-    font-family: 'Rouge Script', cursive;
-    font-size: 50px;
-    font-weight: normal;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: 60px;
+    font-weight: 800;
     
     
     text-align: flex;
@@ -86,20 +87,20 @@ hr {
 }
 
 .textsubtitle{
-    color: #75d6da;
-    font-family: 'Rouge Script', cursive;
+    color: #290e0e;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 15px;
-    font-weight: normal;
+    font-weight: 700;
     margin-top: 1cm;
     text-align: flex;
-    text-shadow: 1px 1px 2px #082b34;
+   
     margin-bottom: 1cm;
     margin-left: 1cm;
 }
 
 .textsubtitle2{
-    color: #2CA4B0;
-     font-family: 'Oleo Script', cursive; 
+    color: #ffffff;
+     font-family: Georgia, 'Times New Roman', Times, serif;
      font-size: 24px; font-weight: normal; 
      line-height: 32px; 
      margin: 0 0 18px;
@@ -130,34 +131,36 @@ hr {
     width:400px;
     margin-left:2cm;
     margin-right: 1cm;
-    color:rgb(8, 120, 211);
+    color:rgb(0, 0, 0);
     
 }
 .inputBox input{
     width:100%;
     padding:10px;
-    border: 1px solid rgba(247, 239, 242, 0.911);
-    background: rgb(9, 2, 46);
+    border: 2px solid #391306;
+    background:#FFFEE6;
     border-radius: 20px;
-    outline: black;
-    color:rgb(157, 184, 206);
+    outline:#391306;
+    color:#391306;
     font-size:1em;
     margin-bottom: 1cm;
     height: 55px;
+    font-weight: 700;
 }
 
 .inputBox select{
     width:100%;
   
     padding-top: 34px;
-    border: 1px solid rgba(247, 239, 242, 0.911);
-    background: rgb(156, 150, 187);
+    border: 1px solid#A96036;
+    background: #FFFEE6;
     border-radius: 20px;
-    outline: rgb(63, 60, 60);
-    color:#75d6da;
+    outline: #A96036;
+    color:#000000;
     font-size:1em;
     margin-bottom: 1cm;
     height: 75px;
+    font-weight: 700;
 }
 
 .inputB{
@@ -167,24 +170,27 @@ hr {
     position:absolute;
     left:0;
     padding:10px;
+    font: bold;
     font-size:1em;
-    color: #878b87;
+    color: #000000;
     pointer-events: none;
     text-transform: uppercase;
-     font-family:'Rouge Script', cursive;
+     font-family:Georgia, 'Times New Roman', Times, serif;
      transition:0.5s;
      padding-left: 25px;
+     font-weight: 800;
+    
 }
 
 .inputBox input:valid ~span,
 .inputBox input:focus ~span
 {
-    color:#00dfc4;
+    color:#000000;
     transform:translateX(15px) translateY(-29px);
     font-size: 0.65em;
     padding: 0 10px;
-    border-left: 1px solid #00dfc4;
-    border-right: 1px solid #00dfc4;
+    border-left: 1px solid #391306;
+    border-right: 1px solid#391306;
     letter-spacing: 0.2em;
     
 }
@@ -193,8 +199,8 @@ hr {
     display: flex;
 }
 .multiselect {
-    font-family:'Rouge Script', cursive;
-    color: #7dd3fc;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    color:#391306;
     width:900px;
     padding-left:75px;
     background: rgb(9, 2, 46);
@@ -206,21 +212,22 @@ hr {
     height: 55px;
 }
 .date{
-    font-family:'Rouge Script', cursive;
+    font-family:Georgia, 'Times New Roman', Times, serif;
   
   
     padding:10px;
     font-size:1em;
-    color: #878b87;
+    color: #000000;
     pointer-events: none;
     text-transform: uppercase;
+    font-weight: 700;
      
    
 }
 .inputBox:nth-child(2) select:valid ~ span,
 .inputBox:nth-child(2) select:focus ~ span
 {
-    background-color: #00dfc4;
+    background-color:#FFFEE6;
     color:#000000;
     border-radius: 2px;
 }
@@ -228,15 +235,16 @@ hr {
 .inputBox:nth-child(2) input:valid ~ span,
 .inputBox:nth-child(2) input:focus ~ span
 {
-    background-color: #00dfc4;
+    
+    background-color:#FFFEE6;
     color:#000000;
     border-radius: 2px;
 }
 .inputBox input:valid,
 .inputBox input:focus
 {
-    border: 1px solid rgba(247, 239, 242, 0.911);
-    font-family: 'Rouge Script', cursive;
+    border: 2px solid rgba(0, 0, 0, 0.911);
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 
@@ -246,11 +254,13 @@ input::placeholder{
     left:0;
     padding:10px;
     font-size:1em;
-    color: #878b87;
+    color: #030303;
     pointer-events: none;
     text-transform: uppercase;
-     font-family:'Rouge Script', cursive;
-  
+     font-family:Georgia, 'Times New Roman', Times, serif;
+     font-weight: 700;
+    
+     
  }
 
  select::placeholder{
@@ -258,26 +268,26 @@ input::placeholder{
     left:0;
     padding:10px;
     font-size:1em;
-    color: #878b87;
+    color: #010301;
     pointer-events: none;
     text-transform: uppercase;
-     font-family:'Rouge Script', cursive;
+     font-family:Georgia, 'Times New Roman', Times, serif;
   
  }
 
  .inputBox select:valid,
 .inputBox select:focus
 {
-    border: 1px solid rgba(247, 239, 242, 0.911);
-    font-family: 'Rouge Script', cursive;
-    background-color:rgb(9, 2, 46);
+    border: 2px solid #391306;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color:#FFFEE6;
     transform:translateX(15px) translateY(-29px);
 }
 
   .select-wrapper {
     background-color: #082b34;
-    font-family:'Rouge Script', cursive;
-    color: #00dfc4; 
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    color: #000000; 
     
   
   }
@@ -287,9 +297,89 @@ input::placeholder{
     width:400px;
     margin-left:1.5cm;
     margin-right: 1cm;
-    color:rgb(8, 120, 211);
+    color:rgb(25, 37, 46);
     font-style: bold;
     margin-bottom: 27px;
     padding-right: 15px;
 }
 
+.card{
+   width: 22rem;
+   border: 2px solid #391306;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    border-radius: 60px;
+   background-color: #e9a18b;
+   height: 440px;
+}
+
+.price{
+    color:rgb(0, 0, 0);
+    font-weight: 700;
+    font-size: 30px;
+   margin-left: 4cm;
+ 
+   }
+.img-card{
+   margin: auto;
+   margin-top: 0.5cm;
+   translate: 0.5s;
+   border-radius: 60px;
+  
+}
+
+
+.img-card:hover {
+   
+    transform: scale(1.1);
+    border: solid 4px rgb(255, 255, 255);
+}
+
+.cardbody{
+    border: #e9a18b;
+    border-radius: 60px;
+    
+    margin-top: 0.5cm;
+}
+
+.cardtitle{
+    margin-left: 0.1cm;
+    font-size: 25px;
+    font-weight: 700;
+   background-color: #c98069;
+    border-radius: 6px;
+    margin-right: 0.1cm;
+}
+
+.cardtext{
+    margin-left: 0.2cm;
+    font-size: 15px;
+    font-weight: 500;
+    background-color: #e9a18b;
+    border-radius: 40px;
+    margin-right: 0.2cm;
+}
+.cardlink{
+    margin-left: 1cm;
+    background-color: #f7bead;
+    font-style:italic;
+    border :solid 2px rgb(255, 255, 255);
+   translate: 1s;
+   display: flex;
+    margin-right: 1cm;
+}
+.cardlink:hover{
+    transform: scale(1.1);
+    color: #b86da1;
+    font-weight: 500;
+    
+}
+.img-profile{
+   
+    border-radius: 50%;
+    height: 30px;
+    width:30px;
+    border:1px solid #fffdfb;
+    color:  #ffffff;
+    margin-left: 1cm;
+   
+}

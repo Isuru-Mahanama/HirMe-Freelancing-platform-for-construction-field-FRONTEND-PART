@@ -128,10 +128,15 @@ class ApplicationWork2 extends React.Component {
                 <div className="textsubtitle ">This information will be displayed publicly so be careful what you share.</div> 
                 <div className="inputForm">
                 <div className="textsubtitle2"> Education Information</div>
-              
+                <div class="size">
+            <input type="text" required className=""></input>
+            <span><VscAccount />Tell us more about you</span>
+            </div>
                 <div className="inputBoxForm">
+
+               
                 <div class="inputBox">
-                <span></span> 
+                
                     <input type="text" required></input>
                    
                     <span ><VscAccount /> School / University</span>

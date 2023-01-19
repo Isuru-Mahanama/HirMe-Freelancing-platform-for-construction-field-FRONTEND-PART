@@ -12,7 +12,7 @@ import { useState } from 'react';
 import UserNameIndex from './Pages/AccountSetUp/UserNameIndex';
 import LoginAsIndex from './Pages/AccountSetUp/AccountTypeIndex'
 import Welcome from './Pages/AccountSetUp/WelcomeForHires';
-
+import ViewProject from './Pages/PostProject/ViewProject';
 import Portfolio from './components/Portfolio/portfolioFirst';
 import FirstPageForHire from './Pages/Hire/AccountPageForHire';
 import WorkApplications from './Pages/Worker/ApplicationWorker';
@@ -106,6 +106,9 @@ function App() {
             
             </Route>
             <Route exact path="/payments" element={<TakeMoney/>} >
+            
+            </Route>
+            <Route exact path="/viewproject" element={<ViewProject/>} >
             
             </Route>
               

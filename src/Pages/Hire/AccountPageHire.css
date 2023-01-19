@@ -15,24 +15,31 @@
 
 .middle{
   
-    background-color: rgb(3, 3, 14);
+    background-color:#724031;
     border-radius: 50%;
     height: 90px;
     width:90px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border:3px solid rgb(33, 125, 138);
+    border:5px solid rgb(238, 236, 234);
     transition:0.4s ease;
 
 }
 .background{
-    background-color: rgb(9, 2, 46) ;
+    background-color: #c98069 ;
    
 }
 
 
-
+.middleright{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 80%;
+    padding-right: 10px;
+    background-color:#c98069;
+}
 
 .devideLeft{
     display: grid;
@@ -49,12 +56,12 @@
     align-items: flex-start;
     width: 80%;
     padding-right: 10px;
-    background-color:rgb(9, 2, 46);
+    background-color:#c98069;
 }
 .ddRight{
     display: flex;
     justify-content: flex-start;
-    background-color:rgb(9, 2, 46);
+    background-color:#c98069;
     padding-top: 5px;
 }
 
@@ -79,13 +86,13 @@
     text-decoration: none;
     outline: none;
     color: #fff;
-    background-color:#090807;
+    background-color:#000000;
     border: none;
     border-radius: 15px;
-    border: 1px solid aqua;
+    border: 1px solid rgb(255, 253, 251);
     
-   
-    font-family: 'Rouge Script', cursive;
+   font-weight: 500;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     width: 220px;
     height: 50px;
    
