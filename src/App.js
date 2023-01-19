@@ -22,7 +22,12 @@ import ApplicationWork2 from './Pages/Worker/ApplicationWork2';
 import AccountPageWorker from './Pages/Worker/AccountPageForWorker';
 import TakeMoney from './Pages/PaymentMethod/Payments';
 import { Message } from './components/components/components';
-
+import ApplyProject from './Pages/PostProject/ApplyProject';
+import PostedProjects from './Pages/PostProject/PostedProjects';
+import ViewAllApplications from './Pages/Application/ViewApplications';
+import ViewOneApplication from './Pages/Application/OneApplication';
+import AppliedProjects from './Pages/Worker/AppliedProjects';
+import Chat from './components/CattingSection/CattingSction';
 
 function App() {
 
@@ -95,7 +100,7 @@ function App() {
             
             </Route>
 
-            <Route exact path="/message" element={<Message/>} >
+            <Route exact path="/message" element={<Chat/>} >
             
             </Route>
               
@@ -111,6 +116,24 @@ function App() {
             <Route exact path="/viewproject" element={<ViewProject/>} >
             
             </Route>
+            <Route exact path="/applyproject" element={<ApplyProject/>} >
+            
+            </Route>
+
+            <Route exact path="/postedprojects" element={<PostedProjects/>} >
+            
+            </Route>
+            <Route exact path="/viewapplications" element={<ViewAllApplications/>} >
+            
+            </Route>
+            <Route exact path="/viewoneapplication" element={<ViewOneApplication/>} >
+            
+            </Route>
+            <Route exact path="/viewworkerappliedprojects" element={<AppliedProjects/>} >
+            
+            </Route>
+              
+            
               
 
       </Routes>

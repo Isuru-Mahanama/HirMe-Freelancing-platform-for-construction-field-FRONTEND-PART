@@ -46,15 +46,76 @@ class AccountPageWorker extends React.Component {
      
         </div>
         <div className="middleright">
-              <Card className="card" >
-      <Link to="/viewproject">
-      <img className="img-card"
-        alt="Sample"
-        src="https://picsum.photos/300/200"
+        
+        <div class="col">
+          <Card className="card" >
+              <Link to="/viewproject">
+              <img className="img-card"
+              alt="Sample"
+              src="https://picsum.photos/300/200"
        
-      />
-      </Link>
-      <CardBody className="cardbody">
+              />
+              </Link>
+              <CardBody className="cardbody">
+              <CardTitle tag="h5" className="cardtitle">
+              I wiill do a large project of house
+              </CardTitle>
+          
+              <CardText className="cardtext">
+              Some quick example text to build on the card title and make up the bulk of the card‘s content.
+              </CardText>
+              
+           
+              <CardLink href="/portfolio" className="cardlink">
+           
+              FreelancerAccount_Link
+              <img className="img-profile" alt="Sample" src="https://picsum.photos/300/200" />
+              </CardLink>
+              <h3 className="price">5$</h3>
+              </CardBody>
+          </Card>
+
+         
+        <Card className="card" >
+            <Link to="/viewproject">
+            <img className="img-card"
+            alt="Sample"
+            src="https://picsum.photos/300/200"
+       
+             />
+            </Link>
+            <CardBody className="cardbody">
+            <CardTitle tag="h5" className="cardtitle">
+            I wiill do a large project of house
+            </CardTitle>
+          
+            <CardText className="cardtext">
+            Some quick example text to build on the card title and make up the bulk of the card‘s content.
+            </CardText>
+              
+           
+            <CardLink href="/portfolio" className="cardlink">
+           
+            FreelancerAccount_Link
+            <img className="img-profile" alt="Sample" src="https://picsum.photos/300/200" />
+
+                 
+            </CardLink>
+            <h3 className="price">5$</h3>
+            </CardBody>
+          </Card>
+            </div>
+
+        <div class="col">
+            <Card className="card" >
+            <Link to="/viewproject">
+            <img className="img-card"
+            alt="Sample"
+            src="https://picsum.photos/300/200"
+       
+              />
+             </Link>
+            <CardBody className="cardbody">
               <CardTitle tag="h5" className="cardtitle">
               I wiill do a large project of house
               </CardTitle>
@@ -74,9 +135,39 @@ class AccountPageWorker extends React.Component {
             <h3 className="price">5$</h3>
             </CardBody>
           </Card>
-        </div>
 
-      </div>
+          <Card className="card" >
+            <Link to="/viewproject">
+            <img className="img-card"
+            alt="Sample"
+            src="https://picsum.photos/300/200"
+       
+              />
+             </Link>
+            <CardBody className="cardbody">
+              <CardTitle tag="h5" className="cardtitle">
+              I wiill do a large project of house
+              </CardTitle>
+          
+            <CardText className="cardtext">
+                  Some quick example text to build on the card title and make up the bulk of the card‘s content.
+            </CardText>
+              
+           
+            <CardLink href="/portfolio" className="cardlink">
+           
+                  FreelancerAccount_Link
+                  <img className="img-profile" alt="Sample" src="https://picsum.photos/300/200" />
+
+                 
+            </CardLink>
+            <h3 className="price">5$</h3>
+            </CardBody>
+          </Card>
+          </div>
+          </div>
+        </div>
+      
 
     );
   }

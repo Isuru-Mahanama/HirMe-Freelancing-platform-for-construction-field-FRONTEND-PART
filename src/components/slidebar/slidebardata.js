@@ -20,9 +20,9 @@ export const SlidebarData =[
 
     },
     {
-        title: "Project proposals",
+        title: "if i am a worker",
         icon: <RiHome3Fill/>,
-        link:"/Projectproposals",
+        link:"/viewworkerappliedprojects",
 
     },
 
@@ -46,9 +46,15 @@ export const SlidebarData =[
         link:"/Scheduling",
 
     }
-    
-    
+    , {
+        title: "if i am a hire",
+        icon: <VscMail />,
+        link:"/postedprojects",
 
+    }
+    
+    
+ 
 
 
 ]
