@@ -21,8 +21,6 @@ class WorkApplications extends React.Component {
         super(props);
         this.value ={};
     }
-    
-    
     setValue(){
         this.setState({});
     }

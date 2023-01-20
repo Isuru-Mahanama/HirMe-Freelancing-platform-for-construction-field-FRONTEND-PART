@@ -16,7 +16,7 @@ class PostAProject extends React.Component {
     <div className="pageDown">
         <div className="text" ><FcReadingEbook className="middle moddle"/>Project</div>
         
-        <div className="inputForm">
+        <div className="inputForm2">
         <div className="textsubtitle2"> Project Information</div>
       
         <div className="inputBoxForm">

@@ -10,7 +10,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import {Multiselect} from 'multiselect-react-dropdown';
 import './message.css'
 import { FaChessBoard} from "react-icons/fa";
+import {CardBody, CardSubtitle} from 'reactstrap'
+import {CardText} from 'reactstrap'
+import {CardLink} from 'reactstrap'
+import {Card} from 'reactstrap'
+import {CardTitle} from 'reactstrap'
 //import ChatListItems from '../../Pages/ChatListItem';
+import { Link } from 'react-router-dom';
 
  export const Example = (props) => {
     const {data}=props;
@@ -456,3 +462,31 @@ const handleshowhide=(event,checked) =>{
       </div>
      );
   };
+
+  export const CardData = ({cardData}) => {
+    return ( 
+     
+        <div className="card-container">
+            {cardData.map((card, index) => (
+                <Card className="card" key={index}>
+                    <Link to={card.projectLink}>
+                        <img className="img-card" src={card.image} alt={card.title} />
+                    </Link>
+                    <CardBody className="cardbody">
+                        <CardTitle tag="h5" className="cardtitle">{card.title}</CardTitle>
+                        <Link to={card.projectLink}>
+                        <CardSubtitle className='cardsub'>View the posted project</CardSubtitle>
+                        </Link>
+                        <CardText className="cardtext">{card.description}</CardText>
+                        <CardLink href={card.freelancerLink} className="cardlink">
+                            FreelancerAccount_Link
+                            <img className="img-profile" src={card.profileImage} alt={card.title} />
+                        </CardLink>
+                        <h3 className="price">{card.price}</h3>
+                    </CardBody>
+                </Card>
+            ))}
+        </div>
+     
+     );
+  } 
