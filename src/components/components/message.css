@@ -378,3 +378,34 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #3b5bfe;
   }
+
+  .searchbar{
+    width: 10cm;
+    height: 1cm;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 15px;
+    border-radius: 30px;
+    border: solid 2px rgb(255, 255, 255);
+    background-color: #f3e7a3;
+    padding-left: 1cm;
+   
+  }
+  .box{
+    text-align: left;
+    border: rgb(248, 246, 246) ridge 1px;
+    border-radius: 20px;
+    background-color: white;
+    width: 50%;
+   cursor: pointer;
+   margin-bottom: 0.05cm;
+   font-family: Georgia, 'Times New Roman', Times, serif;
+   font-weight: 200;
+   
+  }
+  .span-serach{
+    font-size: large;
+    font-size: 25px;
+   
+  }
+ 

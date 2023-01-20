@@ -6,12 +6,12 @@ import {CardText} from 'reactstrap'
 import {CardLink} from 'reactstrap'
 import {Card} from 'reactstrap'
 import {CardTitle} from 'reactstrap'
-
+import SearchBar from "../../components/components/searchbar";
 import '../Hire/AccountPageHire.css'
 import { Link } from "react-router-dom";
 
 class AccountPageWorker extends React.Component {
-  
+ 
   
    state = {  } ;
    
@@ -26,6 +26,7 @@ class AccountPageWorker extends React.Component {
         </div>
        
         <div className="devideRight">
+
           <div className="mostright">
           
 
@@ -45,8 +46,11 @@ class AccountPageWorker extends React.Component {
           </div>
      
         </div>
+      
+        <SearchBar options={this.state.options}></SearchBar>
         <div className="middleright">
         
+       
         <div class="col">
           <Card className="card" >
               <Link to="/viewproject">
@@ -165,7 +169,33 @@ class AccountPageWorker extends React.Component {
             </CardBody>
           </Card>
           </div>
+          
+          <div className="profile-card">
+          <img className="profile-photo" alt="Sample" src="https://picsum.photos/300/200" /> 
+          <div className="text-profile1">userName</div>
+
+          <div className="text-profile">
+          <hr className="line"></hr>
+         <div className="font">From ----</div>
+         Pilimathalawa
+         <hr className="line"></hr>
+         <div className="font">Member -</div>
+         Since 2020
+         <hr className="line"></hr>
+         <div className="font">Description about me,, -</div>
+         <hr className="line"></hr>
+         <div className="font">Languages -</div>
+         Sinhala
+         English
+         <hr className="line"></hr>
+         <div className="font">Education -</div>
+         <hr className="line"></hr>
+         <div className="font">Certification -</div>
+         <div>Kandy Girls' High School</div>
           </div>
+          </div>
+          </div>
+          
         </div>
       
 

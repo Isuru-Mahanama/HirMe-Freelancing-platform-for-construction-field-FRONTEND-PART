@@ -386,3 +386,55 @@ input::placeholder{
     margin-left: 1cm;
    
 }
+
+.profile-card{
+     width: 22rem;
+   border: 2px solid #ffffff;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+   
+   background-color: #4b3527;
+   height: 440px;
+   margin-bottom: 10px;
+   margin-right: 10px;
+   margin-top: 10px;
+   height: auto;
+}
+
+.profile-photo{
+    height: 100px;
+    width: 100px;
+    border:2px solid #fffdfb;
+    border-radius: 50%;
+    margin-left: 3.3cm;
+    margin-top: 1cm;
+}
+.text-profile{
+    margin-left: 1cm;
+    color: #f7fff9;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 15px;
+    font-weight: 200;
+}
+
+.text-profile1{
+    text-align: center;
+    color: #f7fff9;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 17px;
+    font-weight: 200;
+    margin-top: 0.4cm;
+    margin-bottom: 0.2cm;
+}
+
+.line{
+    background-color: white;
+    width: 80%;
+}
+.font{
+    font-family:Arial, Helvetica, sans-serif;
+    background-color: #ebad99;
+    width: 80%;
+    color: black;
+    font-weight: 600;
+    margin-bottom: 0.3cm;
+}
