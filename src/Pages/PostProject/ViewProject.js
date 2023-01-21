@@ -130,12 +130,7 @@ class ViewProject extends React.Component {
                 <button className="button">Apply</button>
                 </Link>
                 </div>
-                
-
-                
             </div>
-           
-          
         );
     }
 }

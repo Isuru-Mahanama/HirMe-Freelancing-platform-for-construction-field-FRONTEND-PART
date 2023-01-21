@@ -413,6 +413,8 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* 4 columns with equal width */
     grid-gap: 16px; /* space between each card */
+    margin-left: 1cm;
+    padding-top: 1cm;
 }
 
 .cardsub{
@@ -421,4 +423,73 @@
 .cardsub:hover{
   color: black;
   transform:scale(1.1)
+}
+.card-application{
+  width: 100%;
+  border: 2px solid #f5c994;
+   font-family:Georgia, 'Times New Roman', Times, serif;
+   border-radius: 60px;
+  background-color: #ffc6aa;
+  height: auto;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  
+}
+.card-header{
+  font-size: 25px;
+  padding-left: 5cm;
+  color: rgb(46, 2, 2);
+  background-color: burlywood;
+  border: 2px solid white;
+  width: 900px;
+  margin-left: 3cm;
+}
+
+.card-title{
+ margin-left: 3cm;
+ padding-left: 1cm;
+  border: 1px solid black;
+  width:300px;
+  height: auto;
+}
+
+.card-text{
+  font-size: 18px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin-left: 3cm;
+}
+
+.cardlink1{
+  width: 400px;
+  display: flex;
+  justify-content: flex;
+  margin-left: 3cm;
+  transition: 1s;
+  padding-top: 1cm;
+}
+
+.cardlink1:hover{
+  
+  transform: scale(1.1);
+  color: rgb(50, 6, 6);
+}
+
+.cardlink2{
+  width: 400px;
+  display: flex;
+  justify-content: flex;
+  margin-left: 3cm;
+  transition: 1s;
+ 
+}
+
+.cardlink2:hover{
+  
+  transform: scale(1.1);
+  color: rgb(50, 6, 6);
+}
+
+.b2{
+  background-color: white;
 }

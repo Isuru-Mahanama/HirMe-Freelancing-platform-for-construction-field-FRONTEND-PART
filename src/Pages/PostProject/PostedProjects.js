@@ -12,7 +12,8 @@ class PostedProjects extends React.Component {
             freelancerLink: "/portfolio",
             profileImage: "https://picsum.photos/300/200",
             price: "5$",
-            projectLink :"/viewproject"
+            projectLink :"/viewproject",
+            applicationLink:"/viewapplications"
         },
         {
             title: "Card 2",
@@ -21,14 +22,13 @@ class PostedProjects extends React.Component {
             freelancerLink: "/portfolio",
             profileImage: "https://picsum.photos/300/200",
             price: "5$",
-            projectLink :"/viewproject"
+            projectLink :"/viewproject",
+            applicationLink:"/viewapplications"
         }] } 
     } 
     render() { 
         return (
             <div className="background">
-                    <div >show all the client posted projects as gigs</div>
-                    <div> click the gigs go to the list of  applications related to one gig</div>
                     <CardData cardData={this.state.cardData}/>
                     <Link to = "/viewapplications">
                     <button className="button"> view all applications</button>

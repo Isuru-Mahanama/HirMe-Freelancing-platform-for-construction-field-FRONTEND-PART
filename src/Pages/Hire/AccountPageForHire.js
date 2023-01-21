@@ -1,7 +1,7 @@
 import React from "react";
 import Slidebar from "../../components/slidebar/slidebar";
 import './AccountPageHire.css';
-
+import '../Application/Application.css'
 import { Link } from "react-router-dom";
 
 class FirstPageForHire extends React.Component {

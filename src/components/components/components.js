@@ -15,10 +15,12 @@ import {CardText} from 'reactstrap'
 import {CardLink} from 'reactstrap'
 import {Card} from 'reactstrap'
 import {CardTitle} from 'reactstrap'
-//import ChatListItems from '../../Pages/ChatListItem';
+import {CardFooter} from 'reactstrap';
 import { Link } from 'react-router-dom';
+import {CardHeader} from 'reactstrap';
 
- export const Example = (props) => {
+
+export const Example = (props) => {
     const {data}=props;
   
     const[selected,setSelcted] = useState([]);
@@ -468,14 +470,14 @@ const handleshowhide=(event,checked) =>{
      
         <div className="card-container">
             {cardData.map((card, index) => (
-                <Card className="card" key={index}>
+                <Card className="cards cardspack" key={index}>
                     <Link to={card.projectLink}>
                         <img className="img-card" src={card.image} alt={card.title} />
                     </Link>
                     <CardBody className="cardbody">
                         <CardTitle tag="h5" className="cardtitle">{card.title}</CardTitle>
-                        <Link to={card.projectLink}>
-                        <CardSubtitle className='cardsub'>View the posted project</CardSubtitle>
+                        <Link to={card.applicationLink}>
+                        <CardSubtitle className='cardsub'>View the applications</CardSubtitle>
                         </Link>
                         <CardText className="cardtext">{card.description}</CardText>
                         <CardLink href={card.freelancerLink} className="cardlink">
@@ -490,3 +492,100 @@ const handleshowhide=(event,checked) =>{
      
      );
   } 
+  export const CardApplication = ({cardData}) => {
+    return ( 
+     
+        <div className="card-container2">
+            {cardData.map((card, index) => (
+                <Card className="card-application" key={index}>
+                    <CardHeader className='card-header'>
+                 Applied Job Type : {card.jobtype}
+                </CardHeader>
+                <CardBody>
+                <CardTitle tag="h5" className='card-title'>
+                Hourly Rate :{card.hourlyrate}
+                </CardTitle>
+                <CardText className='card-text'>
+              {card.description}
+              </CardText>
+            
+              </CardBody>
+              <CardFooter>
+             
+              <CardLink href={card.freelancerAccountLik} className="cardlink1">
+              FreelancerAccount_Link
+              <img className="img-profile" src={card.profileImage} alt={card.title} />
+              </CardLink>
+
+              <div className="center">
+              <a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+                        download>
+              <button className="b2"> Click to download the resume</button>
+              </a>
+              </div>  
+
+              <Link to = "/">
+                    <button className="b1"> Hire Freelancer</button>
+                    </Link> 
+                </CardFooter>
+                </Card>
+            ))}
+            </div>
+     
+     );
+  } 
+
+  export const MyApplications = ({cardData}) => {
+    return ( 
+     
+        <div className="card-container2">
+            {cardData.map((card, index) => (
+                <Card className="card-application" key={index}>
+                    <CardHeader className='card-header'>
+                Project Title:{card.projectTitle}
+                </CardHeader>
+                <CardSubtitle className='card-text'>
+                Applied Job Type : {card.jobtype}
+                </CardSubtitle>
+                <CardBody>
+
+                  
+                <CardTitle tag="h5" className='card-title'>
+                Hourly Rate :{card.hourlyrate}
+                </CardTitle>
+                <CardText className='card-text'>
+              {card.description}
+              </CardText>
+              <CardText className='card-text'>
+              Applied Date : {card.cardData}
+              </CardText>
+            
+              </CardBody>
+              <CardFooter>
+             
+              <CardLink href={card.freelancerAccountLik} className="cardlink1">
+              FreelancerAccount_Link
+              <img className="img-profile" src={card.profileImage} alt={card.title} />
+              </CardLink>
+
+              <CardLink href={card.projectLink} className="cardlink2">
+              Project Link
+             
+              </CardLink>
+
+              <div className="center">
+              <a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+                        download>
+              <button className="b2"> Click to download the resume</button>
+              </a>
+              </div>  
+
+             
+                </CardFooter>
+                </Card>
+            ))}
+            </div>
+     
+     );
+  } 
+

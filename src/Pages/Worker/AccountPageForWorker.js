@@ -52,7 +52,7 @@ class AccountPageWorker extends React.Component {
         
        
         <div class="col">
-          <Card className="card" >
+          <Card className="cards-pack" >
               <Link to="/viewproject">
               <img className="img-card"
               alt="Sample"
@@ -80,7 +80,7 @@ class AccountPageWorker extends React.Component {
           </Card>
 
          
-        <Card className="card" >
+        <Card className="cards-pack" >
             <Link to="/viewproject">
             <img className="img-card"
             alt="Sample"
@@ -111,7 +111,7 @@ class AccountPageWorker extends React.Component {
             </div>
 
         <div class="col">
-            <Card className="card" >
+            <Card className="cards-pack" >
             <Link to="/viewproject">
             <img className="img-card"
             alt="Sample"
@@ -140,7 +140,7 @@ class AccountPageWorker extends React.Component {
             </CardBody>
           </Card>
 
-          <Card className="card" >
+          <Card className="cards-pack" >
             <Link to="/viewproject">
             <img className="img-card"
             alt="Sample"
