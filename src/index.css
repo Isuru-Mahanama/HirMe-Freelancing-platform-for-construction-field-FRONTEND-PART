@@ -61,11 +61,11 @@
   transform: rotate(5deg);
   top: -310px;
   left: -70px;
-  background: rgb(12, 12, 10);
+  background: rgb(194, 194, 163);
   background: linear-gradient(
     58deg,
-    #501d0c 40%,
-    rgb(19, 13, 0) 100%
+    #d69682 40%,
+    rgb(223, 209, 178) 100%
   );
   
 }

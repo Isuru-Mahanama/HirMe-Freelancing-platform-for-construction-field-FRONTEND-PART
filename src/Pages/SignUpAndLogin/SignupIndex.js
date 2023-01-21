@@ -4,7 +4,7 @@ const SignupIndex = () => {
 
     
     return ( 
-        <div class ="bg-slate-800">
+        <div className="background">
         <div  >
             <div className="TopContainer">
                 <div className="backDrop"> </div>

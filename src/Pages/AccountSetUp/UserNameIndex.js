@@ -4,7 +4,7 @@ const UserNameIndex = () => {
 
     
     return ( 
-        <div class ="bg-slate-800">
+        <div className="background">
         <div className="AppContainer " >
             <div className="TopContainer">
                 <div className="backDrop"> </div>
