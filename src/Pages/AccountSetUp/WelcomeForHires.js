@@ -1,17 +1,22 @@
 import { useNavigate } from "react-router-dom";
 import './image.css'
+import { useLocation } from "react-router-dom";
 
-const Welcome = () => {
+const Welcome = (props) => {
 
+    const location = useLocation();
+    const email = location.state.email;
+    
     let history = useNavigate();
     
-    
+   
     const getStarted=()=>{
-        
-        history("/firstPageforHire");
+        console.log("Welcome for hire"+email)
+        history("/firstPageforHire",{ state: { email: email } });
     }
     return ( 
         <div>
+           
         <div class ="bg-slate-800">
         <div className="AppContainer " >
             <div className="TopContainer">

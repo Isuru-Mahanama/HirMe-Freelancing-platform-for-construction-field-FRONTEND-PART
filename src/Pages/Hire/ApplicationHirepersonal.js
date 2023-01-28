@@ -8,22 +8,73 @@ import {RiHome4Line } from "react-icons/ri";
 import {RiHome8Fill } from "react-icons/ri";
 import {RiHome7Fill } from "react-icons/ri";
 import {AiFillBank} from "react-icons/ai";
-import { Link } from "react-router-dom";
+import {  useLocation, useNavigate } from "react-router-dom";
 import { VscLocation } from "react-icons/vsc";
 import { FcBusinesswoman } from "react-icons/fc";
 import {  FcBusinessman } from "react-icons/fc"
 import 'react-phone-number-input/style.css';
 import {Languages, PhoneNumber,Timezone} from "../../components/components/components";
+function ForgotNavigate(props){
+    const navigation = useNavigate();
+    const uselocation = useLocation();
+
+    const email = uselocation.state.email;
+   
+    console.log(props.value.firstName)
+    const accountSetUpClient=(e)=>{
+          e.preventDefault();     
+          const apiLink ="http://localhost:8080/api/v1/user";
+          const user = { email:email, firstName: props.value.firstName};
+          console.log("Email is passed:"+email);
+
+          fetch(apiLink+"/setUpUserAccount", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(user)
+            
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if (data.success) {
+                
+                console.log("First Name is added.");
+                // Redirect to the desired page
+                
+                navigation("/applicationHire2");
+            } else {
+                console.log("Error:", data.message);
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+       
+    }
+    return(<>
+    
+    <button class = "button" onClick={(e)=>accountSetUpClient(e)} >Next</button>
+    </>
+    )
+}
 class ApplicationHire extends React.Component {
     constructor(props){
         super(props);
-        this.value ={};
+        this.state={
+            firstName:"",
+            lastName:""
+        }
+       
     }
+    changState=(e)=>{
+        this.setState(
+            {firstName:e.target.value}
+        );
+       }
+   
     
     
-    setValue(){
-        this.setState({});
-    }
+   
     render() { 
         return (
             <div className="background">
@@ -42,7 +93,7 @@ class ApplicationHire extends React.Component {
                <div className="inputBoxForm">
                 <div class="inputBox">
                 <span></span> 
-                    <input type="text" required></input>
+                    <input type="text" required value={this.state.firstName}  onChange={(e)=>this.changState(e)}></input>
                    
                     <span ><VscAccount /> First Name</span>
                    
@@ -120,9 +171,10 @@ class ApplicationHire extends React.Component {
                 </div>
                 
                 <div className="buttons">
-                <Link to= "/applicationHire2">
-                <button class = "button"  >Next</button>
-                </Link>
+               
+                <ForgotNavigate  value={this.state}></ForgotNavigate>
+                
+               
                 </div>
 
                 

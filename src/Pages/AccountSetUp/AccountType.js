@@ -1,10 +1,37 @@
 import { useNavigate } from "react-router-dom"
+import './image.css';
+import { useLocation } from "react-router-dom";
 
-function Loginas(){
-
+function Loginas(props){
+    const apiLink ="http://localhost:8080/api/v1/client";
     const history = useNavigate();
-    const getStarted=()=>{
-            history('/welcome')
+    const location = useLocation();
+    const email = location.state.email;
+    console.log(email);
+    const getStarted=(e)=>{
+            e.preventDefault();
+
+            
+            const user={email:email};
+            fetch(apiLink +"/setUpClient",{
+              method :"POST",
+              headers: { "Content-Type": "application/json" },
+              body:JSON.stringify(user)
+
+            })
+            .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if (data.success) {
+                console.log("Account type is added.");
+                history('/welcome',{ state: { email: email } });
+            } else {
+                console.log("Error:", data.message);
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
     }
 
     const getWork=()=>{
@@ -12,39 +39,28 @@ function Loginas(){
 }
 
     return(
-            <div style={{display : "flex" , flexDirection :'row' , alignItems: 'center', justifyContent: 'center'
-            }}>
+            <div className="img-cneter">
+            <figure >
+              <img class=" rounded-full " src="/images/I want to work.jpeg" alt="" width="300" height="500"/>
                 
-                <figure >
-  <img class=" rounded-full " src="/images/I want to work.jpeg" alt="" width="300" height="500"/>
+                <figcaption class="font-medium">
+                  <div class=" text-center text-4xl">
+                      <button class="button  buttonS" onClick={()=>{getWork()}}> I want to work</button>
+                  </div>
+                </figcaption>
+                
+            </figure>
+            <figure >
+              <img class=" rounded-full " src="/images/I want to hire.jpeg" alt="" width="300" height="500"/>
   
-  <div class="pt-6 space-y-4">
-   
-    <figcaption class="font-medium">
-      
-      <div class="text-white text-center text-4xl">
-       
-       <button class="button text-white text-center text-4xl buttonS" onClick={()=>{getWork()}}> I want to work</button>
-      </div>
-    </figcaption>
-  </div>
-</figure>
-<figure >
-  <img class=" rounded-full " src="/images/I want to hire.jpeg" alt="" width="300" height="500"/>
-  
-  <div class="pt-6 space-y-4">
-   
-    <figcaption class="font-medium">
-     
-    <div class="text-white text-center text-4xl">
-       
-       <button class="button text-white text-center text-4xl buttonS" onClick={()=>{getStarted()}} > I want to hire</button>
-      </div>
-    </figcaption>
-   
-  </div>
-</figure>
-
+            
+                <figcaption class="font-medium">
+                  <div class=" text-center text-4xl">
+                      <button class="button  buttonS" onClick={(e)=>{getStarted(e)}} > I want to hire</button>
+                  </div>
+                </figcaption>
+            
+            </figure>
             </div>
     )
 

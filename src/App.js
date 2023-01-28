@@ -34,9 +34,11 @@ function App() {
     const userAuthentication =() =>{
       setUserLoggedIn(!isUserLoggedIn);
     }
+    
   
   return (
     <>
+    
     <Router>
      <Navbar isUserLoggedIn ={isUserLoggedIn} userAuthentication={userAuthentication} />
        <Routes>

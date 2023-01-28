@@ -3,27 +3,33 @@ import Slidebar from "../../components/slidebar/slidebar";
 import './AccountPageHire.css';
 import '../Application/Application.css'
 import { Link } from "react-router-dom";
-
-class FirstPageForHire extends React.Component {
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+const FirstPageForHire = () => {
   
-  
-   state = {  } ;
+    let history = useNavigate();
    
-  render(
-      
-  ) { 
+  
     
-    return (
+    const location = useLocation();
+    const email = location.state.email;
+    const handleSignUp=(e)=>{
+         history("/applicationhire",{ state: { email: email } });
+      
+       
+    }
+    
+  return (
+    <div>
       <div className="background" >
         <div className="devideLeft">
         <Slidebar></Slidebar>
         </div>
        
         <div className="devideRight">
-          <Link  to="/applicationhire">
-          <button className="b1" >Set up your account!!!</button>
-          </Link>
-       
+        <button className="b1" onClick={(e)=>handleSignUp(e)} >Set up your account!!!</button>
+         
+     
          <Link  to="/applicationhire">
           <button className="b1" >Edit your profile!!!</button>
           </Link>
@@ -33,10 +39,8 @@ class FirstPageForHire extends React.Component {
         </div>
       
       </div>
-
+    </div>
     );
-  }
 }
-
-
-export default FirstPageForHire  ;
+ 
+export default FirstPageForHire;

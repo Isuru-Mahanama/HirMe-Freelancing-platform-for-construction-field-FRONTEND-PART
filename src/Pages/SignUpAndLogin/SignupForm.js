@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
+
 const SignupForm = (props) => {
     
     const apiLink ="http://localhost:8080/api/v1/user"
@@ -20,6 +21,8 @@ const SignupForm = (props) => {
     const handleSignUp=(e)=>{
           e.preventDefault();     
           const user = { email };
+          
+          
           fetch(apiLink+"/saveUser", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -31,7 +34,10 @@ const SignupForm = (props) => {
             if (data.success) {
                 console.log("User is added.");
                 // Redirect to the desired page
-                history("/userName");
+                history("/userName", { state: { email: email } });
+                
+                
+                
             } else {
                 console.log("Error:", data.message);
             }
