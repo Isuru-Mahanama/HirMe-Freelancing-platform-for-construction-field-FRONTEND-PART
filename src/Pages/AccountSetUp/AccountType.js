@@ -3,7 +3,7 @@ import './image.css';
 import { useLocation } from "react-router-dom";
 
 function Loginas(props){
-    const apiLink ="http://localhost:8080/api/v1/client";
+    const apiLink ="http://localhost:8080/api/v1/user";
     const history = useNavigate();
     const location = useLocation();
     const email = location.state.email;
@@ -20,7 +20,7 @@ function Loginas(props){
 
             })
             .then(res => res.json())
-        .then(data => {
+            .then(data => {
             console.log(data);
             if (data.success) {
                 console.log("Account type is added.");

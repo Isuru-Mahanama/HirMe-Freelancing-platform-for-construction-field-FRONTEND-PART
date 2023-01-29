@@ -14,7 +14,7 @@ const UserName= (props) => {
           
           const user = { userName: username, email: email };
           
-          fetch(apiLink+"/saveUserName", {
+          fetch(apiLink+ "/saveUserName", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(user)

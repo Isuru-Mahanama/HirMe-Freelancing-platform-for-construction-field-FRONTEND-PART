@@ -13,7 +13,8 @@ import { VscLocation } from "react-icons/vsc";
 import { FcBusinesswoman } from "react-icons/fc";
 import {  FcBusinessman } from "react-icons/fc"
 import 'react-phone-number-input/style.css';
-import {Languages, PhoneNumber,Timezone} from "../../components/components/components";
+import { PhoneNumber,Timezone} from "../../components/components/components";
+import Selected from "../../components/Languages";
 function ForgotNavigate(props){
     const navigation = useNavigate();
     const uselocation = useLocation();
@@ -21,12 +22,36 @@ function ForgotNavigate(props){
     const email = uselocation.state.email;
    
     console.log(props.value.firstName)
+    console.log(props.value.lastName)
     const accountSetUpClient=(e)=>{
           e.preventDefault();     
           const apiLink ="http://localhost:8080/api/v1/user";
-          const user = { email:email, firstName: props.value.firstName};
-          console.log("Email is passed:"+email);
+          
 
+          
+         
+          const address={
+            email:email,
+            country:props.value.country,
+            streetAddress:props.value.streetaddress,
+            city :props.value.city,
+            province : props.value.province,
+            language:props.value.language
+            
+
+          }
+          const user = { 
+             email:email,
+             firstName: props.value.firstName,
+             lastName :props.value.lastName,
+             displayEmail:props.value.displayEmail,
+             postalCode:props.value.postalCode,
+             company:props.value.company,
+             location:props.value.location
+            };
+            
+          
+          
           fetch(apiLink+"/setUpUserAccount", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -41,7 +66,21 @@ function ForgotNavigate(props){
                 console.log("First Name is added.");
                 // Redirect to the desired page
                 
-                navigation("/applicationHire2");
+            return fetch(apiLink +"/saveAddress",{
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(address)
+            }).then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.success) {
+                    console.log("Address area added.");
+                    navigation("/applicationHire2",{ state: { email: email } });
+                } else {
+                    console.log("Error:", data.message);
+                }
+            })
+
             } else {
                 console.log("Error:", data.message);
             }
@@ -62,15 +101,85 @@ class ApplicationHire extends React.Component {
         super(props);
         this.state={
             firstName:"",
-            lastName:""
+            lastName:"",
+            displayEmail:'',
+            country :"",
+            streetaddress:"",
+            city:"",
+            state:"",
+            province:"",
+            postalCode:"",
+            company:"",
+            location:"",
+            phoneNumber:"",
+            timeZone:"",
+            language:" "
         }
        
     }
-    changState=(e)=>{
+    changeFirstName=(e)=>{
         this.setState(
             {firstName:e.target.value}
+            
         );
        }
+    changeLastName=(e)=>{
+        this.setState(
+            {lastName:e.target.value}
+        );
+    }
+    changeDisplayEmail=(e)=>{
+        this.setState(
+            {displayEmail:e.target.value}
+        );
+    }
+
+    changeCountry=(e)=>{
+        this.setState(
+            {country:e.target.value}
+        );
+    }
+
+    changeStreetAddress=(e)=>{
+        this.setState(
+            {streetaddress:e.target.value}
+        );
+    }
+
+    changeCity=(e)=>{
+        this.setState(
+            {city:e.target.value}
+        );
+    }
+    changeProvince=(e)=>{
+        this.setState(
+            {province:e.target.value}
+        );
+    }
+    changePostalCode=(e)=>{
+        this.setState(
+            {postalCode:e.target.value}
+        );
+    }
+
+    changeCompany=(e)=>{
+        this.setState(
+            {company:e.target.value}
+        );
+    }
+    changeLocation=(e)=>{
+        this.setState(
+            {location:e.target.value}
+        );
+    }
+ 
+
+    handleLaguage = (e) => {
+        console.log("DD"+e)
+        this.setState(
+            {language:e.target.value})
+        
+    }
    
     
     
@@ -93,61 +202,56 @@ class ApplicationHire extends React.Component {
                <div className="inputBoxForm">
                 <div class="inputBox">
                 <span></span> 
-                    <input type="text" required value={this.state.firstName}  onChange={(e)=>this.changState(e)}></input>
+                    <input type="text" required value={this.state.firstName}  onChange={(e)=>this.changeFirstName(e)}></input>
                    
                     <span ><VscAccount /> First Name</span>
                    
                 </div>
 
                 <div class="inputBox">
-                    <input type="text" required></input>
+                    <input type="text" required value={this.state.lastName} onChange={(e)=>this.changeLastName(e)}></input>
                     <span><VscAccount />Last Name</span>
                 </div>
                 
                 </div>
 
                 <div class="inputBox">
-                    <input type="text" required></input>
+                    <input type="text" required value={this.state.displayEmail} onChange={(e)=>this.changeDisplayEmail(e)}></input>
                     <span><VscMail/>Email</span>
                 </div>
 
                 <div class="inputBox">
-                    <input type="text" required></input>
+                    <input type="text" required value={this.state.country} onChange={(e)=>this.changeCountry(e)}></input>
                     <span><VscHome/>Country</span>
                 </div>
                 <div className ="inputBox inputBoxAddress">
-                    <input type="text" required></input>
+                    <input type="text" required value={this.state.streetaddress} onChange={(e)=>this.changeStreetAddress(e)}></input>
                     <span><RiHome3Line/>Street Address</span>
                 </div>
                 <div className="inputBoxForm">
                 <div className ="inputBox">
-                    <input type="text" required></input>
+                    <input type="text" required value={this.state.city} onChange={(e)=>this.changeCity(e)}></input>
                     <span><RiHome4Line/>City</span>
                 </div>
 
                 <div className ="inputBox">
-                    <input type="text" required></input>
+                    <input type="text" required value={this.state.province} onChange={(e)=>this.changeProvince(e)}></input>
                     <span><RiHome8Fill/>State/Province</span>
                 </div>
 
                 <div className ="inputBox">
-                    <input type="text" required></input>
+                    <input type="text" required value={this.state.postalCode} onChange={(e)=>this.changePostalCode(e)}></input>
                     <span><RiHome7Fill/>ZIP/Postal Code</span>
                 </div>
                 </div>
                 <div className="inputBoxForm">
                 <div className ="inputBox">
-                    <input type="text" required></input>
+                    <input type="text" required value={this.state.company} onChange={(e)=>this.changeCompany(e)}></input>
                     <span><AiFillBank/>Company</span>
                 </div>
-              {/*   
+          
                 <div className ="inputBox">
-                    <input type="text" required></input>
-                    <span><VscCompassActive/>Time Zone</span>
-                </div>
- */}
-                <div className ="inputBox">
-                    <input type="text" required></input>
+                    <input type="text" required value={this.state.location} onChange={(e)=>this.changeLocation(e)}></input>
                     <span><VscLocation/>Location</span>
                 </div>
                 </div>
@@ -162,9 +266,7 @@ class ApplicationHire extends React.Component {
                  </div>
                
                 <div className="inputBox">
-                    <Languages className="widthBox"></Languages>
-
-                
+                <Selected className="widthBox" value={this.state} onChange={this.handleLaguage}></Selected>
                 </div>
                 
              

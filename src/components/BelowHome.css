@@ -3,6 +3,10 @@
     background: rgb(251, 250, 252);
   }
   
+  .gap{
+    padding-bottom: 0.5cm;
+    
+  }
   h1 {
     text-align: center;
   }

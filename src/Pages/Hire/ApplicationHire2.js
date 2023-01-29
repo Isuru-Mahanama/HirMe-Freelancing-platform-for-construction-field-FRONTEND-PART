@@ -88,12 +88,7 @@ class ApplicationHire2 extends React.Component {
                     <input type="text" required></input>
                     <span><AiFillBank/>sub category</span>
                 </div>
-              {/*   
-                <div className ="inputBox">
-                    <input type="text" required></input>
-                    <span><VscCompassActive/>Time Zone</span>
-                </div>
- */}
+          
                 <div className ="inputBox">
                     <input type="text" required></input>
                     <span><VscLocation/>from</span>

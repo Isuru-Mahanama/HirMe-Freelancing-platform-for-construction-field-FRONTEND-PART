@@ -14,7 +14,8 @@ import { FcBusinesswoman } from "react-icons/fc";
 import {  FcBusinessman } from "react-icons/fc"
 import 'react-phone-number-input/style.css';
 import ProgressBar from "../../components/progressbar/progressbar";
-import { Languages ,Timezone,PhoneNumber } from "../../components/components/components";
+import { Timezone,PhoneNumber } from "../../components/components/components";
+import Selected from "../../components/Languages";
 
 class WorkApplications extends React.Component {
     constructor(props){
@@ -89,12 +90,7 @@ class WorkApplications extends React.Component {
                     <input type="text" required></input>
                     <span><AiFillBank/>Company</span>
                 </div>
-              {/*   
-                <div className ="inputBox">
-                    <input type="text" required></input>
-                    <span><VscCompassActive/>Time Zone</span>
-                </div>
- */}
+             
                 <div className ="inputBox">
                     <input type="text" required></input>
                     <span><VscLocation/>Location</span>
@@ -107,18 +103,13 @@ class WorkApplications extends React.Component {
 
                  <div  >
                 <Timezone></Timezone>
-                 </div>
-                 </div>
                
-                <div className="inputBox">
-                    <Languages className="widthBox"></Languages>
-
-                
+                 </div>
+                 <Selected className="widthBox"></Selected>
+                 </div>
+              
                 </div>
-                
-             
-                </div>
-                
+               
                 <div className="buttons">
                 <Link to= "/applicationWork2">
                 <button class = "button"  >Next</button>

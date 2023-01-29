@@ -150,15 +150,12 @@ hr {
 
 .inputBox select{
     width:100%;
-  
-    padding-top: 34px;
     border: 1px solid#A96036;
     background: #FFFEE6;
     border-radius: 20px;
     outline: #A96036;
     color:#000000;
     font-size:1em;
-    margin-bottom: 1cm;
     height: 75px;
     font-weight: 700;
 }
@@ -214,8 +211,6 @@ hr {
 .date{
     font-family:Georgia, 'Times New Roman', Times, serif;
   
-  
-    padding:10px;
     font-size:1em;
     color: #000000;
     pointer-events: none;
