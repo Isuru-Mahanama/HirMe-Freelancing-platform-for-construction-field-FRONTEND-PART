@@ -36,10 +36,10 @@ function ForgotNavigate(props){
             streetAddress:props.value.streetaddress,
             city :props.value.city,
             province : props.value.province,
-            language:props.value.language
-            
+            language:props.value.language,
+            languageLevel:props.value.languageLevel
+         }
 
-          }
           const user = { 
              email:email,
              firstName: props.value.firstName,
@@ -113,7 +113,8 @@ class ApplicationHire extends React.Component {
             location:"",
             phoneNumber:"",
             timeZone:"",
-            language:" "
+            language:" ",
+            languageLevel:""
         }
        
     }
@@ -175,10 +176,15 @@ class ApplicationHire extends React.Component {
  
 
     handleLaguage = (e) => {
-        console.log("DD"+e)
+        
         this.setState(
             {language:e.target.value})
-        
+    }
+
+    handleLanguageLevel =(e) =>{
+        this.setState(
+            {languageLevel: e.target.value}
+        )
     }
    
     
@@ -266,7 +272,7 @@ class ApplicationHire extends React.Component {
                  </div>
                
                 <div className="inputBox">
-                <Selected className="widthBox" value={this.state} onChange={this.handleLaguage}></Selected>
+                <Selected className="widthBox" value={this.state} onChange={this.handleLaguage} onClick={this.handleLanguageLevel}></Selected>
                 </div>
                 
              
