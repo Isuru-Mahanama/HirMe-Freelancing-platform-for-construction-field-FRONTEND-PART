@@ -5,11 +5,11 @@ import axios from 'axios';
 import './BelowHome.css'
 
 const apiLink = "http://localhost:8080/api/v1/user";
-function Selected({onChange},{onClick}) {
+function Selected({onChange , onClick}) {
 
  
   const [data,setData] = useState([]);
-  const [languageLevel,setLanguageLevel] = useState([]);
+  const [datalanguageLevel,datasetLanguageLevel] = useState([]);
  
    const fetchData =async() =>{
     try{
@@ -31,7 +31,7 @@ function Selected({onChange},{onClick}) {
   const fetchLanguageLevels =async() =>{
     try{
       const response =await axios.get(apiLink+'/getLanguageLevels');
-      setLanguageLevel(response.data);
+      datasetLanguageLevel(response.data);
       console.log(response.data)
     }catch(error){
       console.log(error);
@@ -67,10 +67,9 @@ function Selected({onChange},{onClick}) {
       <label className="date "><BiCopyAlt/>Language Level</label>
       </div>
       <select
-        name="language"
-     
-        onChange={onClick}>
-        {languageLevel.map(item=>(
+        name="languageLevel"
+        onClick={onClick}>
+        {datalanguageLevel.map(item=>(
           <option key={item.languageLevelID} value={item.languageLevel}>
             {item.languageLevel}
           </option>

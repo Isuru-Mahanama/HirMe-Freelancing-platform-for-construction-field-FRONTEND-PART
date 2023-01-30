@@ -30,7 +30,7 @@ function ForgotNavigate(props){
 
           
          
-          const address={
+          const address_languages={
             email:email,
             country:props.value.country,
             streetAddress:props.value.streetaddress,
@@ -66,16 +66,33 @@ function ForgotNavigate(props){
                 console.log("First Name is added.");
                 // Redirect to the desired page
                 
-            return fetch(apiLink +"/saveAddress",{
+            return fetch(apiLink +"/saveAddress", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(address)
+                body: JSON.stringify(address_languages)
             }).then(res => res.json())
             .then(data => {
                 console.log(data);
                 if (data.success) {
                     console.log("Address area added.");
+                       
+            return fetch(apiLink +"/saveLanguages", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(address_languages)
+            }).then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.success) {
+                    console.log("Languages are added.");
+                    console.log("Level"+address_languages.languageLevel)
                     navigation("/applicationHire2",{ state: { email: email } });
+                } else {
+                    console.log("Error:", data.message);
+                }
+            })
+                    
+                    
                 } else {
                     console.log("Error:", data.message);
                 }
@@ -114,7 +131,7 @@ class ApplicationHire extends React.Component {
             phoneNumber:"",
             timeZone:"",
             language:" ",
-            languageLevel:""
+            languageLevel:"",
         }
        
     }
@@ -123,6 +140,7 @@ class ApplicationHire extends React.Component {
             {firstName:e.target.value}
             
         );
+        
        }
     changeLastName=(e)=>{
         this.setState(
@@ -183,8 +201,8 @@ class ApplicationHire extends React.Component {
 
     handleLanguageLevel =(e) =>{
         this.setState(
-            {languageLevel: e.target.value}
-        )
+            {languageLevel: e.target.value})
+            console.log("THISis firstname:"+e.target.value);
     }
    
     
