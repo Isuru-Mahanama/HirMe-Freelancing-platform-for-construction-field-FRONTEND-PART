@@ -49,7 +49,8 @@ function ForgotNavigate(props){
              company:props.value.company,
              location:props.value.location,
             // timeZone:props.value.selectedTimezone.value,
-             timeZone:props.value.timeZoneValue + props.value.timeZoneLabel
+             timeZone:props.value.timeZoneValue + props.value.timeZoneLabel,
+             phoneNumber:props.value.phoneNumber
             };
             
           console.log("TimeZone"+ props.value.timeZone)
@@ -210,12 +211,13 @@ class ApplicationHire extends React.Component {
     }
 
     handlePhoneNumber =(e) =>{
+        console.log("phone"+e);
         this.setState(
-            {phoneNumber: e.target.value})
+            {phoneNumber: e})
     }
 
     setSelectedTimezone =(e) =>{
-        console.log(e);
+       
         console.log(e.label);
         this.setState(
             {timeZoneValue: e.value,
@@ -299,7 +301,7 @@ class ApplicationHire extends React.Component {
                 </div>
                 <div className="inputBoxForm">
                 <div >
-                <PhoneNumber></PhoneNumber>
+                <PhoneNumber value={this.state} onChange={this.handlePhoneNumber}></PhoneNumber>
                  </div>
 
                  <div  >

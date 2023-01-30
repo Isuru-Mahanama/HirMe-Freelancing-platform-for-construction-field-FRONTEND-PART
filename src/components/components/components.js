@@ -233,13 +233,13 @@ export const DataPicker = () => {
 };
 
 
-export  const PhoneNumber = () => {
-    const [value, setValue] = useState();
+export  const PhoneNumber = ({value, onChange}) => {
+   // const [value, setValue] = useState();
     return (  
         <>
 
         <div className ="inputBox">
-        <PhoneInput   value={value} onChange={setValue} placeholder ="PHONE NUMBER"/>
+        <PhoneInput   value={value.PhoneNumber} onChange={onChange} placeholder ="PHONE NUMBER"/>
        
         </div>
         </>
