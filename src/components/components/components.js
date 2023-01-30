@@ -341,9 +341,8 @@ const handleshowConstruction=(e) =>{
 
 
 
-export  const Timezone = () => {
-    const [selectedTimezone, setSelectedTimezone] = useState({})
-  
+export  const Timezone = ({value, onChange}) => {
+
     return (
     
        
@@ -352,8 +351,8 @@ export  const Timezone = () => {
        
         <div className="select-wrapper">
           <TimezoneSelect 
-            value={selectedTimezone}
-            onChange={setSelectedTimezone}
+            value={value.selectedTimezone}
+            onChange={onChange}
             placeholder ="TIME ZONE"
           />
         </div>

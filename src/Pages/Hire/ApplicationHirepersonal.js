@@ -47,10 +47,12 @@ function ForgotNavigate(props){
              displayEmail:props.value.displayEmail,
              postalCode:props.value.postalCode,
              company:props.value.company,
-             location:props.value.location
+             location:props.value.location,
+            // timeZone:props.value.selectedTimezone.value,
+             timeZone:props.value.timeZoneValue + props.value.timeZoneLabel
             };
             
-          
+          console.log("TimeZone"+ props.value.timeZone)
           
           fetch(apiLink+"/setUpUserAccount", {
             method: "PUT",
@@ -129,9 +131,13 @@ class ApplicationHire extends React.Component {
             company:"",
             location:"",
             phoneNumber:"",
-            timeZone:"",
+            timeZoneValue:"",
             language:" ",
             languageLevel:"",
+            selectedTimezone :{},
+            timeZoneLabel:"",
+            
+            
         }
        
     }
@@ -140,7 +146,6 @@ class ApplicationHire extends React.Component {
             {firstName:e.target.value}
             
         );
-        
        }
     changeLastName=(e)=>{
         this.setState(
@@ -202,8 +207,21 @@ class ApplicationHire extends React.Component {
     handleLanguageLevel =(e) =>{
         this.setState(
             {languageLevel: e.target.value})
-            console.log("THISis firstname:"+e.target.value);
     }
+
+    handlePhoneNumber =(e) =>{
+        this.setState(
+            {phoneNumber: e.target.value})
+    }
+
+    setSelectedTimezone =(e) =>{
+        console.log(e);
+        console.log(e.label);
+        this.setState(
+            {timeZoneValue: e.value,
+                timeZoneLabel: e.label}
+            //{time:e.label}
+            )}
    
     
     
@@ -285,7 +303,7 @@ class ApplicationHire extends React.Component {
                  </div>
 
                  <div  >
-                <Timezone></Timezone>
+                <Timezone value={this.state} onChange={this.setSelectedTimezone} ></Timezone>
                  </div>
                  </div>
                

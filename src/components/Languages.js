@@ -10,12 +10,17 @@ function Selected({onChange , onClick}) {
  
   const [data,setData] = useState([]);
   const [datalanguageLevel,datasetLanguageLevel] = useState([]);
+  
  
+
+
+  const [defaultLanguage, setDefaultLanguage] = useState('');
    const fetchData =async() =>{
     try{
       const response =await axios.get(apiLink+'/getLanguages');
       setData(response.data);
-      console.log(response.data)
+      setDefaultLanguage( response.data[0].language);
+      console.log("hi"+response.data[0].language)
     }catch(error){
       console.log(error);
     }
@@ -53,7 +58,7 @@ function Selected({onChange , onClick}) {
     </div>
       <select
         name="language"
-     
+        defaultValue={defaultLanguage}
         onChange={onChange}>
         {data.map(item=>(
           <option key={item.languageID} value={item.language}>
