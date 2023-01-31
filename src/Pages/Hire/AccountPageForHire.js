@@ -30,7 +30,7 @@ const FirstPageForHire = () => {
         <button className="b1" onClick={(e)=>handleSignUp(e)} >Set up your account!!!</button>
          
      
-         <Link  to="/applicationhire">
+         <Link  to="/applicationWork2">
           <button className="b1" >Edit your profile!!!</button>
           </Link>
      

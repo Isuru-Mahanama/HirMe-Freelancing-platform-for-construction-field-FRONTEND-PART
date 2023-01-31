@@ -2,22 +2,20 @@ import { useNavigate } from "react-router-dom"
 import './image.css';
 import { useLocation } from "react-router-dom";
 
+const apiLink ="http://localhost:8080/api/v1/user";
 function Loginas(props){
-    const apiLink ="http://localhost:8080/api/v1/user";
+    
     const history = useNavigate();
     const location = useLocation();
     const email = location.state.email;
     console.log(email);
     const getStarted=(e)=>{
             e.preventDefault();
-
-            
-            const user={email:email};
+             const user={email:email};
             fetch(apiLink +"/setUpClient",{
               method :"POST",
               headers: { "Content-Type": "application/json" },
               body:JSON.stringify(user)
-
             })
             .then(res => res.json())
             .then(data => {
@@ -33,10 +31,29 @@ function Loginas(props){
             console.error("Error:", error);
         });
     }
-
-    const getWork=()=>{
-      history('/welcomeForWorker')
-}
+    const getWork=(e)=>{
+      e.preventDefault();
+      const user={email:email};
+     fetch(apiLink +"/setUpFreelancer",{
+       method :"POST",
+       headers: { "Content-Type": "application/json" },
+       body:JSON.stringify(user)
+     })
+     .then(res => res.json())
+     .then(data => {
+     console.log(data);
+     if (data.success) {
+         console.log("Freelancer Account is added.");
+         history('/welcomeForWorker',{ state: { email: email } });
+     } else {
+         console.log("Error:", data.message);
+     }
+    })
+    .catch(error => {
+     console.error("Error:", error);
+    });
+    }
+   
 
     return(
             <div className="img-cneter">
@@ -45,7 +62,7 @@ function Loginas(props){
                 
                 <figcaption class="font-medium">
                   <div class=" text-center text-4xl">
-                      <button class="button  buttonS" onClick={()=>{getWork()}}> I want to work</button>
+                      <button class="button  buttonS" onClick={(e)=>{getWork(e)}}> I want to work</button>
                   </div>
                 </figcaption>
                 
