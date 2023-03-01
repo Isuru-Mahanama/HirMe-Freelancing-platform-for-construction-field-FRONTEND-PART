@@ -19,8 +19,14 @@ function ForgotNavigate(props){
     const navigation = useNavigate();
     const uselocation = useLocation();
 
-    const email = uselocation.state.email;
+    
+    const {email,setEditprofile} = uselocation.state;
    
+    
+   
+    
+    //console.log("Eprofile"+editprofile);
+
     console.log(props.value.firstName)
     console.log(props.value.lastName)
     const accountSetUpClient=(e)=>{
@@ -94,13 +100,10 @@ function ForgotNavigate(props){
                     console.log("Error:", data.message);
                 }
             })
-                    
-                    
                 } else {
                     console.log("Error:", data.message);
                 }
             })
-
             } else {
                 console.log("Error:", data.message);
             }
@@ -112,7 +115,9 @@ function ForgotNavigate(props){
     }
     return(<>
     
-    <button class = "button" onClick={(e)=>accountSetUpClient(e)} >Next</button>
+    
+    {setEditprofile && <button class = "button" onClick={(e)=>accountSetUpClient(e)} >Next</button>}
+    {!setEditprofile && <button class = "button" onClick={(e)=>accountSetUpClient(e)} >Edit Your Company Details</button>}
     </>
     )
 }
@@ -232,9 +237,7 @@ class ApplicationHire extends React.Component {
         return (
             <div className="background">
                
-                
-        
-            <div className="pageUp">
+           <div className="pageUp">
            <ProgressBar></ProgressBar>
             </div>
 
@@ -247,9 +250,7 @@ class ApplicationHire extends React.Component {
                 <div class="inputBox">
                 <span></span> 
                     <input type="text" required value={this.state.firstName}  onChange={(e)=>this.changeFirstName(e)}></input>
-                   
                     <span ><VscAccount /> First Name</span>
-                   
                 </div>
 
                 <div class="inputBox">
@@ -317,10 +318,7 @@ class ApplicationHire extends React.Component {
                 </div>
                 
                 <div className="buttons">
-               
                 <ForgotNavigate  value={this.state}></ForgotNavigate>
-                
-               
                 </div>
 
                 
