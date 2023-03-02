@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ProgressBar from "../../components/progressbar/progressbar";
 import { VscAccount } from "react-icons/vsc";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,7 @@ const apiLink ="http://localhost:8080/api/v1/user";
 function NavigationHire(props){
     const navigation = useNavigate();
     const uselocation = useLocation();
+    const [halfsetup,setup] = useState(true);
 
     const email = uselocation.state.email;
    console.log(props.value.websiteLink)
@@ -26,6 +27,8 @@ function NavigationHire(props){
                 instagramLink :props.value.instagramLink
                };
 
+       
+               
         fetch(apiLink +"/setUpClientAccount",{
                 method :"PUT",
                 headers: { "Content-Type": "application/json" },
@@ -37,7 +40,19 @@ function NavigationHire(props){
             console.log(data);
         if (data.success) {
             console.log("CLient details are added is added.");
-            navigation('/firstPageforHire',{ state: { email: email } });
+            navigation('/firstPageforHire',{ state: { email: email ,setupyouraccount:false } });
+            
+            fetch(apiLink + "/checkclienttable"+email,{
+                method :"GET",
+                headers: { "Content-Type": "application/json" },
+                body:JSON.stringify(clientDetails)
+
+             }).then(Response => Response.json)
+               .then(data => setup(data))
+               .catch(error => console.log(error));
+              
+               console.log("Setting up Accounthalo"+halfsetup);
+            
             } else {
                 console.log("Error:", data.message);
             }

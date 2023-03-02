@@ -17,6 +17,9 @@ import {CardTitle} from 'reactstrap'
 import {CardFooter} from 'reactstrap';
 import { Link } from 'react-router-dom';
 import {CardHeader} from 'reactstrap';
+import axios from 'axios';
+import { useEffect } from 'react';
+const apiLink = "http://localhost:8080/api/v1/user";
 
 
 export const Example = (props) => {
@@ -247,8 +250,23 @@ export  const PhoneNumber = ({value, onChange}) => {
     );
 }
 
+
+
 export const CategoryPicker = () => {
  
+  const [categories,setCategories] = useState([]);
+  const fetchCategory = async()=>{
+    try{
+      const response = await axios.get(apiLink+'/getAllCattegories');
+      setCategories(response.data);
+    }catch(error){
+      console.log(error);
+    }
+  }
+  useEffect(()=>{
+   fetchCategory();
+  },[]);
+  
   
   const data =[
     {Title: 'Structural Engineering' , id:1},
@@ -280,10 +298,9 @@ const handleshowConstruction=(e) =>{
     setArchitecture(current => !current);
     
   }
- 
+  const categoryNames = categories.map(category => category.categoryName);
   return ( 
     <div >
-        
       
               <div className='inputBox'>
                 <div className='dateTo'>
@@ -291,8 +308,9 @@ const handleshowConstruction=(e) =>{
                 </div>
                 
               
-           
-                <label className='date'>  Engineering</label>
+          
+               
+                <label className='date'>{categoryNames[0]}</label>
                 <input className="inputBox"  id = " mycheckbox" type="checkbox" value={showEngineering} onChange={(e)=>{handleshowEngineering(e)}}>
                   
                 </input>
@@ -305,7 +323,7 @@ const handleshowConstruction=(e) =>{
               
 
               <div className='inputBox'>
-                <label className='date'>  Architecture</label>
+              <label className='date'>{categoryNames[1]}</label>
                 <input className="inputBox"  id = " mycheckbox" type="checkbox" value={showArchitecture} onChange={(e)=>{handleshowArchitecture(e)}}>
                   
                   </input>
@@ -317,7 +335,7 @@ const handleshowConstruction=(e) =>{
               }
               
               <div className='inputBox'>
-                  <label className='date'> Construction</label>
+              <label className='date'>{categoryNames[2]}</label>
                   <input className="inputBox"  id = "mycheckbox" type="checkbox" value={showConstruction} onChange={(e)=>{handleshowConstruction(e)}}>
                   
                   </input>

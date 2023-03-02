@@ -8,7 +8,19 @@ import { FcReadingEbook } from "react-icons/fc";
 
 
 class PostAProject extends React.Component {
-  state = {  } 
+  constructor(props){
+    super(props);
+    this.state ={
+         projectTitle:"",
+         smallDescription:"",
+         projectInDetail:"",
+         file:"",
+         category:"",
+         startDate:"",
+         endDate:"",
+         prize:""
+    }
+  }
   render() { 
     return (
  <div className="background">
@@ -22,7 +34,7 @@ class PostAProject extends React.Component {
         <div className="inputBoxForm">
         <div class="inputBox">
         <span></span> 
-            <input type="text" required></input>
+            <input type="text" required value={this.state.projectTitle}></input>
            <span ><VscAccount /> Project Title</span>
            
         </div>
@@ -30,7 +42,7 @@ class PostAProject extends React.Component {
         </div>
         <div className="">
         <div class="size2">
-            <input type="text" required className=""></input>
+            <input type="text" required className="" value={this.state.smallDescription}></input>
             <span><VscAccount />Small description about your project</span>
             
         </div>
@@ -38,7 +50,7 @@ class PostAProject extends React.Component {
        
   
         <div class="size">
-            <input type="text" required className=""></input>
+            <input type="text" required className="" value={this.state.projectInDetail}></input>
             <span><VscAccount />Tell us more about your project</span>
             
         </div>
@@ -50,7 +62,7 @@ class PostAProject extends React.Component {
         <div >
             <label for="file-upload" >
             <span  className ="text2 inputBox">Upload a file or drag or drop</span>
-            <input id="file-upload" name="file-upload" type="file" class=" inputBox text2"/>
+            <input id="file-upload" name="file-upload" type="file" class=" inputBox text2" value={this.state.file}/>
             <p class="text3">PNG, JPG, GIF up to 10MB</p>
             </label>
            
@@ -60,19 +72,10 @@ class PostAProject extends React.Component {
         <div className="">
         
         <div className ="">
-            
-            {/* <input type="text" required></input> */}
-            {/* <span><RiHome7Fill/>category</span> */}
             <CategoryPicker required ></CategoryPicker>
                 
         </div>
        
-      {/*   
-        <div className ="inputBox">
-            <input type="text" required></input>
-            <span><VscCompassActive/>Time Zone</span>
-        </div>
-*/}
         </div>
       
         <div className="inputBoxForm">
