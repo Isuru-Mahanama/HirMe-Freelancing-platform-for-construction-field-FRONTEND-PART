@@ -5,7 +5,18 @@ import { VscMail } from "react-icons/vsc";
 import './Post_project.css'
 import 'react-phone-number-input/style.css';
 import { FcReadingEbook } from "react-icons/fc";
+import {Multiselect} from 'multiselect-react-dropdown';
+import { useState } from "react";
 
+export const ArchitectureSubCategory = (props) => {
+    
+  const[selected,setSelcted] = useState([]);
+    return (
+      <div className="multiselect">
+        <Multiselect value={selected} onChange={setSelcted} options={props.data} displayValue="asubCategoryName" ></Multiselect>
+      </div>
+);
+}
 
 class PostAProject extends React.Component {
   constructor(props){
@@ -69,13 +80,9 @@ class PostAProject extends React.Component {
         </div>
 
        <hr></hr>
-        <div className="">
-        
         <div className ="">
             <CategoryPicker required ></CategoryPicker>
-                
-        </div>
-       
+          
         </div>
       
         <div className="inputBoxForm">

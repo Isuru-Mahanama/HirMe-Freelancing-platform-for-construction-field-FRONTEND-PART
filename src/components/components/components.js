@@ -19,18 +19,32 @@ import { Link } from 'react-router-dom';
 import {CardHeader} from 'reactstrap';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { ArchitectureSubCategory } from '../../Pages/PostProject/postAProject';
+
 const apiLink = "http://localhost:8080/api/v1/user";
 
 
 export const Example = (props) => {
-    const {data}=props;
-  
+    
     const[selected,setSelcted] = useState([]);
       return (
         <div className="multiselect">
-          <Multiselect value={selected} onChange={setSelcted} options={data} displayValue="Title" ></Multiselect>
+          <Multiselect value={selected} onChange={setSelcted} options={props.data} displayValue={props.displayValue} ></Multiselect>
         </div>
   );
+}
+
+
+
+export const ConstructionSubCategory = (props) => {
+    
+  const[selected,setSelcted] = useState([]);
+  console.log("Cpns");
+    return (
+      <div className="multiselect">
+        <Multiselect value={selected} onChange={setSelcted} options={props.data} displayValue="csubCategoryName" ></Multiselect>
+      </div>
+);
 }
 
 export const Avatar = () => {
@@ -255,6 +269,23 @@ export  const PhoneNumber = ({value, onChange}) => {
 export const CategoryPicker = () => {
  
   const [categories,setCategories] = useState([]);
+  const [Constructioncategories,setConstructionCategories] = useState([]);
+  const [Architecturecategories,setArchitectureCategories] = useState([]);
+  const [Engineeringcategories,setEngineeringCategories] = useState([]);
+  
+  const fetchArchitectureCategory = async()=>{
+    try{
+      const response = await axios.get(apiLink+"/getAllArchtectureSubCategories");
+      setArchitectureCategories(response.data);
+    }catch(error){
+      console.log(error);
+    }
+  }
+  useEffect(()=>{
+    fetchArchitectureCategory();
+  },[]);
+  
+
   const fetchCategory = async()=>{
     try{
       const response = await axios.get(apiLink+'/getAllCattegories');
@@ -264,52 +295,62 @@ export const CategoryPicker = () => {
     }
   }
   useEffect(()=>{
-   fetchCategory();
+    fetchCategory();
   },[]);
   
   
-  const data =[
-    {Title: 'Structural Engineering' , id:1},
-    {Title:'Civil ENgineering',id:2}
-  ]
+
+
+  const fetchEngineeringCategory = async()=>{
+    try{
+      const response = await axios.get(apiLink+'/getEngineeringSubCategory');
+      setEngineeringCategories(response.data);
+    }catch(error){
+      console.log(error);
+    }
+  }
+  useEffect(()=>{
+   fetchEngineeringCategory();
+  },[]);
+  
+  const fetchConstructionCategory = async()=>{
+    try{
+      const response = await axios.get(apiLink+'/getAllConstructionSubCategories');
+      setConstructionCategories(response.data);
+    }catch(error){
+      console.log(error);
+    }
+  }
+  useEffect(()=>{
+    fetchConstructionCategory();
+  },[]);
+  
 
 const[showEngineering,setShowEngineering] = useState(false);
 const handleshowEngineering=(e) =>{
-  /*  if (e.target.checked) {
-     setShowEngineering(true);
-   }  */
-   setShowEngineering(current => !current);
-   
- }
+  setShowEngineering(current => !current);
+}
 
  const[showConstruction,setShowConstruction] = useState(false);
 const handleshowConstruction=(e) =>{
-  /*  if (e.target.checked) {
-     setShowEngineering(true);
-   }  */
    setShowConstruction(current => !current);
-   
- }
+}
  const[showArchitecture,setArchitecture] = useState(false);
  const handleshowArchitecture=(e) =>{
-   /*  if (e.target.checked) {
-      setShowEngineering(true);
-    }  */
     setArchitecture(current => !current);
-    
   }
+
   const categoryNames = categories.map(category => category.categoryName);
+  const EngineeringcategoryNames = Engineeringcategories.map(categoryE => categoryE);
+  const ConstructioncategoryNames = Constructioncategories.map(categoryC => categoryC);
+  const ArchitectureCategoryNames = Architecturecategories.map(categoryA => categoryA);
   return ( 
     <div >
-      
-              <div className='inputBox'>
+          <div className='inputBox'>
                 <div className='dateTo'>
                 <label className='date'> <RiHome7Fill />Categories</label>
                 </div>
-                
               
-          
-               
                 <label className='date'>{categoryNames[0]}</label>
                 <input className="inputBox"  id = " mycheckbox" type="checkbox" value={showEngineering} onChange={(e)=>{handleshowEngineering(e)}}>
                   
@@ -317,25 +358,23 @@ const handleshowConstruction=(e) =>{
               </div>
                 {
                 showEngineering === true && (
-                  <Example className="multiselect" data={data}></Example>
-                )
-              }
-              
-
+                  <Example className="multiselect" data={EngineeringcategoryNames} displayValue = "esubCategoryName"></Example>
+                  )
+                }
               <div className='inputBox'>
-              <label className='date'>{categoryNames[1]}</label>
+              <label className='date'>{categoryNames[2]}</label>
                 <input className="inputBox"  id = " mycheckbox" type="checkbox" value={showArchitecture} onChange={(e)=>{handleshowArchitecture(e)}}>
                   
-                  </input>
+                </input>
               </div>
                 {
                 showArchitecture === true && (
-                  <Example className="multiselect" data={data}></Example>
+                  <ArchitectureSubCategory className="multiselect" data={ArchitectureCategoryNames }></ArchitectureSubCategory>
                 )
               }
               
               <div className='inputBox'>
-              <label className='date'>{categoryNames[2]}</label>
+              <label className='date'>{categoryNames[1]}</label>
                   <input className="inputBox"  id = "mycheckbox" type="checkbox" value={showConstruction} onChange={(e)=>{handleshowConstruction(e)}}>
                   
                   </input>
@@ -343,7 +382,7 @@ const handleshowConstruction=(e) =>{
                   {
                 showConstruction === true && (
                   <div >
-                   <Example className="multiselect" data={data}></Example>
+                   <ConstructionSubCategory className="multiselect" data={ConstructioncategoryNames} ></ConstructionSubCategory>
                   </div>
                 )
               }
