@@ -26,6 +26,8 @@ import PostedProjects from './Pages/PostProject/PostedProjects';
 import ViewAllApplications from './Pages/Application/ViewApplications';
 import AppliedProjects from './Pages/Worker/AppliedProjects';
 import Chat from './components/CattingSection/CattingSction';
+import PostProjectIndex from './Pages/SignUpAndLogin/PostProjectIndex';
+import CreatOnlyEmailForPostProjection from './Pages/SignUpAndLogin/CreatOnlyEmailForPostProjection';
 
 function App() {
 
@@ -127,6 +129,13 @@ function App() {
             
             </Route>
             <Route exact path="/viewworkerappliedprojects" element={<AppliedProjects/>} >
+            
+            </Route>
+
+            <Route exact path="/postprojectIndex" element={<PostProjectIndex/>} >
+            
+            </Route>
+             <Route exact path="/createEmailOnlyforPosting" element={<CreatOnlyEmailForPostProjection/>} >
             
             </Route>
               

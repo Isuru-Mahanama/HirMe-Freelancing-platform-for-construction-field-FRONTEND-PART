@@ -7,11 +7,6 @@ import  "./Navbar.css";
 
 function Navbar(props) {
 
-   /* const history = useNavigate();
-
-   const handlehistory =() =>{
-    history("/join");
-  }   */
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -92,7 +87,7 @@ function Navbar(props) {
            
             </li>
             <li className='nav-item'>
-              <Link to='/post-project' className='nav-links' onClick={closeMobileMenu}>
+              <Link to='/postprojectIndex' className='nav-links' onClick={closeMobileMenu}>
                 post a project
               </Link>
             </li>

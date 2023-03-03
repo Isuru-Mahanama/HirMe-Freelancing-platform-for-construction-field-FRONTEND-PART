@@ -19,22 +19,12 @@ function ForgotNavigate(props){
     const navigation = useNavigate();
     const uselocation = useLocation();
 
-    
     const {email,setEditprofile} = uselocation.state;
-   
-    
-   
-    
-    //console.log("Eprofile"+editprofile);
-
     console.log(props.value.firstName)
     console.log(props.value.lastName)
     const accountSetUpClient=(e)=>{
           e.preventDefault();     
           const apiLink ="http://localhost:8080/api/v1/user";
-          
-
-          
          
           const address_languages={
             email:email,
@@ -229,9 +219,6 @@ class ApplicationHire extends React.Component {
                 timeZoneLabel: e.label}
             //{time:e.label}
             )}
-   
-    
-    
    
     render() { 
         return (
