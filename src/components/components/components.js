@@ -24,12 +24,18 @@ import { ArchitectureSubCategory } from '../../Pages/PostProject/postAProject';
 const apiLink = "http://localhost:8080/api/v1/user";
 
 
-export const Example = (props) => {
-    
-    const[selected,setSelcted] = useState([]);
+export const Example = ({value,onSelect,onRemove,data,displayValue}) => {
+  
       return (
         <div className="multiselect">
-          <Multiselect value={selected} onChange={setSelcted} options={props.data} displayValue={props.displayValue} ></Multiselect>
+         <Multiselect
+        options={data}
+        selectedValues={value}
+        onSelect={onSelect}
+        onRemove={onRemove}
+        displayValue={displayValue}
+      />
+          
         </div>
   );
 }
@@ -266,8 +272,8 @@ export  const PhoneNumber = ({value, onChange}) => {
 
 
 
-export const CategoryPicker = () => {
- 
+export const CategoryPicker = ({value,onSelect,onRemove,onChange,setECategory,setACategory}) => {
+ console.log("Ecategory"+value.Ecategory);
   const [categories,setCategories] = useState([]);
   const [Constructioncategories,setConstructionCategories] = useState([]);
   const [Architecturecategories,setArchitectureCategories] = useState([]);
@@ -341,6 +347,8 @@ const handleshowConstruction=(e) =>{
   }
 
   const categoryNames = categories.map(category => category.categoryName);
+  const categoryID = categories.map(category => category.categoryID);
+  console.log("categoryIDI"+categoryID);
   const EngineeringcategoryNames = Engineeringcategories.map(categoryE => categoryE);
   const ConstructioncategoryNames = Constructioncategories.map(categoryC => categoryC);
   const ArchitectureCategoryNames = Architecturecategories.map(categoryA => categoryA);
@@ -358,7 +366,8 @@ const handleshowConstruction=(e) =>{
               </div>
                 {
                 showEngineering === true && (
-                  <Example className="multiselect" data={EngineeringcategoryNames} displayValue = "esubCategoryName"></Example>
+                  <Example className="multiselect" data={EngineeringcategoryNames} displayValue = "esubCategoryName" value={value.Ecategory}
+                  onSelect={setECategory} onRemove={setECategory} onChange={onChange}></Example>
                   )
                 }
               <div className='inputBox'>
@@ -369,7 +378,7 @@ const handleshowConstruction=(e) =>{
               </div>
                 {
                 showArchitecture === true && (
-                  <ArchitectureSubCategory className="multiselect" data={ArchitectureCategoryNames }></ArchitectureSubCategory>
+                  <ArchitectureSubCategory className="multiselect" data={ArchitectureCategoryNames } value={value.Acategory} onSelect={setACategory} onRemove={setACategory}></ArchitectureSubCategory>
                 )
               }
               
@@ -402,9 +411,7 @@ export  const Timezone = ({value, onChange}) => {
 
     return (
     
-       
         <div className="inputBox2">
-        
        
         <div className="select-wrapper">
           <TimezoneSelect 

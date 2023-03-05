@@ -10,36 +10,62 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { useEffect } from "react";
+
 
 const apiLink ="http://localhost:8080/api/v1/user";
-export const ArchitectureSubCategory = (props) => {
+export const ArchitectureSubCategory = ({value,onSelect,onRemove,data,displayValue}) => {
     
-  const[selected,setSelcted] = useState([]);
     return (
       <div className="multiselect">
-        <Multiselect value={selected} onChange={setSelcted} options={props.data} displayValue="asubCategoryName" ></Multiselect>
-      </div>
+      <Multiselect
+     options={data}
+     selectedValues={value}
+     onSelect={onSelect}
+     onRemove={onRemove}
+     displayValue="asubCategoryName"
+   />
+       
+     </div>
 );
 }
 function FetcheingDatata(props){
-
+  
   const navigation = useNavigate();
   const uselocation = useLocation();
 
   const email = uselocation.state.email;
-  
+ 
     const project ={
       email :email,
       projectTitle:props.value.projectTitle,
       smallDescription:props.value.smallDescription,
-      projectInDetail:props.value.projectInDetail,
-      file:props.value.file,
-      category:props.value.category,
-      startDate:props.value.startDate,
-      endDate:props.value.endDate,
-      prize:props.value.prize
+      moreDescription:props.value.projectInDetail,
+      Ecategory: props.value.Ecategory.map((item) => {
+        return {
+          esubCategoryName: item.esubCategoryName,
+          esubCategoryID: item.esubCategoryID
+        };
+      }),
+      //Ecategory:props.value.Ecategory,
+      //file:props.value.file,
+      Acategory: props.value.Acategory.map((item) => {
+        return {
+          esubCategoryName: item.asubCategoryName,
+          esubCategoryID: item.asubCategoryID
+        };
+      }),
+      Ccategory: props.value.Ccategory.map((item) => {
+        return {
+          csubCategoryName: item.csubCategoryName,
+          csubCategoryID: item.csubCategoryID
+        };
+      }),
+     category:props.value.category,
+     startDate:props.value.startDate,
+     endDate:props.value.endDate,
+     projectPrize:props.value.prize
     }
+
 
    
 async function postProject(url, data) {
@@ -53,9 +79,10 @@ async function postProject(url, data) {
 
 const SaveProjectDetails =(e)=>{
   postProject(apiLink+"/postProject",project);
+  console.log("When submitting"+props.value.Ecategory);
 }
   console.log("Here"+email);
-  console.log(props.value.projectTitle);
+  
   return(<>
     <button class = "button" onClick={(e)=>SaveProjectDetails(e)} >Submit</button>
     </>
@@ -72,11 +99,27 @@ class PostAProject extends React.Component {
          projectInDetail:"",
          file:"",
          category:"",
+         Ecategory:[],
+         Ccategory:[],
+         Acategory:[],
          startDate:"",
          endDate:"",
          prize:""
     }
   }
+
+  setEECategory = (selectedList) => {
+    this.setState({ Ecategory: selectedList });
+  };
+  
+  setCCategory = (selectedList) => {
+    this.setState({ Ccategory: selectedList });
+  };
+  
+  setACategory = (selectedList) => {
+    this.setState({ Acategory: selectedList });
+  };
+  
 
    setProjectTitle=(e)=>{
     this.setState({projectTitle:e.target.value});
@@ -97,7 +140,24 @@ class PostAProject extends React.Component {
    setStartDate =(e)=>{
     this.setState({startDate:e.target.value});
    }
-
+  
+   setCategory =(number) =>{
+    this.setState({category:"number"})
+   }
+  
+   setECategory=(selectedList,subcategory)=>{
+    console.log({selectedList});
+    this.setState({category:"Engineering"})
+    this.setState({ Ecategory: selectedList }, () => {
+      console.log("Ecategory:",this.state.Ecategory[0].esubCategoryName);
+    })
+   //console.log(selectedList)
+   // console.log("SelftedLIst"+{Ecategory:selectedList})
+   //console.log(this.state.category);
+ //  console.log("This is just Ecatefgroy"+this.state.Ecategory[0].esubCategoryName);
+  // console.log("This is just Ecatefgroy"+this.state.Ecategory[1].esubCategoryName);
+  console.log("Achitecture:"+this.state.Acategory);
+}
    
   render() { 
     return (
@@ -125,8 +185,6 @@ class PostAProject extends React.Component {
             
         </div>
         
-       
-  
         <div class="size">
             <input type="text" required className="" value={this.state.projectInDetail} onChange={this.setProjectInDetail}></input>
             <span><VscAccount />Tell us more about your project</span>
@@ -142,8 +200,12 @@ class PostAProject extends React.Component {
 
        <hr></hr>
         <div className ="">
-            <CategoryPicker required ></CategoryPicker>
-          
+            <CategoryPicker required value={this.state}   onChange={this.setCategory} setECategory={this.setECategory}
+          setCCategory={this.setCCategory}
+          setACategory={this.setACategory}>
+
+        </CategoryPicker>
+            
         </div>
       
         <div className="inputBoxForm">
@@ -173,10 +235,7 @@ class PostAProject extends React.Component {
         <div className="buttons">
         <FetcheingDatata  value={this.state}></FetcheingDatata >
         </div>
-       
-               
-               
-      
+    
     </div>
     </div>
     );
