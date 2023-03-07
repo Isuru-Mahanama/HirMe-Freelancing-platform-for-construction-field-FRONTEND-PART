@@ -42,13 +42,13 @@ export const Example = ({value,onSelect,onRemove,data,displayValue}) => {
 
 
 
-export const ConstructionSubCategory = (props) => {
+export const ConstructionSubCategory = ({value,onSelect,onRemove,data,displayValue}) => {
     
-  const[selected,setSelcted] = useState([]);
+  
   console.log("Cpns");
     return (
       <div className="multiselect">
-        <Multiselect value={selected} onChange={setSelcted} options={props.data} displayValue="csubCategoryName" ></Multiselect>
+        <Multiselect value={value} selectedValues={value} onSelect={onSelect} onRemove={onRemove} options={data} displayValue="csubCategoryName" ></Multiselect>
       </div>
 );
 }
@@ -248,10 +248,10 @@ export const UserProfile = () => {
 
 
 
-export const DataPicker = () => {
+export const DataPicker = ({value, onChange}) => {
   const [startDate, setStartDate] = useState();
   return (
-    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} placeholder="Date"/>
+    <DatePicker selected={value} onChange={(date) => onChange(date)} placeholder="Date"/>
   );
 };
 
@@ -272,7 +272,7 @@ export  const PhoneNumber = ({value, onChange}) => {
 
 
 
-export const CategoryPicker = ({value,onSelect,onRemove,onChange,setECategory,setACategory}) => {
+export const CategoryPicker = ({value,onSelect,onRemove,onChange,setECategory,setACategory,setCCategory}) => {
  console.log("Ecategory"+value.Ecategory);
   const [categories,setCategories] = useState([]);
   const [Constructioncategories,setConstructionCategories] = useState([]);
@@ -391,7 +391,7 @@ const handleshowConstruction=(e) =>{
                   {
                 showConstruction === true && (
                   <div >
-                   <ConstructionSubCategory className="multiselect" data={ConstructioncategoryNames} ></ConstructionSubCategory>
+                   <ConstructionSubCategory className="multiselect" data={ConstructioncategoryNames} value={value.Ccategory} onSelect={setCCategory} onRemove={setCCategory}></ConstructionSubCategory>
                   </div>
                 )
               }
@@ -428,13 +428,14 @@ export  const Timezone = ({value, onChange}) => {
 
  
 
-  export const PrizeSelector = () => {
+  export const PrizeSelector = ({value, onChange}) => {
 
     const[showhide,setShowhide] = useState(" ");
 
 const handleshowhide=(event,checked) =>{
   const getuser  = event.target.value;
   setShowhide(getuser);
+  onChange(getuser);
 }
     return ( 
       <div>

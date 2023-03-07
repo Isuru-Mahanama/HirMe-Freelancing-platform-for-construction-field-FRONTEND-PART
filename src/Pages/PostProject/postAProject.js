@@ -6,8 +6,6 @@ import './Post_project.css'
 import 'react-phone-number-input/style.css';
 import { FcReadingEbook } from "react-icons/fc";
 import {Multiselect} from 'multiselect-react-dropdown';
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 
@@ -30,7 +28,6 @@ export const ArchitectureSubCategory = ({value,onSelect,onRemove,data,displayVal
 }
 function FetcheingDatata(props){
   
-  const navigation = useNavigate();
   const uselocation = useLocation();
 
   const email = uselocation.state.email;
@@ -56,10 +53,11 @@ function FetcheingDatata(props){
       }),
       Ccategory: props.value.Ccategory.map((item) => {
         return {
-          csubCategoryName: item.csubCategoryName,
-          csubCategoryID: item.csubCategoryID
+          esubCategoryName: item.csubCategoryName,
+          esubCategoryID: item.csubCategoryID
         };
       }),
+      
      category:props.value.category,
      startDate:props.value.startDate,
      endDate:props.value.endDate,
@@ -68,23 +66,29 @@ function FetcheingDatata(props){
 
 
    
-async function postProject(url, data) {
-  try {
-    const response = await axios.post(url, data);
-    console.log(response.data);
-  } catch (error) {
-    console.error(error);
-  }
-}
+const fileUploadHandler = () => {
+  const formData = new FormData();
+  formData.append("file", props.value.files);
+  console.log(project)
+ // console.log("this is object"+this.project.endDate)
+  formData.append("projectDTO", JSON.stringify(project));
+  
+  axios
+    .post(apiLink+"/postProjectFile", formData)
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
-const SaveProjectDetails =(e)=>{
-  postProject(apiLink+"/postProject",project);
-  console.log("When submitting"+props.value.Ecategory);
-}
+
   console.log("Here"+email);
   
   return(<>
-    <button class = "button" onClick={(e)=>SaveProjectDetails(e)} >Submit</button>
+    
+    <button class="button" onClick={fileUploadHandler}>Submit</button>
     </>
     )
 
@@ -97,7 +101,8 @@ class PostAProject extends React.Component {
          projectTitle:"",
          smallDescription:"",
          projectInDetail:"",
-         file:"",
+         files:[],
+         fileByteArray: null,
          category:"",
          Ecategory:[],
          Ccategory:[],
@@ -108,6 +113,7 @@ class PostAProject extends React.Component {
     }
   }
 
+ 
   setEECategory = (selectedList) => {
     this.setState({ Ecategory: selectedList });
   };
@@ -133,29 +139,74 @@ class PostAProject extends React.Component {
     this.setState({projectInDetail:e.target.value});
    }
 
+   handleFileChange = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const byteArray = new Uint8Array(event.target.result);
+      this.setState({ fileByteArray: byteArray });
+    };
+    reader.readAsArrayBuffer(file);
+  };
+
+   
+
+   handleFileUpload = (event) => {
+    const uploadedFile = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsArrayBuffer(uploadedFile);
+    reader.onloadend = () => {
+      const fileData = reader.result;
+      const fileArray = new Uint8Array(fileData);
+     // this.setState({files:fileArray});
+      this.setState({files:fileArray}, () => { console.log(this.state.files) });
+    };
+  };
    setFile=(e)=>{
-    this.setState({file:e.target.value});
+    //console.log("Filejjjj:"+e.target.files);
+    let files = e.target.files;
+    console.warn("data file",files);
+    let reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+    reader.onload = (e) =>{
+      console.warn("img-data",e.target.result);
+      const formData ={file:e.target.result}
+      //this.setState({file:formData.file});
+     console.log("FOrm"+formData.file)
+    // clear the file input element
+    this.setState({ files: files[0] }, () => { console.log(this.state.files) });
+  
+    }
+    
+   // this.setState({file:e.target.files[0]});
+    //console.log("File:");
+    
    }
 
    setStartDate =(e)=>{
-    this.setState({startDate:e.target.value});
+    this.setState({startDate:e});
+   }
+
+   setEndDate =(e)=>{
+    this.setState({endDate:e});
    }
   
    setCategory =(number) =>{
     this.setState({category:"number"})
    }
   
+   setPrize =(prize) =>{
+  
+    this.setState({prize:prize});
+    console.log("Prize:"+this.state.prize)
+   }
    setECategory=(selectedList,subcategory)=>{
     console.log({selectedList});
     this.setState({category:"Engineering"})
     this.setState({ Ecategory: selectedList }, () => {
       console.log("Ecategory:",this.state.Ecategory[0].esubCategoryName);
     })
-   //console.log(selectedList)
-   // console.log("SelftedLIst"+{Ecategory:selectedList})
-   //console.log(this.state.category);
- //  console.log("This is just Ecatefgroy"+this.state.Ecategory[0].esubCategoryName);
-  // console.log("This is just Ecatefgroy"+this.state.Ecategory[1].esubCategoryName);
+ 
   console.log("Achitecture:"+this.state.Acategory);
 }
    
@@ -193,9 +244,10 @@ class PostAProject extends React.Component {
         <div >
             <label for="file-upload" >
             <span  className ="text2 inputBox">Upload a file or drag or drop</span>
-            <input id="file-upload" name="file-upload" type="file" class=" inputBox text2" value={this.state.file} onChange={this.setFile}/>
+            <input id="file-upload"  type="file" className=" inputBox text2" value={this.state.file} onChange={(e)=>this.setFile(e)}/>
             <p class="text3">PNG, JPG, GIF up to 10MB</p>
             </label> 
+           
         </div>
 
        <hr></hr>
@@ -213,13 +265,13 @@ class PostAProject extends React.Component {
         <div class="inputBox dateTo">
         
         <label className="date"><VscMail/>From</label>
-        <DataPicker required value={this.state} onChange={this.setStartDate}></DataPicker>
+        <DataPicker required value={this.state.startDate} onChange={this.setStartDate}></DataPicker>
            
         </div>    
         <div class="inputBox dateTo">
         
         <label className="date"><VscMail/>To</label>
-        <DataPicker required  ></DataPicker>
+        <DataPicker required value={this.state.endDate} onChange={this.setEndDate}></DataPicker>
         </div>    
          </div>
        
@@ -227,7 +279,7 @@ class PostAProject extends React.Component {
          <div class="inputBox dateTo">
         
         <label className="date"><VscMail/></label>
-        <PrizeSelector></PrizeSelector>
+        <PrizeSelector required value={this.state.prize} onChange={this.setPrize}></PrizeSelector>
         </div>    
         </div>
      
@@ -235,7 +287,7 @@ class PostAProject extends React.Component {
         <div className="buttons">
         <FetcheingDatata  value={this.state}></FetcheingDatata >
         </div>
-    
+       
     </div>
     </div>
     );
