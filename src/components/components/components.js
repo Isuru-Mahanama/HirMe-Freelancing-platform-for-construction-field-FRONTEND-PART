@@ -21,6 +21,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { ArchitectureSubCategory } from '../../Pages/PostProject/postAProject';
 
+
 const apiLink = "http://localhost:8080/api/v1/user";
 
 
@@ -99,130 +100,7 @@ export  const Message = () => {
     </div>
     );
 }
-/*  
-export const ChatList = () => {
-  
 
-  allChatUsers = [
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTA78Na63ws7B7EAWYgTr9BxhX_Z8oLa1nvOA&usqp=CAU",
-      id: 1,
-      name: "Tim Hover",
-      active: true,
-      isOnline: true,
-    },
-    {
-      image:
-        "https://pbs.twimg.com/profile_images/1055263632861343745/vIqzOHXj.jpg",
-      id: 2,
-      name: "Ayub Rossi",
-      active: false,
-      isOnline: false,
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTQEZrATmgHOi5ls0YCCQBTkocia_atSw0X-Q&usqp=CAU",
-      id: 3,
-      name: "Hamaad Dejesus",
-      active: false,
-      isOnline: false,
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRZ6tM7Nj72bWjr_8IQ37Apr2lJup_pxX_uZA&usqp=CAU",
-      id: 4,
-      name: "Eleni Hobbs",
-      active: false,
-      isOnline: true,
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRJo1MiPQp3IIdp54vvRDXlhbqlhXW9v1v6kw&usqp=CAU",
-      id: 5,
-      name: "Elsa Black",
-      active: false,
-      isOnline: false,
-    },
-    {
-      image:
-        "https://huber.ghostpool.com/wp-content/uploads/avatars/3/596dfc2058143-bpfull.png",
-      id: 6,
-      name: "Kayley Mellor",
-      active: false,
-      isOnline: true,
-    },
-    {
-      image:
-        "https://www.paintingcontest.org/components/com_djclassifieds/assets/images/default_profile.png",
-      id: 7,
-      name: "Hasan Mcculloch",
-      active: false,
-      isOnline: true,
-    },
-    {
-      image:
-        "https://auraqatar.com/projects/Anakalabel/media//vesbrand/designer4.jpg",
-      id: 8,
-      name: "Autumn Mckee",
-      active: false,
-      isOnline: false,
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSM6p4C6imkewkCDW-9QrpV-MMAhOC7GnJcIQ&usqp=CAU",
-      id: 9,
-      name: "Allen Woodley",
-      active: false,
-      isOnline: true,
-    },
-    {
-      image: "https://pbs.twimg.com/profile_images/770394499/female.png",
-      id: 10,
-      name: "Manpreet David",
-      active: false,
-      isOnline: true,
-    },
-  ];
-  return (  
-    <div className='main_chatList'>
-      <button className='btn1'>
-        <i className='fa fa-plus '></i>
-        <span>New Converstion</span>
-      </button>
-
-      <div className='chatlist_heading'>
-        <h2>Chats</h2>
-        <button className='btn-nobg'></button>
-        <i className='fa fa-ellipsis-h'></i>
-      </div>
-      <div className="chatlist_search">
-        <div className="search_wrap">
-          <input type="text" placeholder='Search Here' required></input>
-          <button className='search-btn'>
-            <i className='fa fa-search'></i>
-          </button>
-        </div>
-        
-      </div>
-      <div className="chatlist__items">
-          {this.state.allChats.map((item, index) => {
-            return (
-              <ChatListItems
-                name={item.name}
-                key={item.id}
-                animationDelay={index + 1}
-                active={item.active ? "active" : ""}
-                isOnline={item.isOnline ? "active" : ""}
-                image={item.image}
-              />
-            );
-          })}
-        </div>
-    </div>
-    
-  );
-} */
 
 export const ChatBody = () => {
   return (
@@ -426,32 +304,68 @@ export  const Timezone = ({value, onChange}) => {
     )
   }
 
- 
-
+  
   export const PrizeSelector = ({value, onChange}) => {
 
-    const[showhide,setShowhide] = useState(" ");
+const [data,setData] = useState([]);
+const [currency,setCurrency] = useState([]);
+const[showhide,setShowhide] = useState(" ");
 
-const handleshowhide=(event,checked) =>{
+const handleshowhide=(event) =>{
   const getuser  = event.target.value;
   setShowhide(getuser);
   onChange(getuser);
 }
+
+
+
+
+const fetchPrizes =async() =>{
+  try{
+    const response =await axios.get(apiLink+'/getPrizes');
+    setData(response.data);
+    console.log(response.data)
+     }catch(error){
+    console.log(error);
+     }
+ }
+useEffect(()=>{
+ 
+  fetchPrizes();
+},[]);
+
+const fetchCurrency =async() =>{
+  try{
+    const response =await axios.get(apiLink+'/getAllCurrencyTypes');
+    setCurrency(response.data);
+    console.log(response.data)
+     }catch(error){
+    console.log(error);
+     }
+ }
+useEffect(()=>{
+ 
+  fetchCurrency();
+},[]);
+
+
+
+
     return ( 
       <div>
               <label for="country" class="text3">Full budget</label>
-                <select  id="country" name="country" autocomplete="country-name"  onChange={(e)=>{handleshowhide(e)}}>
-                  <option>Micro Project($10.00 - 30.00 USD)</option>
-                  <option>Simple Project($30.00 - 250.00 USD)</option>
-                  <option>Very small project($250.00 - 750.00 USD)</option>
-                  <option>Small project($750.00 - 1,500.00 USD)</option>
-                  <option>Medium project($1,500.00 - 3,000.00 USD)</option>
-                  <option>Large project($3,000.00 - 5, 000.00 USD)</option>
-                  <option>Very Large project($10, 000.00 - 20,000.00 USD)</option>
-                  <option>Huge project($20,000.00 - 50,000.00 USD)</option>
-                  <option>Major project($50,000.00  + USD)</option>
-                  <option value="1">Customize budget</option>
-                </select>
+              
+            <select
+              name="prize"
+              defaultValue="1" 
+              onClick={handleshowhide}>
+             {data.map(item=>(
+              <option key={item.prizeID} value={item.projectType}>
+                {item.projectType} {item.minimumPrize} {item.maximumPrize} {item.prizeType}
+              </option>
+              ))}
+          <option value="1">Customize budget</option>
+        </select>
 
 
               {
@@ -464,11 +378,17 @@ const handleshowhide=(event,checked) =>{
                       <input type="number" name="price" id="price" placeholder="0.00 $"/>
                       <div class="absolute inset-y-0 right-0 flex items-center">
                         <label for="currency" class="sr-only">Currency</label>
-                        <select id="currency" name="currency">
-                          <option>USD</option>
-                          <option>CAD</option>
-                          <option>EUR</option>
-                        </select>
+                      <select id="currency" name="currency">
+                      
+                        {currency.map(item=>(
+                      <option key={item.currencyType} value={item.currency}>
+                      {item.currency}  
+                      </option>
+                        ))}
+                     </select>
+
+                      
+
                       </div>
                    </div>
                     </div>
@@ -480,11 +400,15 @@ const handleshowhide=(event,checked) =>{
                       <input type="number" name="price" id="price" placeholder="0.00$"/>
                       <div class="absolute inset-y-0 right-0 flex items-center">
                         
-                        <select id="currency" name="currency" class="">
-                          <option>USD</option>
-                          <option>CAD</option>
-                          <option>EUR</option>
-                        </select>
+                      <select id="currency" name="currency">
+                      
+                      {currency.map(item=>(
+                      <option key={item.currencyType} value={item.currency}>
+                      {item.currency}  
+                      </option>
+                        ))}
+         
+                      </select>
                       </div>
                    </div>
                     </div>

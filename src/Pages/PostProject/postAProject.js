@@ -178,9 +178,6 @@ class PostAProject extends React.Component {
   
     }
     
-   // this.setState({file:e.target.files[0]});
-    //console.log("File:");
-    
    }
 
    setStartDate =(e)=>{
@@ -191,9 +188,6 @@ class PostAProject extends React.Component {
     this.setState({endDate:e});
    }
   
-   setCategory =(number) =>{
-    this.setState({category:"number"})
-   }
   
    setPrize =(prize) =>{
   
