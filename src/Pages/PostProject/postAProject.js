@@ -61,7 +61,10 @@ function FetcheingDatata(props){
      category:props.value.category,
      startDate:props.value.startDate,
      endDate:props.value.endDate,
-     projectPrize:props.value.prize
+     projectType:props.value.projectType,
+     prizeminimum:props.value.prizeminimum,
+     prizemaximum:props.value.prizemaximum,
+     currencyType:props.value.currencyType
     }
 
 
@@ -69,10 +72,11 @@ function FetcheingDatata(props){
 const fileUploadHandler = () => {
   const formData = new FormData();
   formData.append("file", props.value.files);
+  formData.append("image",props.value.image);
   console.log(project)
  // console.log("this is object"+this.project.endDate)
   formData.append("projectDTO", JSON.stringify(project));
-  
+  console.log(props.value.image)
   axios
     .post(apiLink+"/postProjectFile", formData)
     .then((res) => {
@@ -109,7 +113,11 @@ class PostAProject extends React.Component {
          Acategory:[],
          startDate:"",
          endDate:"",
-         prize:""
+         image:[],
+        projectType: 0.0,
+        prizeminimum:"",
+        prizemaximum:"",
+        currencyType:""
     }
   }
 
@@ -139,46 +147,31 @@ class PostAProject extends React.Component {
     this.setState({projectInDetail:e.target.value});
    }
 
-   handleFileChange = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const byteArray = new Uint8Array(event.target.result);
-      this.setState({ fileByteArray: byteArray });
-    };
-    reader.readAsArrayBuffer(file);
-  };
-
    
 
-   handleFileUpload = (event) => {
-    const uploadedFile = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsArrayBuffer(uploadedFile);
-    reader.onloadend = () => {
-      const fileData = reader.result;
-      const fileArray = new Uint8Array(fileData);
-     // this.setState({files:fileArray});
-      this.setState({files:fileArray}, () => { console.log(this.state.files) });
-    };
-  };
+  
    setFile=(e)=>{
-    //console.log("Filejjjj:"+e.target.files);
     let files = e.target.files;
-    console.warn("data file",files);
     let reader = new FileReader();
     reader.readAsDataURL(files[0]);
     reader.onload = (e) =>{
-      console.warn("img-data",e.target.result);
-      const formData ={file:e.target.result}
-      //this.setState({file:formData.file});
-     console.log("FOrm"+formData.file)
-    // clear the file input element
+     
     this.setState({ files: files[0] }, () => { console.log(this.state.files) });
   
     }
+  }
+  setImage=(e)=>{
     
-   }
+    let files = e.target.files;
+   // console.log(files)
+    let reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+    reader.onload = (e) =>{
+     
+    this.setState({ image: files[0]}, () => { console.log(this.state.image) });
+  
+    }
+  }
 
    setStartDate =(e)=>{
     this.setState({startDate:e});
@@ -189,10 +182,13 @@ class PostAProject extends React.Component {
    }
   
   
-   setPrize =(prize) =>{
-  
-    this.setState({prize:prize});
-    console.log("Prize:"+this.state.prize)
+   setPrize =(getuser,minimumvalue,MaximumValue,currencyType) =>{
+    
+    this.setState({projectType:getuser});
+    this.setState({prizeminimum:minimumvalue});
+    this.setState({prizemaximum:MaximumValue});
+    this.setState({currencyType:currencyType});
+    console.log("Prize:"+this.state.prizemaximum)
    }
    setECategory=(selectedList,subcategory)=>{
     console.log({selectedList});
@@ -234,6 +230,13 @@ class PostAProject extends React.Component {
             <input type="text" required className="" value={this.state.projectInDetail} onChange={this.setProjectInDetail}></input>
             <span><VscAccount />Tell us more about your project</span>
         </div>
+        </div><div >
+            <label for="file-upload" >
+            <span  className ="text2 inputBox">Upload a file or drag or drop</span>
+            <input id="file-upload"  type="file" className=" inputBox text2" value={this.state.file} onChange={(e)=>this.setImage(e)}/>
+            <p class="text3">PNG, JPG, GIF up to 10MB</p>
+            </label> 
+           
         </div>
         <div >
             <label for="file-upload" >
@@ -273,7 +276,7 @@ class PostAProject extends React.Component {
          <div class="inputBox dateTo">
         
         <label className="date"><VscMail/></label>
-        <PrizeSelector required value={this.state.prize} onChange={this.setPrize}></PrizeSelector>
+        <PrizeSelector required value={this.state} onChange={this.setPrize}></PrizeSelector>
         </div>    
         </div>
      

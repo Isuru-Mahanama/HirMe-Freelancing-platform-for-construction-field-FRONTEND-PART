@@ -313,12 +313,12 @@ const[showhide,setShowhide] = useState(" ");
 
 const handleshowhide=(event) =>{
   const getuser  = event.target.value;
+  
   setShowhide(getuser);
   onChange(getuser);
+  console.log("This is the key:"+event.target.value);
+  
 }
-
-
-
 
 const fetchPrizes =async() =>{
   try{
@@ -360,8 +360,8 @@ useEffect(()=>{
               defaultValue="1" 
               onClick={handleshowhide}>
              {data.map(item=>(
-              <option key={item.prizeID} value={item.projectType}>
-                {item.projectType} {item.minimumPrize} {item.maximumPrize} {item.prizeType}
+              <option key={item.prizeID} value={item.prizeID} min={item.minimumPrize} max={item.maximumPrize} currencytype = {item.currencyType}>
+                {item.projectType} {item.minimumPrize} {item.maximumPrize} {item.currencyType}
               </option>
               ))}
           <option value="1">Customize budget</option>
