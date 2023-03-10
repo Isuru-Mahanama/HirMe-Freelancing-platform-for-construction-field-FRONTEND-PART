@@ -8,10 +8,10 @@ import {CardTitle} from 'reactstrap'
 import SearchBar from "../../components/components/searchbar";
 import '../Hire/AccountPageHire.css'
 import { Link } from "react-router-dom"
+import axios from "axios";
 
 
-
-
+const apiLink = "http://localhost:8080/api/v1/user";
 function NavigationWorker(props){
  
   return(<>
@@ -35,34 +35,94 @@ function NavigationWorker(props){
 class AccountPageWorker extends React.Component {
  
   
-   state = {  } ;
+   state = { 
+    projects: []
+
+    } ;
+    
+   componentDidMount() {
+    this.fetchData();
+  }
+
+  
+   fetchData =async() =>{
+    try{
+      const response =await axios.get(apiLink+'/getAllProjectDetails');
+      this.setState({projects:response.data})
+      //console.log("currencty"+this.state.projectTitle)
+      console.log(this.state.projects)
+      console.log("kkkkkkkkkkk")
+      console.log(this.state.projects[0].fileUplod.fileName )
+    }catch(error){
+      console.log(error);
+    }
+   
+  }
+
    
   render(
-      
+     
   ) { 
     
     return (
       <div className="background" >
-        <div className="devideLeft">
+         <div className="devideLeft">
         <Slidebar></Slidebar>
         </div>
-       
+
         <div className="devideRight">
 
           <div className="mostright">
-          
-          <NavigationWorker></NavigationWorker>
-        
+
+            <NavigationWorker></NavigationWorker>
+
           </div>
-     
-        </div>
-      
-        <SearchBar options={this.state.options}></SearchBar>
-        <div className="middleright">
-        
+          </div>
+          <SearchBar options={this.state.options}></SearchBar>
+
        
+        <div className="middleright">
         <div class="col">
-          <Card className="cards-pack" >
+        {this.state.projects.slice(0, Math.ceil(this.state.projects.length / 2)).map(item => (
+            
+             <Card key={item.projectID} className="cards-pack" >
+              <Link to="/viewproject">
+              <img className="img-card"
+              alt="Sample"
+              src={`http://localhost:3000/${item.fileUplod.fileName}`} 
+            
+              />
+              </Link>
+              <CardBody className="cardbody">
+              <CardTitle tag="h5" className="cardtitle">
+              {item.projectTitle}
+              </CardTitle>
+          
+              <CardText className="cardtext">
+              {item.smallDescription}
+              </CardText>
+              
+              <CardLink href="/portfolio" className="cardlink">
+           
+              FreelancerAccount_Link
+              <img className="img-profile" alt="Sample" src="https://picsum.photos/300/200" />
+              </CardLink>
+              
+              <h1 className="price">{item.currencyType} {item.prizemaximum} - {item.prizeminimum}</h1>
+              </CardBody>
+          </Card>
+
+         
+             
+          ))}
+        
+      
+            </div>
+
+        <div class="col">
+        {this.state.projects.slice(Math.ceil(this.state.projects.length / 2)).map(item => (
+             
+             <Card key={item.projectID} className="cards-pack" >
               <Link to="/viewproject">
               <img className="img-card"
               alt="Sample"
@@ -72,112 +132,27 @@ class AccountPageWorker extends React.Component {
               </Link>
               <CardBody className="cardbody">
               <CardTitle tag="h5" className="cardtitle">
-              I wiill do a large project of house
+              {item.projectTitle}
               </CardTitle>
           
               <CardText className="cardtext">
-              Some quick example text to build on the card title and make up the bulk of the card‘s content.
+              {item.smallDescription}
               </CardText>
               
-           
               <CardLink href="/portfolio" className="cardlink">
            
               FreelancerAccount_Link
               <img className="img-profile" alt="Sample" src="https://picsum.photos/300/200" />
               </CardLink>
-              <h3 className="price">5$</h3>
+              
+              <h1 className="price">{item.currencyType} {item.prizemaximum} - {item.prizeminimum}</h1>
               </CardBody>
           </Card>
 
          
-        <Card className="cards-pack" >
-            <Link to="/viewproject">
-            <img className="img-card"
-            alt="Sample"
-            src="https://picsum.photos/300/200"
-       
-             />
-            </Link>
-            <CardBody className="cardbody">
-            <CardTitle tag="h5" className="cardtitle">
-            I wiill do a large project of house
-            </CardTitle>
-          
-            <CardText className="cardtext">
-            Some quick example text to build on the card title and make up the bulk of the card‘s content.
-            </CardText>
-              
-           
-            <CardLink href="/portfolio" className="cardlink">
-           
-            FreelancerAccount_Link
-            <img className="img-profile" alt="Sample" src="https://picsum.photos/300/200" />
-
-                 
-            </CardLink>
-            <h3 className="price">5$</h3>
-            </CardBody>
-          </Card>
-            </div>
-
-        <div class="col">
-            <Card className="cards-pack" >
-            <Link to="/viewproject">
-            <img className="img-card"
-            alt="Sample"
-            src="https://picsum.photos/300/200"
-       
-              />
-             </Link>
-            <CardBody className="cardbody">
-              <CardTitle tag="h5" className="cardtitle">
-              I wiill do a large project of house
-              </CardTitle>
-          
-            <CardText className="cardtext">
-                  Some quick example text to build on the card title and make up the bulk of the card‘s content.
-            </CardText>
-              
-           
-            <CardLink href="/portfolio" className="cardlink">
-           
-                  FreelancerAccount_Link
-                  <img className="img-profile" alt="Sample" src="https://picsum.photos/300/200" />
-
-                 
-            </CardLink>
-            <h3 className="price">5$</h3>
-            </CardBody>
-          </Card>
-
-          <Card className="cards-pack" >
-            <Link to="/viewproject">
-            <img className="img-card"
-            alt="Sample"
-            src="https://picsum.photos/300/200"
-       
-              />
-             </Link>
-            <CardBody className="cardbody">
-              <CardTitle tag="h5" className="cardtitle">
-              I wiill do a large project of house
-              </CardTitle>
-          
-            <CardText className="cardtext">
-                  Some quick example text to build on the card title and make up the bulk of the card‘s content.
-            </CardText>
-              
-           
-            <CardLink href="/portfolio" className="cardlink">
-           
-                  FreelancerAccount_Link
-                  <img className="img-profile" alt="Sample" src="https://picsum.photos/300/200" />
-
-                 
-            </CardLink>
-            <h3 className="price">5$</h3>
-            </CardBody>
-          </Card>
+             
+          ))}
+        
           </div>
           
           <div className="profile-card">

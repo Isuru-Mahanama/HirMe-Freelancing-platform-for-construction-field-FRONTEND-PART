@@ -302,9 +302,10 @@ input::placeholder{
 
 .price{
     color:rgb(0, 0, 0);
-    font-weight: 700;
-    font-size: 30px;
-   margin-left: 4cm;
+    font-weight: 200;
+    font-weight: bold;
+    font-size: 20px;
+   margin-left: 0.1cm;
  
    }
 .img-card{

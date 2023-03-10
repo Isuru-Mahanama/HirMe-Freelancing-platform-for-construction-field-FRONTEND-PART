@@ -232,7 +232,7 @@ class PostAProject extends React.Component {
         </div>
         </div><div >
             <label for="file-upload" >
-            <span  className ="text2 inputBox">Upload a file or drag or drop</span>
+            <span  className ="text2 inputBox">Upload a Image or drag or drop(This will appear with your project)</span>
             <input id="file-upload"  type="file" className=" inputBox text2" value={this.state.file} onChange={(e)=>this.setImage(e)}/>
             <p class="text3">PNG, JPG, GIF up to 10MB</p>
             </label> 
