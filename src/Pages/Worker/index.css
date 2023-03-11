@@ -308,8 +308,11 @@ input::placeholder{
    margin-left: 0.1cm;
  
    }
+   
 .img-card{
    margin: auto;
+   height: 5cm;
+   width: 8cm;
    margin-top: 0.5cm;
    translate: 0.5s;
    border-radius: 60px;

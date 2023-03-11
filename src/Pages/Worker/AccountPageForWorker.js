@@ -33,33 +33,36 @@ function NavigationWorker(props){
 }
 
 class AccountPageWorker extends React.Component {
- 
-  
    state = { 
     projects: []
-
-    } ;
     
+    } ; 
+
+  imageElement = new Image();
    componentDidMount() {
     this.fetchData();
+    
   }
-
+   
+    
   
    fetchData =async() =>{
     try{
       const response =await axios.get(apiLink+'/getAllProjectDetails');
-      this.setState({projects:response.data})
+     
+      this.setState({ projects:response.data})
+      
       //console.log("currencty"+this.state.projectTitle)
-      console.log(this.state.projects)
+      console.log(this.state)
       console.log("kkkkkkkkkkk")
-      console.log(this.state.projects[0].fileUplod.fileName )
+    // console.log(this.state.images[0])
     }catch(error){
       console.log(error);
     }
-   
-  }
+  } 
+  
 
-   
+ 
   render(
      
   ) { 
@@ -69,29 +72,22 @@ class AccountPageWorker extends React.Component {
          <div className="devideLeft">
         <Slidebar></Slidebar>
         </div>
-
         <div className="devideRight">
-
           <div className="mostright">
-
             <NavigationWorker></NavigationWorker>
-
           </div>
           </div>
           <SearchBar options={this.state.options}></SearchBar>
-
-       
         <div className="middleright">
         <div class="col">
         {this.state.projects.slice(0, Math.ceil(this.state.projects.length / 2)).map(item => (
             
              <Card key={item.projectID} className="cards-pack" >
               <Link to="/viewproject">
-              <img className="img-card"
-              alt="Sample"
-              src={`http://localhost:3000/${item.fileUplod.fileName}`} 
+              
+             <img className="img-card" alt ="Sample" src={item.fileUplod.imagePath}/>
+     
             
-              />
               </Link>
               <CardBody className="cardbody">
               <CardTitle tag="h5" className="cardtitle">
@@ -124,11 +120,8 @@ class AccountPageWorker extends React.Component {
              
              <Card key={item.projectID} className="cards-pack" >
               <Link to="/viewproject">
-              <img className="img-card"
-              alt="Sample"
-              src="https://picsum.photos/300/200"
+              <img className="img-card" alt ="Sample" src={item.fileUplod.imagePath}/>
        
-              />
               </Link>
               <CardBody className="cardbody">
               <CardTitle tag="h5" className="cardtitle">
