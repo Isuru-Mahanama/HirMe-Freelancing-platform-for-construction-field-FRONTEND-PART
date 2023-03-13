@@ -18,7 +18,8 @@ import Selected from "../../components/Languages";
 function ForgotNavigate(props){
     const navigation = useNavigate();
     const uselocation = useLocation();
-
+    const worker = uselocation.state.worker;
+    console.log("Worker:"+ uselocation.state.worker);
     const {email,setEditprofile} = uselocation.state;
     console.log(props.value.firstName)
     console.log(props.value.lastName)
@@ -85,7 +86,15 @@ function ForgotNavigate(props){
                 if (data.success) {
                     console.log("Languages are added.");
                     console.log("Level"+address_languages.languageLevel)
-                    navigation("/applicationHire2",{ state: { email: email } });
+                    if(worker){
+                        console.log("Go to worker"+worker)
+                        navigation("/applicationWork2",{ state: { email: email } });
+                    }
+                    if(!worker){
+                        navigation("/applicationHire2",{ state: { email: email } });
+                    }
+                   
+                    
                 } else {
                     console.log("Error:", data.message);
                 }
@@ -105,7 +114,7 @@ function ForgotNavigate(props){
     }
     return(<>
     
-    
+    { worker && <button class = "button" onClick={(e)=>accountSetUpClient(e)} >Next</button> }
     {setEditprofile && <button class = "button" onClick={(e)=>accountSetUpClient(e)} >Next</button>}
     {!setEditprofile && <button class = "button" onClick={(e)=>accountSetUpClient(e)} >Edit Your Company Details</button>}
     </>

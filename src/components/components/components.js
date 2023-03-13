@@ -127,9 +127,9 @@ export const UserProfile = () => {
 
 
 export const DataPicker = ({value, onChange}) => {
-  const [startDate, setStartDate] = useState();
+  
   return (
-    <DatePicker selected={value} onChange={(date) => onChange(date)} placeholder="Date"/>
+    < DatePicker selected={value} onChange={(date) => onChange(date)} placeholder="Date"/>
   );
 };
 

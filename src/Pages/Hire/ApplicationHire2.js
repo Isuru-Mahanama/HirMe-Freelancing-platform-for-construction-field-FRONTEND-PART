@@ -102,9 +102,7 @@ class ApplicationHire2 extends React.Component {
     render() { 
         return (
             <div className="background">
-               
-                
-        
+          
             <div className="pageUp">
             <ProgressBar></ProgressBar>
             </div>

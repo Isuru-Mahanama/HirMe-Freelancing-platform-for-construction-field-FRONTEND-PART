@@ -1,14 +1,15 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import './image.css'
 
 const WelcomeForeWorker = () => {
 
     let history = useNavigate();
-    
+    const location = useLocation();
+    const email = location.state.email;
     
     const getStarted=()=>{
         
-        history("/firstPageforworker");
+        history("/firstPageforworker",{ state: { email: email } });
     }
     return ( 
         <div>

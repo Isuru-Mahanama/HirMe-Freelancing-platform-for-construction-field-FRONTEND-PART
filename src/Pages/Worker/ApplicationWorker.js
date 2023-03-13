@@ -28,9 +28,7 @@ class WorkApplications extends React.Component {
     render() { 
         return (
             <div className="background">
-               
-                
-        
+             
             <div className="pageUp">
            <ProgressBar></ProgressBar>
             </div>
@@ -116,7 +114,6 @@ class WorkApplications extends React.Component {
                 </Link>
                 </div>
 
-                
             </div>
             </div>
             

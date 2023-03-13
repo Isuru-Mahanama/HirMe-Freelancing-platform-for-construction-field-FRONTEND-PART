@@ -9,18 +9,26 @@ import SearchBar from "../../components/components/searchbar";
 import '../Hire/AccountPageHire.css'
 import { Link } from "react-router-dom"
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const apiLink = "http://localhost:8080/api/v1/user";
 function NavigationWorker(props){
- 
+
+  const location = useLocation();
+  const email = location.state.email;
+  const worker = true;
+  console.log(email);
+  const history = useNavigate();
+  const handleSignUp=(e)=>{
+    history("/applicationhire",{ state: { email: email,worker:worker}});
+  }
+
   return(<>
+         
+         <button className="b1"  onClick={(e)=>handleSignUp(e)}>Set up your account!!!!!!</button>
+        
           <Link  to="/setupworker">
-         <button className="b1"  >Set up your account!!!!!!</button>
-          </Link>
-       
-       
-         <Link  to="/setupworker">
           <button className="b1" >Edit your profile!!!</button>
           </Link>
      
@@ -61,8 +69,6 @@ class AccountPageWorker extends React.Component {
     }
   } 
   
-
- 
   render(
      
   ) { 
@@ -108,11 +114,8 @@ class AccountPageWorker extends React.Component {
               </CardBody>
           </Card>
 
-         
-             
           ))}
         
-      
             </div>
 
         <div class="col">
@@ -142,8 +145,6 @@ class AccountPageWorker extends React.Component {
               </CardBody>
           </Card>
 
-         
-             
           ))}
         
           </div>

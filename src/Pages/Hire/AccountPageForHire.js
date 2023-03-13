@@ -35,8 +35,6 @@ const FirstPageForHire = () => {
        
         {!halfsetup && <button className="b1" onClick={(e)=>editYourAccount(e)} >Edit your profile!!!</button>}
         
-     
-         
        
         </div>
       
