@@ -85,16 +85,15 @@ class AccountPageWorker extends React.Component {
           </div>
           <SearchBar options={this.state.options}></SearchBar>
         <div className="middleright">
-        <div class="col">
+        <div className="col">
         {this.state.projects.slice(0, Math.ceil(this.state.projects.length / 2)).map(item => (
             
-             <Card key={item.projectID} className="cards-pack" >
-              <Link to="/viewproject">
+            <Card key={item.projectID} className="cards-pack" >
               
-             <img className="img-card" alt ="Sample" src={item.fileUplod.imagePath}/>
-     
-            
-              </Link>
+            <Link to={`/viewproject/${item.projectID}`} key={item.projectID}>
+            <img className="img-card" alt ="Sample" src={item.fileUplod.imagePath}/>
+            </Link>
+
               <CardBody className="cardbody">
               <CardTitle tag="h5" className="cardtitle">
               {item.projectTitle}
@@ -118,11 +117,11 @@ class AccountPageWorker extends React.Component {
         
             </div>
 
-        <div class="col">
+        <div className="col">
         {this.state.projects.slice(Math.ceil(this.state.projects.length / 2)).map(item => (
              
              <Card key={item.projectID} className="cards-pack" >
-              <Link to="/viewproject">
+               <Link to={`/viewproject/${item.projectID}`} key={item.projectID}>
               <img className="img-card" alt ="Sample" src={item.fileUplod.imagePath}/>
        
               </Link>

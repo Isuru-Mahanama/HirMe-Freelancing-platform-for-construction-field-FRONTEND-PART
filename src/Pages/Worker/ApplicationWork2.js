@@ -4,19 +4,39 @@ import { VscAccount } from "react-icons/vsc";
 import { VscMail } from "react-icons/vsc";
 import {VscHome } from "react-icons/vsc";
 import { RiHome3Line } from "react-icons/ri";
-import {RiHome4Line } from "react-icons/ri";
 import { MdReceipt} from "react-icons/md";
 import 'react-phone-number-input/style.css';
 import { FcReadingEbook } from "react-icons/fc";
 import { IoAddCircleSharp} from "react-icons/io5";
 import { CategoryPicker, DataPicker } from "../../components/components/components";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 
+const apiLink ="http://localhost:8080/api/v1/user";
+
+export const Navigate = (props) => {
+  const uselocation = useLocation();
+  const email = uselocation.state.email;
+  console.log("value")
+   props.value.email=email;
+ 
+  console.log();
+  return (  
+    <div>
+        <div className="buttons">
+             <button value={props.value} className="button" onClick={props.fileUploadHandler}>Sublmi</button> 
+        </div>
+    </div>
+  );
+}
+ 
 
 class ApplicationWork2 extends React.Component {
     constructor(props){
         super(props);
         this.value ={};
         this.state = {
+             email:"",
              items: [],
              award:[],
              startDate:"",
@@ -74,7 +94,7 @@ class ApplicationWork2 extends React.Component {
 
       handleInputChange=(e,index,name)=>{
         const updatedEducation = [...this.state.education];
-        if(index!==0){
+        if(updatedEducation[index]===null){
             updatedEducation[index]={ major: '', school: '',title:'',year:'' }
         }
         console.log(index)
@@ -122,6 +142,10 @@ class ApplicationWork2 extends React.Component {
         
         
         const updatedCertificates = [...this.state.cerificates];
+        if(updatedCertificates[index]===null){
+          updatedCertificates[index] ={certificate:'',cerifiedfrom:'',year:''}
+              
+        }
         if(name ==='year'){
             updatedCertificates[index][name] = e;  
         }else{
@@ -141,15 +165,27 @@ class ApplicationWork2 extends React.Component {
         console.log("update the array")  
     }
    
-    setValue(){
-        this.setState({});
-    }
+   
+      
+
+     fileUploadHandler = (props) => {
+      
+      axios
+          .post(apiLink+"/postEducationDetails",this.state)
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      };
+      
    
     render() { 
         const  education  = this.state.education;
         const cerificates = this.state.cerificates;
-
-        console.log(education)
+       
+        
         console.log(cerificates)
         return (
             <div className="background">
@@ -181,8 +217,8 @@ class ApplicationWork2 extends React.Component {
                 </div>
 
                 <div className="inputBoxForm">
-                <div class="inputBox">
-                    <input type="text" required onChange={(e)=>this.handleInputChange(e,index,"title")}></input>
+                <div className="inputBox">
+                    <input type="text" value={this.state.education[index].title} required onChange={(e)=>this.handleInputChange(e,index,"title")}></input>
                     <span><VscAccount />Title</span>
                 </div>
 
@@ -193,7 +229,7 @@ class ApplicationWork2 extends React.Component {
                
                 </div> 
                   <div className="inputBox">
-                    <input type="text" required onChange={(e)=>this.handleInputChange(e,index,"major")}></input>
+                    <input type="text" value={this.state.education[index].major} required onChange={(e)=>this.handleInputChange(e,index,"major")}></input>
                     <span><VscHome/>Major</span>
                 </div>
                 </div>
@@ -227,7 +263,7 @@ class ApplicationWork2 extends React.Component {
                 </div>    
                 </div>
                 <label className="add-item"> Add More Awards</label>
-                < IoAddCircleSharp class ="add"  onClick={this.handleClickAward}/>
+                < IoAddCircleSharp className ="add"  onClick={this.handleClickAward}/>
                 {this.state.award} 
                 <hr></hr>
                
@@ -255,11 +291,9 @@ class ApplicationWork2 extends React.Component {
             </div>    
             </div>
                 </div>
-                <div className="buttons">
-               
-                <button className = "button"  >Submit</button>
-              
-                </div>
+
+                <Navigate value={this.state} fileUploadHandler={this.fileUploadHandler}></Navigate>
+                
             </div>
             </div>
            

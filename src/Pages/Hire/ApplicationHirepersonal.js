@@ -21,7 +21,7 @@ function ForgotNavigate(props){
     const worker = uselocation.state.worker;
     console.log("Worker:"+ uselocation.state.worker);
     const {email,setEditprofile} = uselocation.state;
-    console.log(props.value.firstName)
+    console.log("Email"+email)
     console.log(props.value.lastName)
     const accountSetUpClient=(e)=>{
           e.preventDefault();     
@@ -141,8 +141,7 @@ class ApplicationHire extends React.Component {
             languageLevel:"",
             selectedTimezone :{},
             timeZoneLabel:"",
-            
-            
+           
         }
        
     }

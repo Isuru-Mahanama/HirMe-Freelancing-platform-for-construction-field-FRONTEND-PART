@@ -13,7 +13,7 @@ function NavigationHire(props){
     const [halfsetup,setup] = useState(true);
 
     const email = uselocation.state.email;
-   console.log(props.value.websiteLink)
+   console.log("Email"+email)
    
      const getStarted=(e)=>{
             e.preventDefault();

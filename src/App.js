@@ -36,7 +36,7 @@ function App() {
     const userAuthentication =() =>{
       setUserLoggedIn(!isUserLoggedIn);
     }
-    
+   
   
   return (
     <>
@@ -115,7 +115,7 @@ function App() {
             <Route exact path="/payments" element={<TakeMoney/>} >
             
             </Route>
-            <Route exact path="/viewproject" element={<ViewProject/>} >
+            <Route exact path="/viewproject/:projectId"   element={<ViewProject/>} >
             
             </Route>
             <Route exact path="/applyproject" element={<ApplyProject/>} >

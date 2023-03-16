@@ -309,4 +309,13 @@ tr:nth-child(even) {
   margin-bottom: 1cm;
   margin-left: 2.5cm;
 }
+.fontTable{
+  font-size: medium;
+  line-height: 0.4cm;
+  width: 7cm;
 
+}
+
+.fonts{
+  font-size: medium;
+}

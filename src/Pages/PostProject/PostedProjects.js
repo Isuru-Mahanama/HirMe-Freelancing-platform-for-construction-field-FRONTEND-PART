@@ -25,8 +25,11 @@ class PostedProjects extends React.Component {
             projectLink :"/viewproject",
             applicationLink:"/viewapplications"
         }] } 
+
+       
     } 
     render() { 
+       
         return (
             <div className="background">
                     <CardData cardData={this.state.cardData}/>
