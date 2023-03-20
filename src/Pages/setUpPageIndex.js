@@ -4,7 +4,7 @@ const SetUpPageIndex = () => {
 
     
     return ( 
-        <div class ="bg-slate-800">
+        <div className ="bg-slate-800">
         <div className="AppContainer " >
            
             <div style = {{width: "100%" , display: "flex", flexDirection: "column",justifyContent: "flex-end",padding: "0 1.8em", paddingBottom: "5em"}} >

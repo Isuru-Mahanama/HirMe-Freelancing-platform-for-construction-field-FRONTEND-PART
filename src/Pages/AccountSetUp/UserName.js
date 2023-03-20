@@ -1,22 +1,25 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { GetCurrentUser } from "../../components/components/components";
 const UserName= (props) => {
 
+    const token = GetCurrentUser();
     const[username,setuserName] = useState("");
     let history = useNavigate();
     const apiLink ="http://localhost:8080/api/v1/user";
-    const location = useLocation();
-    const email = location.state.email;
+
+
    
+  
     const handleSignUp=(e)=>{
           e.preventDefault();     
           
-          const user = { userName: username, email: email };
+          const user = { userNames: username };
           
           fetch(apiLink+ "/saveUserName", {
             method: "PUT",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}` },
             body: JSON.stringify(user)
             
         })
@@ -27,7 +30,7 @@ const UserName= (props) => {
                 
                 console.log("User Name is added.");
                 // Redirect to the desired page
-                history("/loginas",{ state: { email: email } });
+                history("/loginas");
             } else {
                 console.log("Error:", data.message);
             }
@@ -52,7 +55,7 @@ const UserName= (props) => {
                     <div  className="Margin"></div>
                     {/* <div  className="MutedLink">Forget your password?</div> */}
                     
-                    <button class="button" onClick={(e)=>handleSignUp(e)}>Next</button>
+                    <button className="button" onClick={(e)=>handleSignUp(e)}>Next</button>
 
                    
                     <div className="MutedLink" >

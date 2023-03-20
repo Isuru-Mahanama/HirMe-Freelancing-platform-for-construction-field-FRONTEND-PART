@@ -10,18 +10,18 @@ import '../Hire/AccountPageHire.css'
 import { Link } from "react-router-dom"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { GetCurrentUser } from "../../components/components/components";
+import { fr } from "date-fns/locale";
+
 
 const apiLink = "http://localhost:8080/api/v1/user";
 function NavigationWorker(props){
 
-  const location = useLocation();
-  const email = location.state.email;
   const worker = true;
-  console.log(email);
+  
   const history = useNavigate();
   const handleSignUp=(e)=>{
-    history("/applicationhire",{ state: { email: email,worker:worker}});
+    history("/applicationhire",{ state: { worker:worker}});
   }
 
   return(<>
@@ -42,7 +42,14 @@ function NavigationWorker(props){
 
 class AccountPageWorker extends React.Component {
    state = { 
-    projects: []
+    projects: [],
+    freelancer:[],
+    language:[],
+    userName:"",
+    City:"",
+    education:[],
+    moreDetails:"",
+    category:[]
     
     } ; 
 
@@ -52,18 +59,28 @@ class AccountPageWorker extends React.Component {
     
   }
    
-    
+    token =GetCurrentUser();
   
    fetchData =async() =>{
     try{
-      const response =await axios.get(apiLink+'/getAllProjectDetails');
+      const response =await axios.get(apiLink+'/getAllProjectDetails',{
+      headers: {
+        Authorization: "Bearer " + this.token
+      }});
      
-      this.setState({ projects:response.data})
+      console.log(response.data);
+      this.setState(
+        { projects:response.data.Projects,
+          freelancer:response.data.FreelancerDetails.cerificates,
+           language:response.data.Languages,
+          userName:response.data.UserName,
+          City:response.data.City,
+          education:response.data.FreelancerDetails.freelancerEducationDetails,
+          moreDetails:response.data.FreelancerDetails.moreDetail,
+          category:response.data.FreelancerDetails.categoryDetails}
+        )
       
-      //console.log("currencty"+this.state.projectTitle)
-      console.log(this.state)
-      console.log("kkkkkkkkkkk")
-    // console.log(this.state.images[0])
+      
     }catch(error){
       console.log(error);
     }
@@ -86,11 +103,12 @@ class AccountPageWorker extends React.Component {
           <SearchBar options={this.state.options}></SearchBar>
         <div className="middleright">
         <div className="col">
-        {this.state.projects.slice(0, Math.ceil(this.state.projects.length / 2)).map(item => (
+          
+        { this.state.projects!=null && this.state.projects.slice(0, Math.ceil(this.state.projects.length / 2)).map(item => (
             
             <Card key={item.projectID} className="cards-pack" >
               
-            <Link to={`/viewproject/${item.projectID}`} key={item.projectID}>
+            <Link to={ `/viewproject/${item.projectID}`} key={item.projectID}>
             <img className="img-card" alt ="Sample" src={item.fileUplod.imagePath}/>
             </Link>
 
@@ -118,7 +136,7 @@ class AccountPageWorker extends React.Component {
             </div>
 
         <div className="col">
-        {this.state.projects.slice(Math.ceil(this.state.projects.length / 2)).map(item => (
+        { this.state.projects!=null  && this.state.projects.slice(Math.ceil(this.state.projects.length / 2)).map(item => (
              
              <Card key={item.projectID} className="cards-pack" >
                <Link to={`/viewproject/${item.projectID}`} key={item.projectID}>
@@ -150,26 +168,38 @@ class AccountPageWorker extends React.Component {
           
           <div className="profile-card">
           <img className="profile-photo" alt="Sample" src="https://picsum.photos/300/200" /> 
-          <div className="text-profile1">userName</div>
+          <div className="text-profile1">{this.state.userName}</div>
 
           <div className="text-profile">
           <hr className="line"></hr>
          <div className="font">From ----</div>
-         Pilimathalawa
+         {this.state.City}
          <hr className="line"></hr>
-         <div className="font">Member -</div>
-         Since 2020
+         <div className="font">Category -</div>
+
+         {this.state.category!= null && this.state.category.map(category=>(
+            <li >{category.category}-{category.esubCategoryName}  </li>
+          ))}
          <hr className="line"></hr>
          <div className="font">Description about me,, -</div>
+         {this.state.moreDetails}
+
          <hr className="line"></hr>
          <div className="font">Languages -</div>
-         Sinhala
-         English
+          {this.state.language.language} - {this.state.language.languageLevel}
+         
          <hr className="line"></hr>
          <div className="font">Education -</div>
+          {this.state.education != null && this.state.education.map(education=>(
+            <li >{education.title} - {education.major} - {education.school}  </li>
+          ))}
          <hr className="line"></hr>
          <div className="font">Certification -</div>
-         <div>Kandy Girls' High School</div>
+
+         {this.state.freelancer!= null && this.state.freelancer.map(cerificate=>(
+            <li >{cerificate.certificate}-{cerificate.cerifiedfrom}  </li>
+          ))}
+         
           </div>
           </div>
           </div>

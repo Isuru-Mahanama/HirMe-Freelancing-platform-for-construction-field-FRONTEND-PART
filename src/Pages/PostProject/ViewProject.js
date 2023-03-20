@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './Post_project.css'
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -9,7 +9,7 @@ const apiLink ="http://localhost:8080/api/v1/user";
 const ViewProject=(prop)=>  {
     const params = useParams();
     console.log(params.projectId)
-
+    
     const [title,setTitle] = useState('');
     const [smallDescription,setSmallDescription] = useState('');
     const [moreDescription,setMoreDescription] = useState('');
@@ -22,6 +22,7 @@ const ViewProject=(prop)=>  {
     const[subcategory,setSubCategory] = useState([]);
    // const[filePath,setFilePath] = useState('');
     const[fileNames,setFileName] = useState('');
+    
     
     const setData=(props)=>{
         setTitle(props.projectTitle);
@@ -45,6 +46,12 @@ const ViewProject=(prop)=>  {
         console.log(subcategory)
        // console.log(subcategory(0).esubCategoryID)
     }
+
+    const history = useNavigate();
+    const passingProjectID=(e)=>{
+    history("/applyproject",{ state: { pID: params.projectId}});
+  }
+
     const downloadFile=async()=>{
         try{
             console.log(apiLink+'/downloadFile')
@@ -217,9 +224,9 @@ const ViewProject=(prop)=>  {
                
             
                 <div className="buttons">
-                 <Link to ="/applyproject">
-                <button className="button">Apply</button>
-                </Link>
+               
+                <button className="button" onClick={(e)=>passingProjectID(e)}>Apply</button>
+             
                 </div>
             </div>
         );

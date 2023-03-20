@@ -4,7 +4,7 @@ const LoginAsIndex = () => {
 
     
     return ( 
-        <div class ="bg-black">
+        <div className ="bg-black">
         <div className="AppContainer " >
             <div className="TopContainer">
                 <div className="backDrop"> </div>

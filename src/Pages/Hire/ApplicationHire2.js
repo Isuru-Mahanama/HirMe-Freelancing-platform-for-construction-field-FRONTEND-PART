@@ -119,17 +119,17 @@ class ApplicationHire2 extends React.Component {
                 <span><VscAccount />Tell us more about you and your company</span>
             </div>
 
-            <div class="inputBox">
+            <div className="inputBox">
                     <input type="text" required  value={this.state.faceBookLink} onChange={(e)=>{this.setFaceBookLink(e)}}></input>
                     <span><VscAccount />FaceBook Link</span>
             </div>
 
-            <div class="inputBox">
+            <div className="inputBox">
                     <input type="text" required value={this.state.instagramLink} onChange={(e)=>{this.setInstagramLink(e)}} ></input>
                     <span><VscAccount />Instagram Link</span>
             </div>
 
-            <div class="inputBox">
+            <div className="inputBox">
                     <input type="text" required value={this.state.websiteLink} onChange={(e)=>{this.setWebSiteLink(e)}} ></input>
                     <span><VscAccount />Website Link</span>
             </div>

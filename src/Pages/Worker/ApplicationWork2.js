@@ -8,23 +8,22 @@ import { MdReceipt} from "react-icons/md";
 import 'react-phone-number-input/style.css';
 import { FcReadingEbook } from "react-icons/fc";
 import { IoAddCircleSharp} from "react-icons/io5";
-import { CategoryPicker, DataPicker } from "../../components/components/components";
+import { CategoryPicker, DataPicker, GetCurrentUser } from "../../components/components/components";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const apiLink ="http://localhost:8080/api/v1/user";
 
 export const Navigate = (props) => {
-  const uselocation = useLocation();
-  const email = uselocation.state.email;
-  console.log("value")
-   props.value.email=email;
  
-  console.log();
+ 
+  console.log("sggsgs");
   return (  
     <div>
         <div className="buttons">
+          <Link to="/firstPageforworker">
              <button value={props.value} className="button" onClick={props.fileUploadHandler}>Sublmi</button> 
+             </Link>
         </div>
     </div>
   );
@@ -165,15 +164,19 @@ class ApplicationWork2 extends React.Component {
         console.log("update the array")  
     }
    
-   
-      
-
+    token = GetCurrentUser();
+    
      fileUploadHandler = (props) => {
       
       axios
-          .post(apiLink+"/postEducationDetails",this.state)
+          .post(apiLink+"/postEducationDetails",this.state, {
+            headers: {
+              Authorization: "Bearer " + this.token
+            }
+          })
           .then((res) => {
-            console.log(res.data);
+         
+           
           })
           .catch((err) => {
             console.log(err);

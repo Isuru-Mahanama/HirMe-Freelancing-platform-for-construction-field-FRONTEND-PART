@@ -1,23 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import './image.css'
-import { useLocation } from "react-router-dom";
 
 const Welcome = (props) => {
 
-    const location = useLocation();
-    const email = location.state.email;
-    
     let history = useNavigate();
     
    
     const getStarted=()=>{
-        console.log("Welcome for hire"+email)
-        history("/firstPageforHire",{ state: { email: email } });
+     
+        history("/firstPageforHire");
     }
     return ( 
         <div>
            
-        <div class ="bg-slate-800">
+        <div className ="bg-slate-800">
         <div className="AppContainer " >
             <div className="TopContainer">
                 <div className="backDrop"> </div>
@@ -38,15 +34,15 @@ const Welcome = (props) => {
        
         </div>
         <div style={{display : "flex" , flexDirection :'row' , alignItems: 'center', justifyContent: 'center'}}>
-        <img class=" rounded-full image " src="/images/1_c.jpeg" alt="" width="220" height="550"/>
-        <img class=" rounded-full image" src="/images/2_c.jpeg" alt="" width="220" height="550"/>
-        <img class=" rounded-full image" src="/images/3_c.jpeg" alt="" width="220" height="500"/>
-        <img class=" rounded-full image" src="/images/4_c.jpeg" alt="" width="220" height="500"/>
-        <img class=" rounded-full image" src="/images/5_c.jpeg" alt="" width="220" height="500"/>
-        <img class=" rounded-full image" src="/images/6_c.jpeg" alt="" width="220" height="500"/>
+        <img className=" rounded-full image " src="/images/1_c.jpeg" alt="" width="220" height="550"/>
+        <img className=" rounded-full image" src="/images/2_c.jpeg" alt="" width="220" height="550"/>
+        <img className=" rounded-full image" src="/images/3_c.jpeg" alt="" width="220" height="500"/>
+        <img className=" rounded-full image" src="/images/4_c.jpeg" alt="" width="220" height="500"/>
+        <img className=" rounded-full image" src="/images/5_c.jpeg" alt="" width="220" height="500"/>
+        <img className=" rounded-full image" src="/images/6_c.jpeg" alt="" width="220" height="500"/>
         </div>
-        <div class="text-white text-center text-4xl">
-        <button class="button text-white text-center text-4xl"  onClick={()=>getStarted()} >Get Started</button>
+        <div className="text-white text-center text-4xl">
+        <button className="button text-white text-center text-4xl"  onClick={()=>getStarted()} >Get Started</button>
         </div>
         </div>
      );

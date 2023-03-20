@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Slidebar from "../../components/slidebar/slidebar";
 import './AccountPageHire.css';
 import '../Application/Application.css'
@@ -7,20 +7,19 @@ import { useLocation } from "react-router-dom";
 const FirstPageForHire = () => {
 
     const location = useLocation();
-    const {email,halfsetup} = location.state;
-    const [account,setaccount] = useState(halfsetup);
+    const halfsetup = location.state;
+    
 
     let history = useNavigate();
     
    
-    console.log("Setting up Account"+account);
     
     const handleSignUp=(e)=>{
-         history("/applicationhire",{ state: { email: email,setEditprofile : true, setupyouraccount:true}});
+         history("/applicationhire",{ state: { setEditprofile : true, setupyouraccount:true}});
     }
 
     const editYourAccount=(e)=>{
-      history("/applicationhire",{ state: { email: email , setEditprofile : false } });
+      history("/applicationhire",{ state: {  setEditprofile : false } });
     }
     
   return (

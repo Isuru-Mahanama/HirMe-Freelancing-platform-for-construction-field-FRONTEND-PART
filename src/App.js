@@ -28,6 +28,7 @@ import AppliedProjects from './Pages/Worker/AppliedProjects';
 import Chat from './components/CattingSection/CattingSction';
 import PostProjectIndex from './Pages/SignUpAndLogin/PostProjectIndex';
 import CreatOnlyEmailForPostProjection from './Pages/SignUpAndLogin/CreatOnlyEmailForPostProjection';
+import Admin from './Admin/admin';
 
 function App() {
 
@@ -138,6 +139,10 @@ function App() {
              <Route exact path="/createEmailOnlyforPosting" element={<CreatOnlyEmailForPostProjection/>} >
             
             </Route>
+            <Route exact path="/admin" element={<Admin/>} >
+            
+            </Route>
+           
               
             
               

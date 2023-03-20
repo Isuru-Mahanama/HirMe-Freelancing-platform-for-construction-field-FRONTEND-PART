@@ -1,20 +1,21 @@
 import { useNavigate } from "react-router-dom"
 import './image.css';
-import { useLocation } from "react-router-dom";
+import { GetCurrentUser } from "../../components/components/components";
 
 const apiLink ="http://localhost:8080/api/v1/user";
 function Loginas(props){
     
     const history = useNavigate();
-    const location = useLocation();
-    const email = location.state.email;
-    console.log(email);
+    
+    const token = GetCurrentUser();
+
     const getStarted=(e)=>{
             e.preventDefault();
-             const user={email:email};
+             const user={};
             fetch(apiLink +"/setUpClient",{
               method :"POST",
-              headers: { "Content-Type": "application/json" },
+              headers: { "Content-Type": "application/json",
+                          "Authorization": `Bearer ${token}`},
               body:JSON.stringify(user)
             })
             .then(res => res.json())
@@ -22,7 +23,7 @@ function Loginas(props){
             console.log(data);
             if (data.success) {
                 console.log("Account type is added.");
-                history('/welcome',{ state: { email: email } });
+                history('/welcome');
             } else {
                 console.log("Error:", data.message);
             }
@@ -33,10 +34,11 @@ function Loginas(props){
     }
     const getWork=(e)=>{
       e.preventDefault();
-      const user={email:email};
+      const user={};
      fetch(apiLink +"/setUpFreelancer",{
        method :"POST",
-       headers: { "Content-Type": "application/json" },
+       headers: { "Content-Type": "application/json" ,
+                  "Authorization": `Bearer ${token}`},
        body:JSON.stringify(user)
      })
      .then(res => res.json())
@@ -44,7 +46,7 @@ function Loginas(props){
      console.log(data);
      if (data.success) {
          console.log("Freelancer Account is added.");
-         history('/welcomeForWorker',{ state: { email: email } });
+         history('/welcomeForWorker' );
      } else {
          console.log("Error:", data.message);
      }
@@ -58,22 +60,22 @@ function Loginas(props){
     return(
             <div className="img-cneter">
             <figure >
-              <img class=" rounded-full " src="/images/I want to work.jpeg" alt="" width="300" height="500"/>
+              <img className=" rounded-full " src="/images/I want to work.jpeg" alt="" width="300" height="500"/>
                 
-                <figcaption class="font-medium">
-                  <div class=" text-center text-4xl">
-                      <button class="button  buttonS" onClick={(e)=>{getWork(e)}}> I want to work</button>
+                <figcaption className="font-medium">
+                  <div className=" text-center text-4xl">
+                      <button className="button  buttonS" onClick={(e)=>{getWork(e)}}> I want to work</button>
                   </div>
                 </figcaption>
                 
             </figure>
             <figure >
-              <img class=" rounded-full " src="/images/I want to hire.jpeg" alt="" width="300" height="500"/>
+              <img className=" rounded-full " src="/images/I want to hire.jpeg" alt="" width="300" height="500"/>
   
             
-                <figcaption class="font-medium">
-                  <div class=" text-center text-4xl">
-                      <button class="button  buttonS" onClick={(e)=>{getStarted(e)}} > I want to hire</button>
+                <figcaption className="font-medium">
+                  <div className=" text-center text-4xl">
+                      <button className="button  buttonS" onClick={(e)=>{getStarted(e)}} > I want to hire</button>
                   </div>
                 </figcaption>
             

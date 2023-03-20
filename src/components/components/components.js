@@ -24,6 +24,15 @@ import { ArchitectureSubCategory } from '../../Pages/PostProject/postAProject';
 
 const apiLink = "http://localhost:8080/api/v1/user";
 
+export const Logout =()=>{
+  localStorage.removeItem("user");
+}
+export const GetCurrentUser=()=>{
+  //console.log(JSON.parse(localStorage.getItem("user")));
+  const user = JSON.parse(localStorage.getItem("user"));
+  return user ? user.token : null;
+}
+
 
 export const Example = ({value,onSelect,onRemove,data,displayValue}) => {
   

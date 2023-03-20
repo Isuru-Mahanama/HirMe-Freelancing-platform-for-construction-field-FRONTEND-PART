@@ -4,7 +4,7 @@ import { SlidebarData } from './slidebardata';
 const Slidebar = () => {
     return ( 
         <>
-        <div class="slidebar">
+        <div className="slidebar">
             <ul className='sidebarlist'>
             {SlidebarData.map((val,key)=>{
             return(

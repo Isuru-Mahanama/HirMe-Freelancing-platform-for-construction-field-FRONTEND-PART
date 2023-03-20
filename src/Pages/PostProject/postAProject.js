@@ -92,7 +92,7 @@ const fileUploadHandler = () => {
   
   return(<>
     
-    <button class="button" onClick={fileUploadHandler}>Submit</button>
+    <button className="button" onClick={fileUploadHandler}>Submit</button>
     </>
     )
 
@@ -147,9 +147,6 @@ class PostAProject extends React.Component {
     this.setState({projectInDetail:e.target.value});
    }
 
-   
-
-  
    setFile=(e)=>{
     let files = e.target.files;
     let reader = new FileReader();

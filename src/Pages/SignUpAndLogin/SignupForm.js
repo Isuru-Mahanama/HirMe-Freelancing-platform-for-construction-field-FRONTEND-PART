@@ -1,40 +1,49 @@
 import React, { useState } from "react";
-
 import { Link } from "react-router-dom";
-
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 
-
+const apiLink ="http://localhost:8080/api/v1/user"
 
 const SignupForm = (props) => {
     
-    const apiLink ="http://localhost:8080/api/v1/user"
+    
     let history = useNavigate();
     
     const [email,setEmail] = useState(" ");
     const[password,setPassword] = useState("");
     
     function handleLogout(){
-        setEmail(" ");
+        axios
+        .post(apiLink+"/logout")
+        .then((res) => {
+          console.log(res.data);
+          localStorage.removeItem("user");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
     const handleSignUp=(e)=>{
           e.preventDefault();     
-          const user = { email };
+          const user = { email ,password};
+
           
           
-          fetch(apiLink+"/saveUser", {
+          fetch(apiLink+"/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(user)
         })
-        .then(res => res.json())
+        .then((res => res.json()))
         .then(data => {
+            localStorage.setItem("user",JSON.stringify(data))
             console.log(data);
-            if (data.success) {
+            if (data != null) {
                 console.log("User is added.");
                 // Redirect to the desired page
-                history("/userName", { state: { email: email } });
+                history("/userName");
                 
                 
                 
@@ -61,12 +70,11 @@ const SignupForm = (props) => {
                     <div  className="Margin"></div>
                     {/* <div  className="MutedLink">Forget your password?</div> */}
                     
-                    <button class="button" onClick={(e)=>handleSignUp(e)}>SigUp</button>
+                    <button className="button" onClick={(e)=>handleSignUp(e)}>SigUp</button>
                     <button onClick={handleLogout}>Logout</button>
                    
                     <div className="MutedLink" >
-                    <Link to={'/signin'}><h6 style={{}}>Already have an account?</h6></Link>
-                        <div className="BoldLink" href ="#"></div>
+                    <Link to={'/signin'}><h6 >Already have an account?</h6></Link>  
                     </div>
                     
            

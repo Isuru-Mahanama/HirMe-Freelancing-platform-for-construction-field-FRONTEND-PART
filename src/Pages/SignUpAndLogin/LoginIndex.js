@@ -5,7 +5,7 @@ const AccountBox = () => {
 
     
     return ( 
-        <div class ="backgroundLoginSignup">
+        <div className ="backgroundLoginSignup">
         <div >
             <div className="TopContainer">
                 <div className="backDrop"> </div>
@@ -13,7 +13,7 @@ const AccountBox = () => {
                         <div className="HeaderText" >
                         <h2 className="texts">Welcome</h2>
                         <h2 className="texts">Back</h2>
-                        <div className = "SmallText"><h5 class="texts">Please sign in to continue!</h5></div>
+                        <div className = "SmallText"><h5 className="texts">Please sign in to continue!</h5></div>
                         </div>
                     </div>
             </div>

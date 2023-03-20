@@ -11,9 +11,6 @@ function Selected({onChange , onClick}) {
   const [data,setData] = useState([]);
   const [datalanguageLevel,datasetLanguageLevel] = useState([]);
   
- 
-
-
   const [defaultLanguage, setDefaultLanguage] = useState('');
    const fetchData =async() =>{
     try{

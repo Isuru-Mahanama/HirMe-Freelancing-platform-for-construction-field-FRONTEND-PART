@@ -13,22 +13,26 @@ import { VscLocation } from "react-icons/vsc";
 import { FcBusinesswoman } from "react-icons/fc";
 import {  FcBusinessman } from "react-icons/fc"
 import 'react-phone-number-input/style.css';
-import { PhoneNumber,Timezone} from "../../components/components/components";
+import { GetCurrentUser, PhoneNumber,Timezone} from "../../components/components/components";
 import Selected from "../../components/Languages";
+
+const apiLink ="http://localhost:8080/api/v1/user";
 function ForgotNavigate(props){
     const navigation = useNavigate();
     const uselocation = useLocation();
     const worker = uselocation.state.worker;
-    console.log("Worker:"+ uselocation.state.worker);
-    const {email,setEditprofile} = uselocation.state;
-    console.log("Email"+email)
-    console.log(props.value.lastName)
+    
+    const setEditprofile = uselocation.state;
+  
+    const token= GetCurrentUser();
+    console.log("here")
+    console.log(token)
+
     const accountSetUpClient=(e)=>{
           e.preventDefault();     
-          const apiLink ="http://localhost:8080/api/v1/user";
+         
          
           const address_languages={
-            email:email,
             country:props.value.country,
             streetAddress:props.value.streetaddress,
             city :props.value.city,
@@ -38,7 +42,6 @@ function ForgotNavigate(props){
          }
 
           const user = { 
-             email:email,
              firstName: props.value.firstName,
              lastName :props.value.lastName,
              displayEmail:props.value.displayEmail,
@@ -54,7 +57,10 @@ function ForgotNavigate(props){
           
           fetch(apiLink+"/setUpUserAccount", {
             method: "PUT",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+              },
             body: JSON.stringify(user)
             
         })
@@ -68,7 +74,8 @@ function ForgotNavigate(props){
                 
             return fetch(apiLink +"/saveAddress", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json",
+                           "Authorization": `Bearer ${token}`  },
                 body: JSON.stringify(address_languages)
             }).then(res => res.json())
             .then(data => {
@@ -78,7 +85,8 @@ function ForgotNavigate(props){
                        
             return fetch(apiLink +"/saveLanguages", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json",
+                          "Authorization": `Bearer ${token}`  },
                 body: JSON.stringify(address_languages)
             }).then(res => res.json())
             .then(data => {
@@ -88,10 +96,10 @@ function ForgotNavigate(props){
                     console.log("Level"+address_languages.languageLevel)
                     if(worker){
                         console.log("Go to worker"+worker)
-                        navigation("/applicationWork2",{ state: { email: email } });
+                        navigation("/applicationWork2");
                     }
                     if(!worker){
-                        navigation("/applicationHire2",{ state: { email: email } });
+                        navigation("/applicationHire2");
                     }
                    
                     
@@ -242,25 +250,25 @@ class ApplicationHire extends React.Component {
                 <div className="inputForm">
                 <div className="textsubtitle2"> Personal Information</div>
                <div className="inputBoxForm">
-                <div class="inputBox">
+                <div className="inputBox">
                 <span></span> 
                     <input type="text" required value={this.state.firstName}  onChange={(e)=>this.changeFirstName(e)}></input>
                     <span ><VscAccount /> First Name</span>
                 </div>
 
-                <div class="inputBox">
+                <div className="inputBox">
                     <input type="text" required value={this.state.lastName} onChange={(e)=>this.changeLastName(e)}></input>
                     <span><VscAccount />Last Name</span>
                 </div>
                 
                 </div>
 
-                <div class="inputBox">
+                <div className="inputBox">
                     <input type="text" required value={this.state.displayEmail} onChange={(e)=>this.changeDisplayEmail(e)}></input>
                     <span><VscMail/>Email</span>
                 </div>
 
-                <div class="inputBox">
+                <div className="inputBox">
                     <input type="text" required value={this.state.country} onChange={(e)=>this.changeCountry(e)}></input>
                     <span><VscHome/>Country</span>
                 </div>
