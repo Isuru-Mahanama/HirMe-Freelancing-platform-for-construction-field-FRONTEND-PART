@@ -19,6 +19,7 @@ export const SlidebarData =[
         link:"/firstPageforHire",
 
     },
+
     {
         title: "My Applications",
         icon: <RiHome3Fill/>,
@@ -57,4 +58,61 @@ export const SlidebarData =[
  
 
 
+]
+
+export const SlidebarDataForClient =[
+    {
+        title: "Home",
+        icon: <RiHome4Line />,
+        link:"/",
+
+    },
+    {
+        title: "Account",
+        icon: <VscAccount/>,
+        link:"/firstPageforHire",
+
+    },
+    {
+        title: "Post A Project",
+        icon: <RiHome3Fill/>,
+        link:"/post-project",
+
+    },
+
+    
+    {
+        title: "My Applications",
+        icon: <RiHome3Fill/>,
+        link:"/viewworkerappliedprojects",
+
+    },
+
+    {
+        title: "Payments",
+        icon: <RiHome3Fill/>,
+        link:"/payments",
+
+    },
+    
+    {
+        title: "Messages",
+        icon: <VscMail />,
+        link:"/message",
+
+    }
+    ,
+    {
+        title: "Scheduling",
+        icon: <VscMail />,
+        link:"/Scheduling",
+
+    }
+    , {
+        title: "My Projects",
+        icon: <VscMail />,
+        link:"/postedprojects",
+
+    }
+    
 ]

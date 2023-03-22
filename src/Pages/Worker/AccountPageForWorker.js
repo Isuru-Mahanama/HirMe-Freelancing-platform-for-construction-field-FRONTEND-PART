@@ -11,7 +11,7 @@ import { Link } from "react-router-dom"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { GetCurrentUser } from "../../components/components/components";
-import { fr } from "date-fns/locale";
+
 
 
 const apiLink = "http://localhost:8080/api/v1/user";
@@ -65,21 +65,30 @@ class AccountPageWorker extends React.Component {
     try{
       const response =await axios.get(apiLink+'/getAllProjectDetails',{
       headers: {
-        Authorization: "Bearer " + this.token
+        Authorization: "Bearer " + this.token.token
       }});
      
       console.log(response.data);
+      if (response.data.FreelancerDetails && response.data.FreelancerDetails.freelancerEducationDetails && response.data.FreelancerDetails.cerificates){
+        this.setState(
+          { projects:response.data.Projects,
+            freelancer:response.data.FreelancerDetails.cerificates,
+             language:response.data.Languages,
+            userName:response.data.UserName,
+            City:response.data.City,
+            education:response.data.FreelancerDetails.freelancerEducationDetails,
+            moreDetails:response.data.FreelancerDetails.moreDetail,
+            category:response.data.FreelancerDetails.categoryDetails}
+          )
+        
+      }
+     else{
       this.setState(
         { projects:response.data.Projects,
-          freelancer:response.data.FreelancerDetails.cerificates,
-           language:response.data.Languages,
           userName:response.data.UserName,
-          City:response.data.City,
-          education:response.data.FreelancerDetails.freelancerEducationDetails,
-          moreDetails:response.data.FreelancerDetails.moreDetail,
-          category:response.data.FreelancerDetails.categoryDetails}
+        }
         )
-      
+     }
       
     }catch(error){
       console.log(error);
@@ -173,15 +182,15 @@ class AccountPageWorker extends React.Component {
           <div className="text-profile">
           <hr className="line"></hr>
          <div className="font">From ----</div>
-         {this.state.City}
+         {this.state.category!= null && this.state.City}
          <hr className="line"></hr>
          <div className="font">Category -</div>
 
          {this.state.category!= null && this.state.category.map(category=>(
-            <li >{category.category}-{category.esubCategoryName}  </li>
+            <li key={category.categoryId}>{category.category}-{category.esubCategoryName}  </li>
           ))}
          <hr className="line"></hr>
-         <div className="font">Description about me,, -</div>
+         <div className="font">Description about me, -</div>
          {this.state.moreDetails}
 
          <hr className="line"></hr>
@@ -191,13 +200,14 @@ class AccountPageWorker extends React.Component {
          <hr className="line"></hr>
          <div className="font">Education -</div>
           {this.state.education != null && this.state.education.map(education=>(
-            <li >{education.title} - {education.major} - {education.school}  </li>
+      
+          <li key={education.educationID} >{education.title} - {education.major} - {education.school}  </li>
           ))}
          <hr className="line"></hr>
          <div className="font">Certification -</div>
 
          {this.state.freelancer!= null && this.state.freelancer.map(cerificate=>(
-            <li >{cerificate.certificate}-{cerificate.cerifiedfrom}  </li>
+            <li key={ cerificate.freelancerCertificatesDetailsID} >{cerificate.certificate}-{cerificate.cerifiedfrom}  </li>
           ))}
          
           </div>

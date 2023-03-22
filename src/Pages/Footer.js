@@ -34,7 +34,7 @@ function Footer() {
                     <Link to='/'>Investors</Link>
                     <Link to='/'>Terms of Service</Link>
                 </div>
-                <div class='footer-link-items'>
+                <div className='footer-link-items'>
             <h2>Contact Us</h2>
             <Link to='/'>Contact</Link>
             <Link to='/'>Support</Link>

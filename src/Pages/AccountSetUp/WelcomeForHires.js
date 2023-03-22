@@ -5,7 +5,6 @@ const Welcome = (props) => {
 
     let history = useNavigate();
     
-   
     const getStarted=()=>{
      
         history("/firstPageforHire");

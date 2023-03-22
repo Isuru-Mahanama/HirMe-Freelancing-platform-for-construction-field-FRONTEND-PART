@@ -21,12 +21,10 @@ function ForgotNavigate(props){
     const navigation = useNavigate();
     const uselocation = useLocation();
     const worker = uselocation.state.worker;
-    
+    console.log(worker);
     const setEditprofile = uselocation.state;
-  
-    const token= GetCurrentUser();
-    console.log("here")
-    console.log(token)
+
+ 
 
     const accountSetUpClient=(e)=>{
           e.preventDefault();     
@@ -59,7 +57,7 @@ function ForgotNavigate(props){
             method: "PUT",
             headers: { 
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
+                "Authorization": `Bearer ${GetCurrentUser().token}`
               },
             body: JSON.stringify(user)
             
@@ -75,7 +73,7 @@ function ForgotNavigate(props){
             return fetch(apiLink +"/saveAddress", {
                 method: "POST",
                 headers: { "Content-Type": "application/json",
-                           "Authorization": `Bearer ${token}`  },
+                           "Authorization": `Bearer ${GetCurrentUser().token}`  },
                 body: JSON.stringify(address_languages)
             }).then(res => res.json())
             .then(data => {
@@ -86,7 +84,7 @@ function ForgotNavigate(props){
             return fetch(apiLink +"/saveLanguages", {
                 method: "POST",
                 headers: { "Content-Type": "application/json",
-                          "Authorization": `Bearer ${token}`  },
+                          "Authorization": `Bearer ${GetCurrentUser().token}`  },
                 body: JSON.stringify(address_languages)
             }).then(res => res.json())
             .then(data => {
@@ -122,9 +120,9 @@ function ForgotNavigate(props){
     }
     return(<>
     
-    { worker && <button class = "button" onClick={(e)=>accountSetUpClient(e)} >Next</button> }
-    {setEditprofile && <button class = "button" onClick={(e)=>accountSetUpClient(e)} >Next</button>}
-    {!setEditprofile && <button class = "button" onClick={(e)=>accountSetUpClient(e)} >Edit Your Company Details</button>}
+    { worker && <button className = "button" onClick={(e)=>accountSetUpClient(e)} >Next</button> }
+    {setEditprofile && <button className = "button" onClick={(e)=>accountSetUpClient(e)} >Next</button>}
+    {!setEditprofile && <button className = "button" onClick={(e)=>accountSetUpClient(e)} >Edit Your Company Details</button>}
     </>
     )
 }

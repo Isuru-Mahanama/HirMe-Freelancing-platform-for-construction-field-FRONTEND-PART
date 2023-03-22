@@ -171,7 +171,7 @@ class ApplicationWork2 extends React.Component {
       axios
           .post(apiLink+"/postEducationDetails",this.state, {
             headers: {
-              Authorization: "Bearer " + this.token
+              Authorization: "Bearer " + this.token.token
             }
           })
           .then((res) => {

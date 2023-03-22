@@ -25,7 +25,7 @@ const LoginForm = () => {
       })
       .then(res => res.json())
       .then(data => {
-        localStorage.setItem("user",JSON.stringify(data))
+        
           console.log(data);
           if (data != null) {
               console.log("User is added.");

@@ -55,8 +55,6 @@ function Navbar(props) {
            
             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
            
-         
-            
             </ul>
           
             </div>
@@ -87,21 +85,20 @@ function Navbar(props) {
            
             </li>
             <li className='nav-item'>
-              <Link to='/postprojectIndex' className='nav-links' onClick={closeMobileMenu}>
-                post a project
+          
+              <Link to='/post-project' className='nav-links' onClick={closeMobileMenu}>
+                Logout
               </Link>
             </li>
 
             <li className='nav-item'>
               <Link to="/join" >
-            <button  className='nav-links-button text-3xl ' buttonStyle = 'btn--outline_sign ' onClick={()=>changeNavebar()}>Join</button>
+            <button  className='nav-links-button text-3xl ' buttonstyle = 'btn--outline_sign ' onClick={()=>changeNavebar()}>Join</button>
             </Link>
             </li>
 
             </ul>
            
-          
-          
             </div>
          </nav>
          </div>

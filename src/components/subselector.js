@@ -53,7 +53,7 @@ export default function CheckboxesGroup() {
 
     setState({
         ...state,
-        ['Engineering']: event.target.checked,
+        ['Engineering']:event.target.checked,
       });
   };
 

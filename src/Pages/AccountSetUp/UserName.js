@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { GetCurrentUser } from "../../components/components/components";
 const UserName= (props) => {
 
-    const token = GetCurrentUser();
+    //const token = GetCurrentUser();
     const[username,setuserName] = useState("");
     let history = useNavigate();
     const apiLink ="http://localhost:8080/api/v1/user";
@@ -19,7 +19,7 @@ const UserName= (props) => {
           fetch(apiLink+ "/saveUserName", {
             method: "PUT",
             headers: { "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}` },
+                        "Authorization": `Bearer ${ GetCurrentUser().token}` },
             body: JSON.stringify(user)
             
         })

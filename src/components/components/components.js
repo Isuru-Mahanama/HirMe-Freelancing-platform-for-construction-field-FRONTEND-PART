@@ -25,12 +25,14 @@ import { ArchitectureSubCategory } from '../../Pages/PostProject/postAProject';
 const apiLink = "http://localhost:8080/api/v1/user";
 
 export const Logout =()=>{
-  localStorage.removeItem("user");
+ localStorage.removeItem("user");
+ //localStorage.clear("user");
+  
 }
 export const GetCurrentUser=()=>{
   //console.log(JSON.parse(localStorage.getItem("user")));
-  const user = JSON.parse(localStorage.getItem("user"));
-  return user ? user.token : null;
+  return JSON.parse(localStorage.getItem("user"));
+  
 }
 
 
@@ -362,7 +364,7 @@ useEffect(()=>{
 
     return ( 
       <div>
-              <label for="country" class="text3">Full budget</label>
+              <label className="text3">Full budget</label>
               
             <select
               name="prize"
@@ -381,12 +383,12 @@ useEffect(()=>{
                 showhide ==='1' && (
                   <div>
                    <div>
-                        <label for="price" class="text3">Minimum Price</label>
-                              <div class="relative mt-1 rounded-md shadow-sm">
+                        <label  className="text3">Minimum Price</label>
+                              <div className="relative mt-1 rounded-md shadow-sm">
                      
                       <input type="number" name="price" id="price" placeholder="0.00 $"/>
-                      <div class="absolute inset-y-0 right-0 flex items-center">
-                        <label for="currency" class="sr-only">Currency</label>
+                      <div className="absolute inset-y-0 right-0 flex items-center">
+                        <label  className="sr-only">Currency</label>
                       <select id="currency" name="currency">
                       
                         {currency.map(item=>(
@@ -403,11 +405,11 @@ useEffect(()=>{
                     </div>
 
                     <div>
-                        <label for="price" class="text3">Maximum Price</label>
-                     <div class="relative mt-1 rounded-md shadow-sm">
+                        <label  className="text3">Maximum Price</label>
+                     <div className="relative mt-1 rounded-md shadow-sm">
                 
                       <input type="number" name="price" id="price" placeholder="0.00$"/>
-                      <div class="absolute inset-y-0 right-0 flex items-center">
+                      <div  className="absolute inset-y-0 right-0 flex items-center">
                         
                       <select id="currency" name="currency">
                       

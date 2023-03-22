@@ -2,50 +2,44 @@ import React, { useState } from "react";
 import ProgressBar from "../../components/progressbar/progressbar";
 import { VscAccount } from "react-icons/vsc";
 import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import 'react-phone-number-input/style.css';
 import { FcReadingEbook } from "react-icons/fc";
+import { GetCurrentUser } from "../../components/components/components";
 
 const apiLink ="http://localhost:8080/api/v1/user";
 function NavigationHire(props){
     const navigation = useNavigate();
-    const uselocation = useLocation();
+    
     const [halfsetup,setup] = useState(true);
 
-    const email = uselocation.state.email;
-   console.log("Email"+email)
-   
      const getStarted=(e)=>{
             e.preventDefault();
-            console.log("EmailBack:"+email);
-    
+      
             const clientDetails={
-                email:email,
                 companyDetails:props.value.companyDetails,
                 websiteLink : props.value.websiteLink,
                 faceBookLink :props.value.faceBookLink,
                 instagramLink :props.value.instagramLink
                };
 
-       
-               
         fetch(apiLink +"/setUpClientAccount",{
                 method :"PUT",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json",
+                        "Authorization": `Bearer ${ GetCurrentUser().token}`  },
                 body:JSON.stringify(clientDetails)
-
             })
         .then(res => res.json())
         .then(data => {
             console.log(data);
         if (data.success) {
             console.log("CLient details are added is added.");
-            navigation('/firstPageforHire',{ state: { email: email ,setupyouraccount:false } });
+            navigation('/firstPageforHire',{ state: { setupyouraccount:false } });
             
-            fetch(apiLink + "/checkclienttable"+email,{
+            fetch(apiLink + "/checkclienttable",{
                 method :"GET",
-                headers: { "Content-Type": "application/json" },
-                body:JSON.stringify(clientDetails)
+                headers: { "Content-Type": "application/json" ,
+                          "Authorization": `Bearer ${ GetCurrentUser().token}`},
+                body:JSON.stringify()
 
              }).then(Response => Response.json)
                .then(data => setup(data))
@@ -62,11 +56,9 @@ function NavigationHire(props){
         });
     }
 
-   
-  
     return(<>
     
-    <button class = "button" onClick={(e)=>getStarted(e)} >Next</button>
+    <button className="button" onClick={(e)=>getStarted(e)} >Next</button>
     </>
     )
 }
@@ -114,7 +106,7 @@ class ApplicationHire2 extends React.Component {
                 <div className="textsubtitle2"> Information of the company</div>
             <div className="">
            
-            <div class="size">
+            <div className="size">
                 <input type="text" required value={this.state.companyDetails} onChange={(e)=>{this.setCompanyDetails(e)}}></input>
                 <span><VscAccount />Tell us more about you and your company</span>
             </div>

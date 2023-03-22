@@ -13,7 +13,7 @@ function Frontpage() {
          <div className='hero-btns'>
         <Button
           className='btn'
-          buttonStyle='btn--outline'
+         buttonStyle='btn--outline'
           buttonSize='btn--large'
         >
           GET STARTED

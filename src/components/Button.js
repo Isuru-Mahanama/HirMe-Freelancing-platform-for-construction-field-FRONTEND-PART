@@ -9,10 +9,10 @@ const Button = ({
     children,
     type,
     onclick,
-    buttonStyle,
+    buttonstyle,
     buttonsize
 }) => {
-    const checkButtonStyle = STYLES.includes(buttonStyle) ? buttonStyle:STYLES[0];
+    const checkButtonStyle = STYLES.includes(buttonstyle) ?buttonstyle:STYLES[0];
     
 
     const checkButtonSize = SIZES.includes(buttonsize) ? buttonsize:SIZES[0];

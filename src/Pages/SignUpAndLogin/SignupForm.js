@@ -15,11 +15,13 @@ const SignupForm = (props) => {
     const[password,setPassword] = useState("");
     
     function handleLogout(){
+        
         axios
         .post(apiLink+"/logout")
         .then((res) => {
           console.log(res.data);
           localStorage.removeItem("user");
+          
         })
         .catch((err) => {
           console.log(err);
@@ -38,6 +40,7 @@ const SignupForm = (props) => {
         })
         .then((res => res.json()))
         .then(data => {
+            
             localStorage.setItem("user",JSON.stringify(data))
             console.log(data);
             if (data != null) {

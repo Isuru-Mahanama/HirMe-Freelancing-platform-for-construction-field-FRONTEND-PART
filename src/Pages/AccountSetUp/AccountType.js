@@ -7,7 +7,7 @@ function Loginas(props){
     
     const history = useNavigate();
     
-    const token = GetCurrentUser();
+   // const token = GetCurrentUser();
 
     const getStarted=(e)=>{
             e.preventDefault();
@@ -15,7 +15,7 @@ function Loginas(props){
             fetch(apiLink +"/setUpClient",{
               method :"POST",
               headers: { "Content-Type": "application/json",
-                          "Authorization": `Bearer ${token}`},
+                          "Authorization": `Bearer ${ GetCurrentUser().token}`},
               body:JSON.stringify(user)
             })
             .then(res => res.json())
@@ -38,7 +38,7 @@ function Loginas(props){
      fetch(apiLink +"/setUpFreelancer",{
        method :"POST",
        headers: { "Content-Type": "application/json" ,
-                  "Authorization": `Bearer ${token}`},
+                  "Authorization": `Bearer ${ GetCurrentUser().token}`},
        body:JSON.stringify(user)
      })
      .then(res => res.json())

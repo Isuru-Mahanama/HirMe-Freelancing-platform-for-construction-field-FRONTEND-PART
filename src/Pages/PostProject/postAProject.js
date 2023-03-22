@@ -1,15 +1,13 @@
 import React from "react";
-import { CategoryPicker, DataPicker, PrizeSelector } from "../../components/components/components";
+import { CategoryPicker, DataPicker, GetCurrentUser, PrizeSelector } from "../../components/components/components";
 import { VscAccount } from "react-icons/vsc";
 import { VscMail } from "react-icons/vsc";
 import './Post_project.css'
 import 'react-phone-number-input/style.css';
 import { FcReadingEbook } from "react-icons/fc";
 import {Multiselect} from 'multiselect-react-dropdown';
-import { useLocation } from "react-router-dom";
 import axios from "axios";
-
-
+import { useNavigate } from "react-router-dom";
 const apiLink ="http://localhost:8080/api/v1/user";
 export const ArchitectureSubCategory = ({value,onSelect,onRemove,data,displayValue}) => {
     
@@ -28,12 +26,10 @@ export const ArchitectureSubCategory = ({value,onSelect,onRemove,data,displayVal
 }
 function FetcheingDatata(props){
   
-  const uselocation = useLocation();
-
-  const email = uselocation.state.email;
  
+  const navigate = useNavigate();
     const project ={
-      email :email,
+     
       projectTitle:props.value.projectTitle,
       smallDescription:props.value.smallDescription,
       moreDescription:props.value.projectInDetail,
@@ -78,9 +74,14 @@ const fileUploadHandler = () => {
   formData.append("projectDTO", JSON.stringify(project));
   console.log(props.value.image)
   axios
-    .post(apiLink+"/postProjectFile", formData)
+    .post(apiLink+"/postProjectFile", formData, {
+      headers: {
+        Authorization: `Bearer ${GetCurrentUser().token}`
+      }
+    })
     .then((res) => {
       console.log(res.data);
+      navigate('/firstPageforHire');
     })
     .catch((err) => {
       console.log(err);
@@ -88,7 +89,6 @@ const fileUploadHandler = () => {
 };
 
 
-  console.log("Here"+email);
   
   return(<>
     
@@ -208,7 +208,7 @@ class PostAProject extends React.Component {
         <div className="textsubtitle2"> Project Information</div>
       
         <div className="inputBoxForm">
-        <div class="inputBox">
+        <div className="inputBox">
         <span></span> 
             <input type="text" required value={this.state.projectTitle} onChange={this.setProjectTitle}></input>
            <span ><VscAccount /> Project Title</span>
@@ -216,36 +216,36 @@ class PostAProject extends React.Component {
         </div>
        
         </div>
-        <div className="">
-        <div class="size2">
+        <div >
+        <div className="size2">
             <input type="text" required className="" value={this.state.smallDescription} onChange={this.setSmallDescription}></input>
             <span><VscAccount />Small description about your project</span>
             
         </div>
         
-        <div class="size">
+        <div className="size">
             <input type="text" required className="" value={this.state.projectInDetail} onChange={this.setProjectInDetail}></input>
             <span><VscAccount />Tell us more about your project</span>
         </div>
         </div><div >
-            <label for="file-upload" >
+            <label  >
             <span  className ="text2 inputBox">Upload a Image or drag or drop(This will appear with your project)</span>
             <input id="file-upload"  type="file" className=" inputBox text2" value={this.state.file} onChange={(e)=>this.setImage(e)}/>
-            <p class="text3">PNG, JPG, GIF up to 10MB</p>
+            <p className="text3">PNG, JPG, GIF up to 10MB</p>
             </label> 
            
         </div>
         <div >
-            <label for="file-upload" >
+            <label  >
             <span  className ="text2 inputBox">Upload a file or drag or drop</span>
             <input id="file-upload"  type="file" className=" inputBox text2" value={this.state.file} onChange={(e)=>this.setFile(e)}/>
-            <p class="text3">PNG, JPG, GIF up to 10MB</p>
+            <p className="text3">PNG, JPG, GIF up to 10MB</p>
             </label> 
            
         </div>
 
        <hr></hr>
-        <div className ="">
+        <div >
             <CategoryPicker required value={this.state}   onChange={this.setCategory} setECategory={this.setECategory}
           setCCategory={this.setCCategory}
           setACategory={this.setACategory}>
@@ -256,13 +256,13 @@ class PostAProject extends React.Component {
       
         <div className="inputBoxForm">
 
-        <div class="inputBox dateTo">
+        <div className="inputBox dateTo">
         
         <label className="date"><VscMail/>From</label>
         <DataPicker required value={this.state.startDate} onChange={this.setStartDate}></DataPicker>
            
         </div>    
-        <div class="inputBox dateTo">
+        <div className="inputBox dateTo">
         
         <label className="date"><VscMail/>To</label>
         <DataPicker required value={this.state.endDate} onChange={this.setEndDate}></DataPicker>
@@ -270,7 +270,7 @@ class PostAProject extends React.Component {
          </div>
        
        <hr></hr>
-         <div class="inputBox dateTo">
+         <div className="inputBox dateTo">
         
         <label className="date"><VscMail/></label>
         <PrizeSelector required value={this.state} onChange={this.setPrize}></PrizeSelector>
