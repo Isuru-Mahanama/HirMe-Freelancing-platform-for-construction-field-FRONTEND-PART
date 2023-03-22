@@ -70,7 +70,7 @@ class FirstPageForHire extends React.Component {
       }});
      
       console.log(response.data);
-      if (response.data.ClientDetails  && response.data.ClientDetails.companyDetails){
+      if (response.data.ClientDetails && response.data.ClientDetails.companyDetails){
         this.setState(
           { projects:response.data.Projects,
              language:response.data.Languages,
@@ -134,7 +134,7 @@ class FirstPageForHire extends React.Component {
               
               <CardLink href="/portfolio" className="cardlink">
            
-              {this.state.userName}
+              ClientAccount_Link
               <img className="img-profile" alt="Sample" src="https://picsum.photos/300/200" />
               </CardLink>
               
@@ -165,7 +165,7 @@ class FirstPageForHire extends React.Component {
               
               <CardLink href="/portfolio" className="cardlink">
            
-              {this.state.userName}
+              ClientAccount_Link
               <img className="img-profile" alt="Sample" src="https://picsum.photos/300/200" />
               </CardLink>
               
