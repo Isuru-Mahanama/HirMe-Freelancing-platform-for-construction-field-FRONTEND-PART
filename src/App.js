@@ -90,7 +90,7 @@ function App() {
             
             </Route>
 
-            <Route exact path="/portfolio" element={<Portfolio/>} >
+            <Route exact path="/portfolio/:clientID" element={<Portfolio/>} >
             
             </Route>
               

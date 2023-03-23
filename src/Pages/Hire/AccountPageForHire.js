@@ -132,9 +132,9 @@ class FirstPageForHire extends React.Component {
               {item.smallDescription}
               </CardText>
               
-              <CardLink href="/portfolio" className="cardlink">
+              <CardLink href={"/portfolio/"+item.fk_userID.clientID} className="cardlink">
            
-              ClientAccount_Link
+              ClientAccount_Link{item.fk_userID.clientID}
               <img className="img-profile" alt="Sample" src="https://picsum.photos/300/200" />
               </CardLink>
               
@@ -163,9 +163,9 @@ class FirstPageForHire extends React.Component {
               {item.smallDescription}
               </CardText>
               
-              <CardLink href="/portfolio" className="cardlink">
+              <CardLink href={"/portfolio/"+item.fk_userID.clientID} className="cardlink">
            
-              ClientAccount_Link
+              ClientAccount_Link{item.fk_userID.clientID}
               <img className="img-profile" alt="Sample" src="https://picsum.photos/300/200" />
               </CardLink>
               
