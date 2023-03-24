@@ -432,6 +432,7 @@ useEffect(()=>{
   };
 
   export const CardData = ({cardData}) => {
+
     return ( 
      
         <div className="card-container">
@@ -447,10 +448,11 @@ useEffect(()=>{
                         </Link>
                         <CardText className="cardtext">{card.description}</CardText>
                         <CardLink href={card.freelancerLink} className="cardlink">
-                            FreelancerAccount_Link
+                            ClientAccount_Link
+                         
                             <img className="img-profile" src={card.profileImage} alt={card.title} />
                         </CardLink>
-                        <h3 className="price">{card.price}</h3>
+                        <h3 className="price">{card.price} {card.prizeminimum}-{card.prizemaximum}</h3>
                     </CardBody>
                 </Card>
             ))}

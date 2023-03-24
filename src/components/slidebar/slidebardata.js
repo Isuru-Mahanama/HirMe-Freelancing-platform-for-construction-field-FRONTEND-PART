@@ -79,12 +79,10 @@ export const SlidebarDataForClient =[
         link:"/post-project",
 
     },
-
-    
     {
-        title: "My Applications",
-        icon: <RiHome3Fill/>,
-        link:"/viewworkerappliedprojects",
+        title: "My Projects",
+        icon: <VscMail />,
+        link:"/postedprojects",
 
     },
 
@@ -96,23 +94,11 @@ export const SlidebarDataForClient =[
     },
     
     {
-        title: "Messages",
-        icon: <VscMail />,
-        link:"/message",
-
-    }
-    ,
-    {
         title: "Scheduling",
         icon: <VscMail />,
         link:"/Scheduling",
 
     }
-    , {
-        title: "My Projects",
-        icon: <VscMail />,
-        link:"/postedprojects",
-
-    }
+    
     
 ]

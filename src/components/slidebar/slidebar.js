@@ -25,6 +25,7 @@ const Slidebar = () => {
 export default Slidebar;
 
 export const SlidebarClient = () => {
+    
     return ( 
         <>
         <div className="slidebar">
