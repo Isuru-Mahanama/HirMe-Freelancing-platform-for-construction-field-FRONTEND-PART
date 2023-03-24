@@ -15,8 +15,9 @@ class PostedProjects extends React.Component {
             freelancerLink: "",
             profileImage: "https://picsum.photos/300/200",
             price: "",
-            projectLink :"/viewproject",
+            projectLink :"",
             applicationLink:"/viewapplications"
+          
         }] } 
 
       
@@ -34,7 +35,7 @@ class PostedProjects extends React.Component {
                   }});
               
              // console.log(response.data.Projects.projectTitle  );
-              console.log(response.data.ClientDetails.clientID);
+              console.log(response.data);
             //  console.log(response.data.Client.companyDetails);
               if(response.data.Projects ) {
                 const cardData = response.data.Projects.map((project) => ({
@@ -47,7 +48,7 @@ class PostedProjects extends React.Component {
                   price: project.currencyType,
                   prizeminimum:project.prizeminimum, 
                   prizemaximum:project.prizemaximum,
-                 // projectLink: project.projectLink,
+                  projectLink: "/viewproject/"+project.projectID,
                  // applicationLink: project.applicationLink,
                 }));
                 this.setState({ cardData });

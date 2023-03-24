@@ -191,11 +191,11 @@ class AccountPageWorker extends React.Component {
           ))}
          <hr className="line"></hr>
          <div className="font">Description about me, -</div>
-         {this.state.moreDetails}
+         {this.state.moreDetails!=null && this.state.moreDetails}
 
          <hr className="line"></hr>
          <div className="font">Languages -</div>
-          {this.state.language.language} - {this.state.language.languageLevel}
+         {this.state.language !=null && this.state.language.language} - {this.state.language !=null && this.state.language.languageLevel}
          
          <hr className="line"></hr>
          <div className="font">Education -</div>

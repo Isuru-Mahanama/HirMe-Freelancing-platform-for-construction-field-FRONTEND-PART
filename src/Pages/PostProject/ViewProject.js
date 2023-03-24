@@ -10,6 +10,7 @@ const ViewProject=(prop)=>  {
     const params = useParams();
     console.log(params.projectId)
     
+    
     const [title,setTitle] = useState('');
     const [smallDescription,setSmallDescription] = useState('');
     const [moreDescription,setMoreDescription] = useState('');
@@ -51,7 +52,6 @@ const ViewProject=(prop)=>  {
     const passingProjectID=(e)=>{
     history("/applyproject",{ state: { pID: params.projectId}});
   }
-
     const downloadFile=async()=>{
         try{
             console.log(apiLink+'/downloadFile')
@@ -89,45 +89,7 @@ const ViewProject=(prop)=>  {
     useEffect(()=>{
         fetchData();
     },[]);
-       /*  static propTypes = {
-            match: PropTypes.object.isRequired,
-          };
-
-          constructor(props){
-          super(props);
-        
-        this.file ={
-        url: 'https://example.com/my-file.pdf',
-        name: 'My File'
-        }
-        this.state =[{
-            role:"Civil Engineer",
-            hours:55,
-            hourly_rate :'100$',
-            full_amount: '5500$'
-        },
-        {
-            role:"Civil Engineer",
-            hours:55,
-            hourly_rate :'100$',
-            full_amount: '5500$'
-        },
-        {
-            role:"Civil Engineer",
-            hours:55,
-            hourly_rate :'100$',
-            full_amount: '5500$'
-        }]
-    }
-   
-       
-    */
-  
-   /*  render() { 
      
-        const { match } = this.props;
-     //   console.log(this.props.match.params.projectID)
-    console.log(this.props); */
      return (
             <div className="background">
             <div className="oneline">
@@ -162,7 +124,6 @@ const ViewProject=(prop)=>  {
                    
                     <button className="b1" onClick={(e)=>downloadFile(e)}> Click to download the resume</button>
                 
-   
                 </div>  
                
                 <div className="text5"> Selected categories!!!</div>
@@ -173,17 +134,19 @@ const ViewProject=(prop)=>  {
                         <tr >
                             <th className="fontTable" >Category</th>
                             <th className="fontTable">SubCategory</th>
-                           
+                        
                         </tr>
                     </thead>
-                 </table>
-
+               
+                    <tbody>
                 {subcategory.map((row,index)=>(
-                    <tr key={index} className="table">
+                    <tr key={index} className="">
                     <td className="fontTable" >{row.category}</td>
                     <td className="fontTable">{row.esubCategoryName}</td>
                     </tr>
                  ))}
+                  </tbody>
+                   </table>
                 </div>  
                
                 <div className="flex">

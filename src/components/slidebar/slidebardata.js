@@ -33,27 +33,14 @@ export const SlidebarData =[
         link:"/payments",
 
     },
-    
-    {
-        title: "Messages",
-        icon: <VscMail />,
-        link:"/message",
 
-    }
-    ,
     {
         title: "Scheduling",
         icon: <VscMail />,
         link:"/Scheduling",
 
     }
-    , {
-        title: "My Projects",
-        icon: <VscMail />,
-        link:"/postedprojects",
 
-    }
-    
     
  
 

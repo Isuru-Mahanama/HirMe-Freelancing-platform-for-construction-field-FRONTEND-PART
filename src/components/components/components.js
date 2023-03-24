@@ -438,7 +438,7 @@ useEffect(()=>{
         <div className="card-container">
             {cardData.map((card, index) => (
                 <Card className="cards cardspack" key={index}>
-                    <Link to={card.projectLink}>
+                    <Link to={card.projectLink} >
                         <img className="img-card" src={card.image} alt={card.title} />
                     </Link>
                     <CardBody className="cardbody">
@@ -504,6 +504,27 @@ useEffect(()=>{
   } 
 
   export const MyApplications = ({cardData}) => {
+    const downloadFile=async({projectID,fileName})=>{
+      try{
+          console.log(apiLink+'/downloadFile')
+          const response =await axios.get(apiLink+'/downloadFile/'+ projectID,{
+              responseType: 'blob',
+          });
+
+          const fileUrl = URL.createObjectURL(response.data);
+          const link = document.createElement('a');
+          link.href = fileUrl;
+        //  console.log("FileName")
+        //  console.log(fileName)
+          link.setAttribute('download', fileName);
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+      
+        }catch(error){
+          console.log(error);
+        }
+  }
     return ( 
      
         <div className="card-container2">
@@ -519,20 +540,20 @@ useEffect(()=>{
 
                   
                 <CardTitle tag="h5" className='card-title'>
-                Hourly Rate :{card.hourlyrate}
+                Hourly Rate :  &nbsp;  {card.price} &nbsp; &nbsp; {card.prizeminimum}
                 </CardTitle>
                 <CardText className='card-text'>
-              {card.description}
+                  More Description :{card.description}
               </CardText>
               <CardText className='card-text'>
-              Applied Date : {card.cardData}
+              Applied Date : {card.applicationDate}
               </CardText>
             
               </CardBody>
               <CardFooter>
              
-              <CardLink href={card.freelancerAccountLik} className="cardlink1">
-              FreelancerAccount_Link
+              <CardLink href={card.clientLink} className="cardlink1">
+              ClientAccount_Link
               <img className="img-profile" src={card.profileImage} alt={card.title} />
               </CardLink>
 
@@ -542,10 +563,10 @@ useEffect(()=>{
               </CardLink>
 
               <div className="center">
-              <a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
-                        download>
-              <button className="b2"> Click to download the resume</button>
-              </a>
+              
+              <button className="b2" onClick={() => downloadFile({ projectID: card.projectID, fileName: card.fileName })}>
+              Click to download the resume
+              </button>
               </div>  
 
              

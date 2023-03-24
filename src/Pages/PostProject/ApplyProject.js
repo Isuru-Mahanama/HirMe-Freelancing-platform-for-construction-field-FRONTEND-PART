@@ -7,16 +7,18 @@ import {  FcBusinessman } from "react-icons/fc"
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import { GetCurrentUser } from "../../components/components/components";
+import { useNavigate } from "react-router-dom";
 
 const apiLink ="http://localhost:8080/api/v1/user";
 
 const ApplyProject=()=>{
    
+    const navigate = useNavigate();
     const location = useLocation();
     console.log("HI")
     const passedValue = location.state?.pID;
-    const email = location.state?.email;
-    console.log(email)
+   
     const [currency,setCurrency]=useState([]);
     const [subcategories,setSubCategory] = useState([]);
     const [selectedCurrency,setSelectedCurrency] = useState('');
@@ -42,7 +44,7 @@ const ApplyProject=()=>{
 
       
      const appliedProjects ={
-        email:email,
+     
         projectIDD:passedValue,
         moreDescription:moreDescription,
         selectedCurrency:selectedCurrency,
@@ -59,9 +61,14 @@ const ApplyProject=()=>{
     formData.append("appliedProjects", JSON.stringify(appliedProjects));
   //  console.log(props.value.image)
     axios
-      .post(apiLink+"/postApplications", formData)
+      .post(apiLink+"/postApplications", formData, {
+        headers: {
+          Authorization: `Bearer ${GetCurrentUser().token}`
+        }
+      })
       .then((res) => {
         console.log(res.data);
+        
       })
       .catch((err) => {
         console.log(err);
@@ -122,7 +129,7 @@ const ApplyProject=()=>{
                 </select> }
                 
 
-                <label for="currency" className="sr-only">Currency</label>
+                <label className="sr-only">Currency</label>
                 
              {    <select  id="currency" name="currency" onClick={handleChange} placeholder='SELECT THE JOB TYPE'>
                     <option value={null}>SELECT THE CURENCY TYPE!!</option>
@@ -145,7 +152,7 @@ const ApplyProject=()=>{
                     </div>
 
                     <div >
-                     <label for="file-upload" >
+                     <label  >
                     <span  className ="text2 inputBox">Upload a resume</span>
                     <input id="file-upload" name="file-upload" type="file" className=" inputBox text2" onChange={(e)=>setFile(e)}/>
                     <p className="text3">PNG, JPG, GIF up to 10MB</p>
@@ -154,7 +161,7 @@ const ApplyProject=()=>{
                 </div>
                 </div>
                 <div className="buttons">
-                 <Link to ="/">
+                 <Link to ="/viewworkerappliedprojects">
                 <button className="button" onClick={fileUploadHandler}>Apply</button>
                 </Link>
                 </div>

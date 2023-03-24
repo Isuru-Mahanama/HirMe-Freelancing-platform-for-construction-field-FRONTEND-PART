@@ -14,10 +14,9 @@ const LoginForm = () => {
     const handleSignUp=(e)=>{
        
         e.preventDefault();     
+        
         const user = { email ,password};
 
-        
-        
         fetch(apiLink+"/authenticate", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -30,9 +29,7 @@ const LoginForm = () => {
           if (data != null) {
               console.log("User is added.");
               // Redirect to the desired page
-              history("/userName", { state: { email: email } });
-              
-              
+              history("/userName" );
               
           } else {
               console.log("Error:", data.message);
@@ -70,8 +67,6 @@ const LoginForm = () => {
                     </div>
                     </div>
            
-
-        
         </>
      );
 }
