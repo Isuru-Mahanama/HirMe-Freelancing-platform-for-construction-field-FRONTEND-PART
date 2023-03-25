@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
  //import {Marginer} from "../Marginer";
 import { Link } from "react-router-dom";
+import { GetCurrentUser } from "../../components/components/components";
 
  const apiLink ="http://localhost:8080/api/v1/user"
 const LoginForm = () => {
@@ -41,22 +42,66 @@ const LoginForm = () => {
           body: JSON.stringify(user)
       })
       .then(res => {
+        console.log(res)
         if(res.status === 403){
              // display error message to user
            alert("Yor email address or password is wrong");
       } 
       if(res.status === 200){
-        history("/username" );
+        return res.json();
+        
       }else {
       // handle other errors
       console.error(res);
         }
-      })
+      }).then(data => {
+        // use token from response
+       
+        localStorage.setItem(
+            "user",
+            JSON.stringify({
+                token: data.token,
+                refreshToken:data.refreshToken,
+            })
+        )
+       getUserName();
+        // do something with token, such as save it in local storage or use it for authenticated requests
+    })
       .catch(error => {
         console.log(error)
       });
   }
-  
+
+  const getUserName=(e)=>{
+    console.log(GetCurrentUser().token);
+      fetch(apiLink+ "/getUserName", {
+        method: "GET",
+        headers: { "Content-Type": "application/json",
+                    "Authorization": `Bearer ${ GetCurrentUser().token}` },
+        
+    })
+    .then(res => {
+        if (res.ok) {
+            return res.text();
+            // if response is successful, convert to JSON
+        } else {
+            throw new Error("Network response was not ok.");
+        }
+    })
+    .then(data => {
+        console.log(data);
+       if(data!=null){
+        history('/loginas')
+       }
+       if(data==null){
+        history('/username')
+       }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });    
+}
+
     return ( 
         <>
         <div className="BoxContainer_2 InnerContainer">

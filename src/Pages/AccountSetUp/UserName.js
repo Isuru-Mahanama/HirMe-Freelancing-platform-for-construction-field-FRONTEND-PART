@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GetCurrentUser } from "../../components/components/components";
 const UserName= (props) => {
@@ -8,8 +8,26 @@ const UserName= (props) => {
     let history = useNavigate();
     const apiLink ="http://localhost:8080/api/v1/user";
 
+    const checkUserNameIsEmpty=()=>{
+        fetch(apiLink+ "/getUserName", {
+            method: "GET",
+            headers: { "Content-Type": "application/json",
+                        "Authorization": `Bearer ${ GetCurrentUser().token}` },
+        })
+        .then(res => {
+            console.log(res)
+        })
+        .then(data => {
+            console.log(data);
+          
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
 
-   
+    }
+
+  
   
     const handleSignUp=(e)=>{
         console.log(GetCurrentUser())
