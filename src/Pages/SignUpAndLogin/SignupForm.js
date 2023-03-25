@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { useEffect } from "react";
+import { GetCurrentUser } from "../../components/components/components";
 
 const apiLink ="http://localhost:8080/api/v1/user"
 
@@ -13,14 +14,33 @@ const SignupForm = (props) => {
     
     const [email,setEmail] = useState(" ");
     const[password,setPassword] = useState("");
+    const [token, setAccessToken] = useState("");
+    const [refreshToken, setRefreshToken] = useState("");
+
+    
+    
+    
+    useEffect(() => {
+       console.log(GetCurrentUser().token)
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (user && user.accessToken) {
+            setAccessToken(user.token);
+            setRefreshToken(user.refreshToken);
+        }
+    }, []);
     
     function handleLogout(){
         
         axios
         .post(apiLink+"/logout")
         .then((res) => {
-          console.log(res.data);
+          console.log("Logged out sucessfully");
           localStorage.removeItem("user");
+       
+          setEmail("");
+          setPassword("");
+          setAccessToken("");
+          setRefreshToken("");
           
         })
         .catch((err) => {
@@ -28,7 +48,7 @@ const SignupForm = (props) => {
         });
     }
     const handleSignUp=(e)=>{
-          e.preventDefault();     
+        
           const user = { email ,password};
 
           
@@ -39,15 +59,23 @@ const SignupForm = (props) => {
             body: JSON.stringify(user)
         })
         .then((res => res.json()))
+        
         .then(data => {
-            
-            localStorage.setItem("user",JSON.stringify(data))
-            console.log(data);
+            console.log(data.token)
+            setAccessToken(data.token);
+            setRefreshToken(data.refreshToken);
+            localStorage.setItem(
+                "user",
+                JSON.stringify({
+                    token: data.token,
+                    refreshToken:data.refreshToken,
+                })
+            )
             if (data != null) {
                 console.log("User is added.");
                 // Redirect to the desired page
-                history("/userName");
-                
+                history('/username')
+             //   console.log(GetCurrentUser().token)
                 
                 
             } else {
@@ -57,7 +85,43 @@ const SignupForm = (props) => {
         .catch(error => {
             console.error("Error:", error);
         });
+
+   
     }
+    const refreshTokens = () => {
+        axios.post(apiLink + "/refresh", { refreshToken: refreshToken })
+        .then((response) => {
+            console.log(response.data);
+            setAccessToken(response.data.token);
+            localStorage.setItem(
+                "user",
+                JSON.stringify({
+                    token: response.data.token,
+                    refreshToken: refreshToken,
+                })
+            );
+        })
+        .catch((error) => {
+            console.error("Error: ", error);
+        });
+    }
+      axios.interceptors.response.use(
+        (response) => {
+            return response;
+        },
+        (error) => {
+            const originalRequest = error.config;
+            if (
+                error.response.status === 401 &&
+                originalRequest.url === apiLink + "/api/v1/user"
+            ) {
+                console.log("Access token expired, refreshing token...");
+                refreshTokens();
+                return axios(originalRequest);
+            }
+            return Promise.reject(error);
+        }
+    );
     
     return ( 
         <div className="BoxContainer_2 ">

@@ -13,30 +13,47 @@ const LoginForm = () => {
 
     const handleSignUp=(e)=>{
        
-        e.preventDefault();     
-        
+    function validateEmail(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+        }
+
         const user = { email ,password};
+        // perform email and password validation here
+        if (email.trim() === "") {
+          alert("Please enter your email.");
+         return;
+        }
+        if (!validateEmail(email)) {
+            alert("Please enter a valid email address");
+            return;
+          }
+  
+       if (password.trim() === "") {
+           alert("Please enter your password.");
+        return;
+        }
+  
 
         fetch(apiLink+"/authenticate", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(user)
       })
-      .then(res => res.json())
-      .then(data => {
-        
-          console.log(data);
-          if (data != null) {
-              console.log("User is added.");
-              // Redirect to the desired page
-              history("/userName" );
-              
-          } else {
-              console.log("Error:", data.message);
-          }
+      .then(res => {
+        if(res.status === 403){
+             // display error message to user
+           alert("Yor email address or password is wrong");
+      } 
+      if(res.status === 200){
+        history("/username" );
+      }else {
+      // handle other errors
+      console.error(res);
+        }
       })
       .catch(error => {
-          console.error("Error:", error);
+        console.log(error)
       });
   }
   

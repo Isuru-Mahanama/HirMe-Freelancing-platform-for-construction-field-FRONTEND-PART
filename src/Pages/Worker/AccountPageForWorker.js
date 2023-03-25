@@ -130,9 +130,9 @@ class AccountPageWorker extends React.Component {
               {item.smallDescription}
               </CardText>
               
-              <CardLink href="/portfolio" className="cardlink">
+              <CardLink href={"/portfolio/"+item.fk_userID.clientID} className="cardlink">
            
-              FreelancerAccount_Link
+              ClientAccount_Link{item.fk_userID.clientID}
               <img className="img-profile" alt="Sample" src="https://picsum.photos/300/200" />
               </CardLink>
               

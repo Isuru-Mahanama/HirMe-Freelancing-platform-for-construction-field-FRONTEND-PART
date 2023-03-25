@@ -12,15 +12,16 @@ const UserName= (props) => {
    
   
     const handleSignUp=(e)=>{
+        console.log(GetCurrentUser())
           e.preventDefault();     
           
-          const user = { userNames: username };
+          const userName = { userNames: username };
           
           fetch(apiLink+ "/saveUserName", {
             method: "PUT",
             headers: { "Content-Type": "application/json",
                         "Authorization": `Bearer ${ GetCurrentUser().token}` },
-            body: JSON.stringify(user)
+            body: JSON.stringify(userName)
             
         })
         .then(res => res.json())
