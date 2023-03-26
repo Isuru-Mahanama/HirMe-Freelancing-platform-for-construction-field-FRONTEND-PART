@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
  //import {Marginer} from "../Marginer";
 import { Link } from "react-router-dom";
 import { GetCurrentUser } from "../../components/components/components";
+import { CheckTokenExpiration } from "../../components/components/components";
+
 
  const apiLink ="http://localhost:8080/api/v1/user"
 const LoginForm = () => {
@@ -35,7 +37,7 @@ const LoginForm = () => {
         return;
         }
   
-
+        
         fetch(apiLink+"/authenticate", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -73,7 +75,8 @@ const LoginForm = () => {
   }
 
   const getUserName=(e)=>{
-    console.log(GetCurrentUser().token);
+      //console.log(GetCurrentUser());
+      CheckTokenExpiration();
       fetch(apiLink+ "/getUserName", {
         method: "GET",
         headers: { "Content-Type": "application/json",

@@ -10,7 +10,7 @@ import '../Hire/AccountPageHire.css'
 import { Link } from "react-router-dom"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { GetCurrentUser } from "../../components/components/components";
+import { CheckTokenExpiration, GetCurrentUser } from "../../components/components/components";
 
 
 
@@ -59,17 +59,18 @@ class AccountPageWorker extends React.Component {
     
   }
    
-    token =GetCurrentUser();
+    
   
    fetchData =async() =>{
+    await CheckTokenExpiration();
     try{
       const response =await axios.get(apiLink+'/getAllProjectDetails',{
       headers: {
-        Authorization: "Bearer " + this.token.token
+        Authorization: "Bearer " + GetCurrentUser().token
       }});
      
       console.log(response.data);
-      if (response.data.FreelancerDetails && response.data.FreelancerDetails.freelancerEducationDetails && response.data.FreelancerDetails.cerificates){
+      if (response.data.FreelancerDetails ){
         this.setState(
           { projects:response.data.Projects,
             freelancer:response.data.FreelancerDetails.cerificates,

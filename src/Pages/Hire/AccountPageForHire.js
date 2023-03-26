@@ -11,7 +11,7 @@ import '../Hire/AccountPageHire.css'
 import { Link } from "react-router-dom"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { GetCurrentUser } from "../../components/components/components";
+import { CheckTokenExpiration, GetCurrentUser } from "../../components/components/components";
 
 
 
@@ -60,13 +60,14 @@ class FirstPageForHire extends React.Component {
     
   }
    
-    token =GetCurrentUser();
+   
   
    fetchData =async() =>{
+    await CheckTokenExpiration();
     try{
       const response =await axios.get(apiLink+'/getAllProjectDetailsANDClienDetails',{
       headers: {
-        Authorization: "Bearer " + this.token.token
+        Authorization: "Bearer " +  GetCurrentUser().token
       }});
      
       console.log(response.data);
@@ -75,7 +76,7 @@ class FirstPageForHire extends React.Component {
           { projects:response.data.Projects,
              language:response.data.Languages,
              userName:response.data.UserName,
-             City:response.data.City,
+            
              companyDetails:response.data.ClientDetails.companyDetails,
             faceBookLink:response.data.ClientDetails.faceBookLink,
             instagramLink:response.data.ClientDetails.instagramLink,
@@ -87,6 +88,7 @@ class FirstPageForHire extends React.Component {
      else{
       this.setState(
         { projects:response.data.Projects,
+          City:response.data.City,
           userName:response.data.UserName,
         }
         )

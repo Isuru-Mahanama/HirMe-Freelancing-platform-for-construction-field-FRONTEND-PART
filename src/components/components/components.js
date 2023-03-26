@@ -20,7 +20,7 @@ import {CardHeader} from 'reactstrap';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { ArchitectureSubCategory } from '../../Pages/PostProject/postAProject';
-
+import jwt_decode from "jwt-decode";
 
 const apiLink = "http://localhost:8080/api/v1/user";
 
@@ -29,6 +29,41 @@ export const Logout =()=>{
  //localStorage.clear("user");
   
 }
+
+export const CheckTokenExpiration = async () => {
+  console.log("inchecktokenexporation")
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user.refreshToken)
+  const decodedToken = jwt_decode(user.token);
+  const currentTime = Date.now() / 1000;
+  if (decodedToken.exp < currentTime) {
+    const response = await fetch(apiLink + "/refreshToken", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.refreshToken}`,
+      },
+    });
+    if (response.ok) {
+      console.log(response)
+      console.log(response.headers.get('Content-Type'))
+      const data = await response.json();
+      console.log(data)
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          token: data.token,
+          refreshToken: data.refreshToken,
+        })
+      );
+    } else {
+      console.log("Please Logged in again")
+      // Handle token refresh error
+    }
+  }
+};
+
 export const GetCurrentUser=()=>{
   //console.log(JSON.parse(localStorage.getItem("user")));
   return JSON.parse(localStorage.getItem("user"));
@@ -151,7 +186,7 @@ export  const PhoneNumber = ({value, onChange}) => {
         <>
 
         <div className ="inputBox">
-        <PhoneInput   value={value.PhoneNumber} onChange={onChange} placeholder ="PHONE NUMBER"/>
+        <PhoneInput   value={value} onChange={onChange} placeholder ="PHONE NUMBER"/>
        
         </div>
         </>

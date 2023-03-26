@@ -13,8 +13,10 @@ import { VscLocation } from "react-icons/vsc";
 import { FcBusinesswoman } from "react-icons/fc";
 import {  FcBusinessman } from "react-icons/fc"
 import 'react-phone-number-input/style.css';
-import { GetCurrentUser, PhoneNumber,Timezone} from "../../components/components/components";
+import { CheckTokenExpiration, GetCurrentUser, PhoneNumber,Timezone} from "../../components/components/components";
 import Selected from "../../components/Languages";
+import axios from "axios";
+import { useEffect } from "react";
 
 const apiLink ="http://localhost:8080/api/v1/user";
 function ForgotNavigate(props){
@@ -24,12 +26,11 @@ function ForgotNavigate(props){
     console.log(worker);
     const setEditprofile = uselocation.state;
 
- 
+    
 
-    const accountSetUpClient=(e)=>{
-          e.preventDefault();     
-         
-         
+
+    const accountSetUpClient = async (e) => {
+      
           const address_languages={
             country:props.value.country,
             streetAddress:props.value.streetaddress,
@@ -52,7 +53,7 @@ function ForgotNavigate(props){
             };
             
           console.log("TimeZone"+ props.value.timeZone)
-          
+          await CheckTokenExpiration();
           fetch(apiLink+"/setUpUserAccount", {
             method: "PUT",
             headers: { 
@@ -69,7 +70,7 @@ function ForgotNavigate(props){
                 
                 console.log("First Name is added.");
                 // Redirect to the desired page
-                
+            
             return fetch(apiLink +"/saveAddress", {
                 method: "POST",
                 headers: { "Content-Type": "application/json",
@@ -141,16 +142,58 @@ class ApplicationHire extends React.Component {
             postalCode:"",
             company:"",
             location:"",
-            phoneNumber:"",
+            phoneNumber:null,
             timeZoneValue:"",
-            language:" ",
-            languageLevel:"",
+            language:{},
+            languageLevel:{},
             selectedTimezone :{},
             timeZoneLabel:"",
-           
+            
         }
        
     }
+
+    componentDidMount() {
+        this.fetchData();
+      }
+
+     fetchData =async() =>{
+        console.log("Hi its fetching data from user")
+        await CheckTokenExpiration();
+        try{
+          const response =await axios.get(apiLink+'/getalluserandfreelancerDetais',{
+          headers: {
+            Authorization: "Bearer " +  GetCurrentUser().token
+          }});
+         
+          console.log(response.data);
+          if (response.data.UserName){
+            this.setState(
+              { 
+                firstName:response.data.FirstName,
+                lastName:response.data.LastName,
+                displayEmail:response.data.DisplayEmail,
+                country:response.data.Address.country,
+                streetaddress:response.data.Address.streetAddress,
+                city:response.data.Address.city,
+                province:response.data.Address.province,
+                postalCode:response.data.PostalCode,
+                company:response.data.Company,
+                location:response.data.Location,
+                phoneNumber:response.data.PhoneNumber,
+                selectedTimezone:response.data.TimeZone,
+                language:response.data.Languages.language,
+                languageLevel:response.data.Languages.languageLevel
+                
+              }
+              )
+            
+          }
+
+        }catch(error){
+          console.log(error);
+        }
+      } 
     changeFirstName=(e)=>{
         this.setState(
             {firstName:e.target.value}
@@ -303,7 +346,7 @@ class ApplicationHire extends React.Component {
                 </div>
                 <div className="inputBoxForm">
                 <div >
-                <PhoneNumber value={this.state} onChange={this.handlePhoneNumber}></PhoneNumber>
+                <PhoneNumber value={  this.state.phoneNumber } onChange={this.handlePhoneNumber}></PhoneNumber>
                  </div>
 
                  <div  >

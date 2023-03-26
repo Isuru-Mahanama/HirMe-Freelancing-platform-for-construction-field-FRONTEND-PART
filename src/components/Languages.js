@@ -5,18 +5,18 @@ import axios from 'axios';
 import './BelowHome.css'
 
 const apiLink = "http://localhost:8080/api/v1/user";
-function Selected({onChange , onClick}) {
+function Selected({value,onChange , onClick}) {
 
  
   const [data,setData] = useState([]);
   const [datalanguageLevel,datasetLanguageLevel] = useState([]);
   
-  const [defaultLanguage, setDefaultLanguage] = useState('');
+  //const [defaultLanguage, setDefaultLanguage] = useState('');
    const fetchData =async() =>{
     try{
       const response =await axios.get(apiLink+'/getLanguages');
       setData(response.data);
-      setDefaultLanguage( response.data[0].language);
+      //setDefaultLanguage( response.data[0].language);
       console.log("hi"+response.data[0].language)
     }catch(error){
       console.log(error);
@@ -55,7 +55,7 @@ function Selected({onChange , onClick}) {
     </div>
       <select
         name="language"
-        defaultValue={defaultLanguage}
+        value={value.language}
         onChange={onChange}>
         {data.map(item=>(
           <option key={item.languageID} value={item.language}>
@@ -70,6 +70,7 @@ function Selected({onChange , onClick}) {
       </div>
       <select
         name="languageLevel"
+        value={value.languageLevel}
         onClick={onClick}>
         {datalanguageLevel.map(item=>(
           <option key={item.languageLevelID} value={item.languageLevel}>

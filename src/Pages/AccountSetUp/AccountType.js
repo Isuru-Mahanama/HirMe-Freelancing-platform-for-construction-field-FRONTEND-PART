@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import './image.css';
-import { GetCurrentUser } from "../../components/components/components";
+import { CheckTokenExpiration, GetCurrentUser } from "../../components/components/components";
 
 const apiLink ="http://localhost:8080/api/v1/user";
 function Loginas(props){
@@ -9,8 +9,8 @@ function Loginas(props){
     
    // const token = GetCurrentUser();
 
-    const getStarted=(e)=>{
-            e.preventDefault();
+   const getStarted = async (e) => {
+       await CheckTokenExpiration();
              const user={};
             fetch(apiLink +"/setUpClient",{
               method :"POST",
@@ -32,8 +32,8 @@ function Loginas(props){
             console.error("Error:", error);
         });
     }
-    const getWork=(e)=>{
-      e.preventDefault();
+    const getWork = async (e) => {
+      await CheckTokenExpiration();
       const user={};
      fetch(apiLink +"/setUpFreelancer",{
        method :"POST",
