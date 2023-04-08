@@ -42,7 +42,7 @@
 
 .TopContainer{
   width: 100%;
-  height: 250px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -99,7 +99,7 @@
 }
 
 .texts{
-  font-family: Georgia, 'Times New Roman', Times, serif;
+
   font-weight: 700;
 }
 
@@ -229,10 +229,11 @@ Input:not(:last-of-type){
     border-radius: 15px;
     box-shadow: 0 9px #999;
     margin: 0.2em;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
     
   }
   
-  .button:hover {background-color: #898e3e}
+  .button:hover {background-color: #939662}
   
   .button:active {
     background-color: #8e7b3e;
@@ -263,25 +264,28 @@ Input:not(:last-of-type){
     max-height: 100%;
     object-fit: cover;
     transition: all 0.2s linear;
+   
   }
   
   input[type=email], select {
-    width: 140%;
-    padding: 10px 20px;
+    width: 100%;
+    padding: 5px 20px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid rgb(12, 12, 12);
     border-radius: 4px;
     box-sizing: border-box;
+    margin-left: 3cm;
   }
   input[type=password], select {
-    width: 140%;
-    padding: 10px 20px;
+    width: 100%;
+    padding: 5px 20px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid rgb(27, 25, 25);
     border-radius: 4px;
     box-sizing: border-box;
+    margin-left: 3cm;
    
   }
 
@@ -293,7 +297,7 @@ Input:not(:last-of-type){
   .input {
     display: inline-block;
     padding: 5px 25px;
-    font-size: 20px;
+    font-size: 10px;
     cursor: pointer;
    text-decoration: none;
     outline: none;
@@ -303,7 +307,7 @@ Input:not(:last-of-type){
     border-radius: 15px;
     box-shadow: 0 9px #999;
     margin: 0.2em;
-    transition: 1s;
+    transition: 8s;
     padding-bottom: 10px;
   }
   

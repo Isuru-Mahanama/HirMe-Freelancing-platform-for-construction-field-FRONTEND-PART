@@ -3,31 +3,42 @@ import Circle from "./circle";
 import './progressbar.css'
 
 
- function ProgressBar() {
+ function ProgressBar({circle,active}) {
 
-    const [active,setActive] = useState(0)
     const[width,setWidth] = useState(0)
-    const[circle] = useState(4);
-    
-   /* const links = [
-        '/',
-        '/',
-        '/page3',
-        '/page4',
-      ];*/
-      
-   // let val = 0;
+  
     useEffect(()=>{
     setWidth(100/(circle-1)*active)
     },[circle,active]);
     const arr =[];
-    for (let i = 0; i < circle; i++) {
+    for (let i = 0; i < circle-1; i++) {
       arr.push( <Circle className={i<=active?"circle active":"circle"} key={i} val= {i}>
         {i} </Circle>)  ;
         
     }
 
     
+ 
+            
+                 
+    return (
+        <div className="containerprgress">
+            <div className="content">
+                <div className="progress">
+                <div className="progressbar " style={{width:width+"%"}}></div>
+                {arr}
+                </div>
+               
+            </div>
+
+        </div>
+    );
+}export default ProgressBar;
+
+export const ButtonComponent = () => {
+    const [active,setActive] = useState(0)
+   
+    const[circle] = useState(3);
     const handleClick1 = () => {
     
         if(active<=0){
@@ -35,7 +46,7 @@ import './progressbar.css'
              
         }else{
             setActive(active-1)}
-            }
+      }
 
     
     
@@ -47,22 +58,16 @@ import './progressbar.css'
         setActive(active+1)}
 
        }
-            
-                 
-    return (
-        <div className="containerprgress">
-            <div className="content">
-                <div className="progress">
-                <div className="progressbar " style={{width:width+"%"}}></div>
-                {arr}
-                </div>
-                <div className="buttons">
-                <button className="button btns" disabled ={active>0?false:true} onClick={handleClick1}>Prev</button>
-                <button className="button btns " disabled ={active>=circle-1?true:false}onClick={handleCircle}>Next</button>
-                </div>
-            </div>
+    
+    return ( 
+        
 
+        <div className="buttons">
+        <button className="button btns" disabled ={active>0?false:true} onClick={handleClick1}>Prev</button>
+        <button className="button btns " disabled ={active>=circle-1?true:false}onClick={handleCircle}>Next</button>
         </div>
-    );
-}export default ProgressBar;
+     );
+}
+ 
+
 

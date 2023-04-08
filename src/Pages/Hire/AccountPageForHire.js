@@ -16,10 +16,10 @@ import { CheckTokenExpiration, GetCurrentUser } from "../../components/component
 
 
 const apiLink = "http://localhost:8080/api/v1/user";
-function NavigationWorker(props){
+function NavigationWorker({value}){
 
   const worker = false;
-  
+  console.log(value.City)
   const history = useNavigate();
   const handleSignUp=(e)=>{
     history("/applicationhire",{ state: { worker:worker}});
@@ -27,11 +27,11 @@ function NavigationWorker(props){
 
   return(<>
          
-         <button className="b1"  onClick={(e)=>handleSignUp(e)}>Set up your account!!!!!!</button>
+         {value.City === "-" && <button className="b1"  onClick={(e)=>handleSignUp(e)}>Set up your account!!!!!!</button>}
         
-          <Link  to="/setupworker">
-          <button className="b1" >Edit your profile!!!</button>
-          </Link>
+         
+          {value.City!=="-" && <button className="b1" onClick={(e)=>handleSignUp(e)} >Edit your profile!!!</button>}
+        
      
           <Link  to="/portfolio">
           <button className="b1" >Portfolio!!!</button>
@@ -76,7 +76,7 @@ class FirstPageForHire extends React.Component {
           { projects:response.data.Projects,
              language:response.data.Languages,
              userName:response.data.UserName,
-            
+             City:response.data.City,
              companyDetails:response.data.ClientDetails.companyDetails,
             faceBookLink:response.data.ClientDetails.faceBookLink,
             instagramLink:response.data.ClientDetails.instagramLink,
@@ -104,17 +104,17 @@ class FirstPageForHire extends React.Component {
   ) { 
     
     return (
-      <div className="background" >
+      <div className="background " >
          <div className="devideLeft">
        <SlidebarClient/>
         </div>
-        <div className="devideRight">
-          <div className="mostright">
-            <NavigationWorker></NavigationWorker>
+        <div className="devideRight ">
+          <div className="mostright ">
+            <NavigationWorker value={this.state}></NavigationWorker>
           </div>
           </div>
           <SearchBar options={this.state.options}></SearchBar>
-        <div className="middleright">
+        <div className="middleright ">
         <div className="col">
           
         { this.state.projects!=null && this.state.projects.slice(0, Math.ceil(this.state.projects.length / 2)).map(item => (
@@ -171,7 +171,7 @@ class FirstPageForHire extends React.Component {
               <img className="img-profile" alt="Sample" src="https://picsum.photos/300/200" />
               </CardLink>
               
-              <h1 className="price">{item.currencyType} {item.prizemaximum} - {item.prizeminimum}</h1>
+              <h1 className="price">{item.currencyType}  {item.prizeminimum} - {item.prizemaximum} </h1>
               </CardBody>
           </Card>
 
@@ -186,7 +186,7 @@ class FirstPageForHire extends React.Component {
           <div className="text-profile">
           <hr className="line"></hr>
          <div className="font">From ----</div>
-         {this.state.City!= null && this.state.City}
+         {this.state.City != null && this.state.City}
          <hr className="line"></hr>
          <div className="font">About  -</div>
         {this.state.companyDetails}

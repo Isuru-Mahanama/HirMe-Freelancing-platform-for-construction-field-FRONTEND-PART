@@ -4,9 +4,9 @@
     box-sizing: border-box;
     justify-content: center;
     align-items: center;
-    height:100vh ;
-   
+    height: 30vh;
     color: rgb(255, 255, 255);
+    display: flex;
 }
 
 .content{

@@ -21,7 +21,7 @@
  }
 
  .text2{  color: #f7fff9;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+ 
   font-size: 25px;
   font-weight: normal;
   outline: #f7fff9;
@@ -34,8 +34,7 @@
  }
   
  .text3{  color: #f7fff9;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: 18px;
+  
   font-weight: normal;
   outline: #f7fff9;
   box-sizing: 3cm;
@@ -47,7 +46,7 @@
  }
 
  .text5{  color: #000501;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  
   font-size: 18px;
   font-weight: normal;
   outline: #f7fff9;
@@ -90,7 +89,7 @@
   color: #000000;
   pointer-events: none;
   text-transform: uppercase;
-   font-family:Georgia, 'Times New Roman', Times, serif;
+  
    transition:0.5s;
    padding-left: 25px;
    font-weight: 700;
@@ -113,7 +112,7 @@
 .size input:focus
 {
     border: 1px solid rgba(247, 239, 242, 0.911);
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    
 }
 
 
@@ -147,7 +146,7 @@
   color: #000000;
   pointer-events: none;
   text-transform: uppercase;
-   font-family:Georgia, 'Times New Roman', Times, serif;
+  
    transition:0.5s;
    padding-left: 25px;
    font-weight: 700;
@@ -170,11 +169,11 @@
 .size2 input:focus
 {
     border: 1px solid rgba(247, 239, 242, 0.911);
-    font-family: Georgia, 'Times New Roman', Times, serif;
+   
 }
 
 .text4{
-  font-family: Georgia, 'Times New Roman', Times, serif;
+ 
   font-size: 30px;
   color: white;
   font-weight: 800;
@@ -298,7 +297,6 @@ tr:nth-child(even) {
 }
 .text-price{
   color: #492706;
-  font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 18px;
   font-weight: normal;
   outline: #f7fff9;

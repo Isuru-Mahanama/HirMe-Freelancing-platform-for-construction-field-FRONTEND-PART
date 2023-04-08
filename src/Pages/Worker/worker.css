@@ -1,6 +1,7 @@
 .background{
     background-color:#c98069;
     padding-bottom:1.5cm ;
+    font-family:Georgia, 'Times New Roman', Times, serif
 }
 
 .inputForm{
@@ -58,7 +59,7 @@ hr {
     padding-top: 40px;
 }        
 .add-item{
-    font-family: Georgia, 'Times New Roman', Times, serif;
+   
     color:#391306;
     font-weight: 700;
    
@@ -75,7 +76,7 @@ hr {
 }
 .text{
     color: #f7fff9;
-    font-family:Georgia, 'Times New Roman', Times, serif;
+   
     font-size: 60px;
     font-weight: 800;
     
@@ -88,7 +89,7 @@ hr {
 
 .textsubtitle{
     color: #290e0e;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    
     font-size: 15px;
     font-weight: 700;
     margin-top: 1cm;
@@ -100,7 +101,7 @@ hr {
 
 .textsubtitle2{
     color: #ffffff;
-     font-family: Georgia, 'Times New Roman', Times, serif;
+   
      font-size: 24px; font-weight: normal; 
      line-height: 32px; 
      margin: 0 0 18px;
@@ -172,7 +173,7 @@ hr {
     color: #000000;
     pointer-events: none;
     text-transform: uppercase;
-     font-family:Georgia, 'Times New Roman', Times, serif;
+  
      transition:0.5s;
      padding-left: 25px;
      font-weight: 800;
@@ -196,7 +197,7 @@ hr {
     display: flex;
 }
 .multiselect {
-    font-family:Georgia, 'Times New Roman', Times, serif;
+  
     color:#391306;
     width:900px;
     padding-left:75px;
@@ -209,7 +210,7 @@ hr {
     height: 55px;
 }
 .date{
-    font-family:Georgia, 'Times New Roman', Times, serif;
+   
   
     font-size:1em;
     color: #000000;
@@ -239,7 +240,7 @@ hr {
 .inputBox input:focus
 {
     border: 2px solid rgba(0, 0, 0, 0.911);
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    
 }
 
 
@@ -252,7 +253,7 @@ input::placeholder{
     color: #030303;
     pointer-events: none;
     text-transform: uppercase;
-     font-family:Georgia, 'Times New Roman', Times, serif;
+     
      font-weight: 700;
     
      
@@ -266,7 +267,7 @@ input::placeholder{
     color: #010301;
     pointer-events: none;
     text-transform: uppercase;
-     font-family:Georgia, 'Times New Roman', Times, serif;
+     
   
  }
 
@@ -274,14 +275,14 @@ input::placeholder{
 .inputBox select:focus
 {
     border: 2px solid #d4c7c2;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+   
     background-color:#FFFEE6;
     transform:translateX(15px) translateY(-29px);
 }
 
   .select-wrapper {
     background-color: #e7f2f4;
-    font-family:Georgia, 'Times New Roman', Times, serif;
+  
     color: #000000; 
     
   
@@ -380,7 +381,6 @@ input::placeholder{
 .profile-card{
      width: 22rem;
    border: 2px solid #ffffff;
-    font-family:Georgia, 'Times New Roman', Times, serif;
    
    background-color: #f3ebe6;
    height: 440px;
@@ -401,15 +401,15 @@ input::placeholder{
 .text-profile{
     margin-left: 1cm;
     color: #000000;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 15px;
+ 
+    font-size: 13px;
     font-weight: 200;
 }
 
 .text-profile1{
     text-align: center;
     color: #000000;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+   
     font-size: 17px;
     font-weight: 200;
     margin-top: 0.4cm;
@@ -421,7 +421,7 @@ input::placeholder{
     width: 80%;
 }
 .font{
-    font-family:Arial, Helvetica, sans-serif;
+   
     background-color: #ebad99;
     width: 80%;
     color: black;
@@ -432,7 +432,7 @@ input::placeholder{
 .cards-pack{
     width: 22rem;
     border: 2px solid #ffffff;
-     font-family:'Tajawal', sans-serif;
+    
      border-radius: 60px;
      background-color: #e9a18b;
     height: auto;

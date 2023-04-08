@@ -22,14 +22,14 @@ import ApplicationWork2 from './Pages/Worker/ApplicationWork2';
 import AccountPageWorker from './Pages/Worker/AccountPageForWorker';
 import TakeMoney from './Pages/PaymentMethod/Payments';
 import ApplyProject from './Pages/PostProject/ApplyProject';
-import PostedProjects from './Pages/PostProject/PostedProjects';
-import ViewAllApplications from './Pages/Application/ViewApplications';
-import AppliedProjects from './Pages/Worker/AppliedProjects';
+import PostedProjects from './Pages/PostProject/MyProjects';
+
+import AppliedProjects from './Pages/PostProject/AppliedProjects';
 import Chat from './components/CattingSection/CattingSction';
 import PostProjectIndex from './Pages/SignUpAndLogin/PostProjectIndex';
 import CreatOnlyEmailForPostProjection from './Pages/SignUpAndLogin/CreatOnlyEmailForPostProjection';
 import Admin from './Admin/admin';
-
+import ViewAllApplications from './Pages/Application/ViewApplications.js';
 function App() {
 
     const[isUserLoggedIn,setUserLoggedIn] = useState(false);

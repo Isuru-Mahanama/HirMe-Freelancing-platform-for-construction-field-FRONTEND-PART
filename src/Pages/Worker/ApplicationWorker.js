@@ -1,5 +1,5 @@
 import React from "react";
-import './index.css'
+import './worker.css'
 import { VscAccount } from "react-icons/vsc";
 import { VscMail } from "react-icons/vsc";
 import {VscHome } from "react-icons/vsc";

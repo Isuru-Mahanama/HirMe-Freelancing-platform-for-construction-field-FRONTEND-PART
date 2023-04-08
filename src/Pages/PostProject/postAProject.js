@@ -1,5 +1,5 @@
 import React from "react";
-import { CategoryPicker, DataPicker, GetCurrentUser, PrizeSelector } from "../../components/components/components";
+import { CategoryPicker, CheckTokenExpiration, DataPicker, GetCurrentUser, PrizeSelector } from "../../components/components/components";
 import { VscAccount } from "react-icons/vsc";
 import { VscMail } from "react-icons/vsc";
 import './Post_project.css'
@@ -64,8 +64,8 @@ function FetcheingDatata(props){
     }
 
 
-   
-const fileUploadHandler = () => {
+  const fileUploadHandler = async (e) => {
+      
   const formData = new FormData();
   formData.append("file", props.value.files);
   formData.append("image",props.value.image);
@@ -73,6 +73,7 @@ const fileUploadHandler = () => {
  // console.log("this is object"+this.project.endDate)
   formData.append("projectDTO", JSON.stringify(project));
   console.log(props.value.image)
+  await CheckTokenExpiration();
   axios
     .post(apiLink+"/postProjectFile", formData, {
       headers: {

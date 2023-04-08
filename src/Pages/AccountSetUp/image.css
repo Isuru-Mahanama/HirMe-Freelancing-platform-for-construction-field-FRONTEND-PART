@@ -9,4 +9,11 @@
     align-items: center;
     justify-content: center;
 }
+.image-inline{
+    display:flex;
+    flex-direction: row ;
+    align-items: center;
+    justify-content: center;
+   
+}
 

@@ -32,10 +32,9 @@ const WelcomeForeWorker = () => {
         </div>
        
         </div>
-        <div style={{display : "flex" , flexDirection :'row' , alignItems: 'center', justifyContent: 'center'}}>
+        <div className="image-inline">
         <img className=" rounded-full image " src="/images/1_c.jpeg" alt="" width="220" height="550"/>
         <img className=" rounded-full image" src="/images/2_c.jpeg" alt="" width="220" height="550"/>
-        <img className=" rounded-full image" src="/images/3_c.jpeg" alt="" width="220" height="500"/>
         <img className=" rounded-full image" src="/images/4_c.jpeg" alt="" width="220" height="500"/>
         <img className=" rounded-full image" src="/images/5_c.jpeg" alt="" width="220" height="500"/>
         <img className=" rounded-full image" src="/images/6_c.jpeg" alt="" width="220" height="500"/>

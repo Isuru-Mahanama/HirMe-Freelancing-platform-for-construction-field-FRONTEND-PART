@@ -1,27 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProgressBar from "../../components/progressbar/progressbar";
 import { VscAccount } from "react-icons/vsc";
 import { useNavigate } from "react-router-dom";
 import 'react-phone-number-input/style.css';
 import { FcReadingEbook } from "react-icons/fc";
-import { GetCurrentUser } from "../../components/components/components";
+import { CheckTokenExpiration, GetCurrentUser } from "../../components/components/components";
 
 const apiLink ="http://localhost:8080/api/v1/user";
-function NavigationHire(props){
+function NavigationHire({ value, handleCircle, handleClick1,setClientDetals }){
     const navigation = useNavigate();
-    
+    const worker = false;
     const [halfsetup,setup] = useState(true);
+    const history = useNavigate();
 
-     const getStarted=(e)=>{
-            e.preventDefault();
-      
+    const getStarted =async() =>{
+     
             const clientDetails={
-                companyDetails:props.value.companyDetails,
-                websiteLink : props.value.websiteLink,
-                faceBookLink :props.value.faceBookLink,
-                instagramLink :props.value.instagramLink
+                companyDetails:value.companyDetails,
+                websiteLink : value.websiteLink,
+                faceBookLink :value.faceBookLink,
+                instagramLink :value.instagramLink
                };
-
+        await CheckTokenExpiration();
         fetch(apiLink +"/setUpClientAccount",{
                 method :"PUT",
                 headers: { "Content-Type": "application/json",
@@ -42,6 +42,7 @@ function NavigationHire(props){
                 body:JSON.stringify()
 
              }).then(Response => Response.json)
+             
                .then(data => setup(data))
                .catch(error => console.log(error));
               
@@ -56,9 +57,41 @@ function NavigationHire(props){
         });
     }
 
+    const GoingToNextPage = (e) => {
+        getStarted();
+     }
+     const gotoPreviousPage=()=>{
+        handleClick1();
+        history("/applicationhire",{ state: { worker:worker}});
+        
+     }
+
+     useEffect(()=>{
+        fetch(apiLink+"/retrieveClientDetails",{
+            method :"GET",
+            headers: { "Content-Type": "application/json" ,
+                      "Authorization": `Bearer ${ GetCurrentUser().token}`},
+            body:JSON.stringify()
+
+         }).then(res => res.json())
+         .then(data => {
+          //  backend stored client data diplaying
+          setClientDetals(data.ClientDetails)
+            
+           
+            console.log(data.ClientDetails.faceBookLink)
+           //  this.setState(value.companyDetails=data.companyDetails);
+            
+         })
+          
+     },[])
+      
     return(<>
     
-    <button className="button" onClick={(e)=>getStarted(e)} >Next</button>
+    
+   
+    <button className="button btns" disabled ={value.active>0?false:true} onClick={gotoPreviousPage}>Prev</button>
+    <button className="button btns " disabled ={value.active>=value.circle-1?true:false}onClick={GoingToNextPage}>Submit</button>
     </>
     )
 }
@@ -68,9 +101,40 @@ class ApplicationHire2 extends React.Component {
         this.state ={
              companyDetails:"",
              websiteLink:"",
-             faceBookLink:"",
-             instagramLink:""
+             faceBookLink:"dd",
+             instagramLink:"",
+             circle: 3,
+             active:1,
+             
         }
+    }
+
+    //backend stored client data displaying
+    setClientDetals =(props)=>{
+        console.log(props)
+        this.setState({companyDetails:props.companyDetails});
+        this.setState({websiteLink:props.websiteLink});
+        this.setState({faceBookLink:props.faceBookLink});
+        this.setState({instagramLink:props.instagramLink});
+    }
+
+    handleClick1 = () => {
+    
+        if(this.state.active<=0){
+            this.setState({active:0})
+             
+        }else{
+            this.setState({active:this.state.active-1})
+        }  
+      }
+
+      handleCircle = () => {
+    
+        if( this.state.active>=this.state.circle){
+            this.setState({active:this.state.circle})
+       }else{
+        this.setState({active:this.state.active+1})
+       }
     }
     
     setCompanyDetails = (e) => {
@@ -91,12 +155,13 @@ class ApplicationHire2 extends React.Component {
      }
      
     
+    
     render() { 
         return (
             <div className="background">
           
-            <div className="pageUp">
-            <ProgressBar></ProgressBar>
+            <div className="pageUp" >
+            <ProgressBar className="middle-progressbar" active={this.state.active} circle={this.state.circle}></ProgressBar>
             </div>
 
             <div className="pageDown">
@@ -129,9 +194,9 @@ class ApplicationHire2 extends React.Component {
        
         
         </div>
-        <div className="buttons">
-        <NavigationHire value={this.state}></NavigationHire>
-        </div>
+        
+        <NavigationHire value={this.state} handleCircle={this.handleCircle} handleClick1={this.handleClick1} setClientDetals={this.setClientDetals}></NavigationHire>
+        
     </div>
     </div>
            

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import './Post_project.css'
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { CheckTokenExpiration } from "../../components/components/components";
 
 
 const apiLink ="http://localhost:8080/api/v1/user";
@@ -35,10 +36,7 @@ const ViewProject=(prop)=>  {
         setPrizeMaximum(props.prizemaximum);
         setPrizeMinimum(props.prizeminimum);
         setImagePath(props.fileUplod.imagePath);
-       // setFileName(prop.fileUplod.fileName);
-      //  setFilePath(props.fileUplod.filePath);
-       // console.log("hi")
-       // console.log(props.fileUplod)
+     
 
     }
 
@@ -53,6 +51,7 @@ const ViewProject=(prop)=>  {
     history("/applyproject",{ state: { pID: params.projectId}});
   }
     const downloadFile=async()=>{
+            await CheckTokenExpiration()
         try{
             console.log(apiLink+'/downloadFile')
             const response =await axios.get(apiLink+'/downloadFile/'+params.projectId,{
@@ -62,8 +61,7 @@ const ViewProject=(prop)=>  {
             const fileUrl = URL.createObjectURL(response.data);
             const link = document.createElement('a');
             link.href = fileUrl;
-          //  console.log("FileName")
-          //  console.log(fileName)
+         
             link.setAttribute('download', fileNames);
             document.body.appendChild(link);
             link.click();
@@ -74,6 +72,7 @@ const ViewProject=(prop)=>  {
           }
     }
     const fetchData =async() =>{
+        await CheckTokenExpiration()
         try{
           const response =await axios.get(apiLink+'/viewallProjectDetails/'+params.projectId);
           setData(response.data.project)

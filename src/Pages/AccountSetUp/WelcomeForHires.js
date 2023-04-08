@@ -38,7 +38,7 @@ const Welcome = (props) => {
         <img className=" rounded-full image" src="/images/3_c.jpeg" alt="" width="220" height="500"/>
         <img className=" rounded-full image" src="/images/4_c.jpeg" alt="" width="220" height="500"/>
         <img className=" rounded-full image" src="/images/5_c.jpeg" alt="" width="220" height="500"/>
-        <img className=" rounded-full image" src="/images/6_c.jpeg" alt="" width="220" height="500"/>
+        
         </div>
         <div className="text-white text-center text-4xl">
         <button className="button text-white text-center text-4xl"  onClick={()=>getStarted()} >Get Started</button>

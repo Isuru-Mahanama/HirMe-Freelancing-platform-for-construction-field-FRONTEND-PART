@@ -16,43 +16,40 @@ import 'react-phone-number-input/style.css';
 import { CheckTokenExpiration, GetCurrentUser, PhoneNumber,Timezone} from "../../components/components/components";
 import Selected from "../../components/Languages";
 import axios from "axios";
-import { useEffect } from "react";
+
 
 const apiLink ="http://localhost:8080/api/v1/user";
-function ForgotNavigate(props){
+function ForgotNavigate({ value, handleCircle, handleClick1 }){
     const navigation = useNavigate();
     const uselocation = useLocation();
     const worker = uselocation.state.worker;
-    console.log(worker);
-    const setEditprofile = uselocation.state;
-
-    
-
+  //  console.log(worker);
+   
 
     const accountSetUpClient = async (e) => {
       
           const address_languages={
-            country:props.value.country,
-            streetAddress:props.value.streetaddress,
-            city :props.value.city,
-            province : props.value.province,
-            language:props.value.language,
-            languageLevel:props.value.languageLevel
+            country:value.country,
+            streetAddress:value.streetaddress,
+            city :value.city,
+            province : value.province,
+            language:value.language,
+            languageLevel:value.languageLevel
          }
 
           const user = { 
-             firstName: props.value.firstName,
-             lastName :props.value.lastName,
-             displayEmail:props.value.displayEmail,
-             postalCode:props.value.postalCode,
-             company:props.value.company,
-             location:props.value.location,
+             firstName: value.firstName,
+             lastName :value.lastName,
+             displayEmail:value.displayEmail,
+             postalCode:value.postalCode,
+             company:value.company,
+             location:value.location,
             // timeZone:props.value.selectedTimezone.value,
-             timeZone:props.value.timeZoneValue + props.value.timeZoneLabel,
-             phoneNumber:props.value.phoneNumber
+             timeZone:value.timeZoneValue + value.timeZoneLabel,
+             phoneNumber:value.phoneNumber
             };
             
-          console.log("TimeZone"+ props.value.timeZone)
+          console.log("TimeZone"+ value.timeZone)
           await CheckTokenExpiration();
           fetch(apiLink+"/setUpUserAccount", {
             method: "PUT",
@@ -119,11 +116,23 @@ function ForgotNavigate(props){
         });
        
     }
+
+     const GoingToNextPage = () => {
+       handleClick1();
+       accountSetUpClient();
+    }
+     
+    
     return(<>
     
-    { worker && <button className = "button" onClick={(e)=>accountSetUpClient(e)} >Next</button> }
-    {setEditprofile && <button className = "button" onClick={(e)=>accountSetUpClient(e)} >Next</button>}
-    {!setEditprofile && <button className = "button" onClick={(e)=>accountSetUpClient(e)} >Edit Your Company Details</button>}
+   
+    
+
+ 
+        <button className="button btns" disabled ={value.active>0?false:true} onClick={handleClick1}>Prev</button>
+        <button className="button btns " disabled ={value.active>=value.circle-1?true:false}onClick={GoingToNextPage}>Next</button>
+ 
+
     </>
     )
 }
@@ -143,16 +152,36 @@ class ApplicationHire extends React.Component {
             company:"",
             location:"",
             phoneNumber:null,
-            timeZoneValue:"",
+            timeZoneValue:{},
             language:{},
             languageLevel:{},
             selectedTimezone :{},
             timeZoneLabel:"",
+            circle: 3,
+            active:0
             
         }
        
     }
 
+     handleClick1 = () => {
+    
+        if(this.state.active<=0){
+            this.setState({active:0})
+             
+        }else{
+            this.setState({active:this.state.active-1})
+        }  
+      }
+
+      handleCircle = () => {
+    
+        if( this.state.active>=this.state.circle){
+            this.setState({active:this.state.circle})
+       }else{
+        this.setState({active:this.state.active+1})
+       }
+    }
     componentDidMount() {
         this.fetchData();
       }
@@ -181,7 +210,7 @@ class ApplicationHire extends React.Component {
                 company:response.data.Company,
                 location:response.data.Location,
                 phoneNumber:response.data.PhoneNumber,
-                selectedTimezone:response.data.TimeZone,
+                timeZoneValue:response.data.TimeZone,
                 language:response.data.Languages.language,
                 languageLevel:response.data.Languages.languageLevel
                 
@@ -272,7 +301,8 @@ class ApplicationHire extends React.Component {
        
         console.log(e.label);
         this.setState(
-            {timeZoneValue: e.value,
+            {
+                timeZoneValue: e.value,
                 timeZoneLabel: e.label}
             //{time:e.label}
             )}
@@ -282,9 +312,10 @@ class ApplicationHire extends React.Component {
             <div className="background">
                
            <div className="pageUp">
-           <ProgressBar></ProgressBar>
+            
+           <ProgressBar active={this.state.active} circle={this.state.circle}></ProgressBar>
+            
             </div>
-
             <div className="pageDown">
                 <div className="text" >  <div className="img-middle"> < FcBusinessman className="middle"/><FcBusinesswoman className="middle"/> </div>Profile</div>
                 <div className="textsubtitle ">This information will be displayed publicly so be careful what you share.</div> 
@@ -361,12 +392,14 @@ class ApplicationHire extends React.Component {
              
                 </div>
                 
-                <div className="buttons">
-                <ForgotNavigate  value={this.state}></ForgotNavigate>
-                </div>
-
+                <ForgotNavigate  value={this.state} handleCircle={this.handleCircle} handleClick1={this.handleClick1}></ForgotNavigate>
+               
+            
+                
                 
             </div>
+        
+
             </div>
            
           

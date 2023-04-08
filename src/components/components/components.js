@@ -15,7 +15,7 @@ import {CardLink} from 'reactstrap'
 import {Card} from 'reactstrap'
 import {CardTitle} from 'reactstrap'
 import {CardFooter} from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import {CardHeader} from 'reactstrap';
 import axios from 'axios';
 import { useEffect } from 'react';
@@ -67,7 +67,6 @@ export const CheckTokenExpiration = async () => {
 export const GetCurrentUser=()=>{
   //console.log(JSON.parse(localStorage.getItem("user")));
   return JSON.parse(localStorage.getItem("user"));
-  
 }
 
 
@@ -339,7 +338,7 @@ export  const Timezone = ({value, onChange}) => {
        
         <div className="select-wrapper">
           <TimezoneSelect 
-            value={value.selectedTimezone}
+            value={value.timeZoneValue}
             onChange={onChange}
             placeholder ="TIME ZONE"
           />
@@ -467,7 +466,9 @@ useEffect(()=>{
   };
 
   export const CardData = ({cardData}) => {
-
+    const params = useParams();
+    const history = useNavigate();
+   
     return ( 
      
         <div className="card-container">
@@ -478,9 +479,11 @@ useEffect(()=>{
                     </Link>
                     <CardBody className="cardbody">
                         <CardTitle tag="h5" className="cardtitle">{card.title}</CardTitle>
-                        <Link to={card.applicationLink}>
-                        <CardSubtitle className='cardsub'>View the applications</CardSubtitle>
-                        </Link>
+                     
+                         <Link to={`/viewapplications/?projectID=${card.projectID}`}> 
+                        <CardSubtitle className='cardsub' >View the applications</CardSubtitle>
+                         </Link> 
+                       
                         <CardText className="cardtext">{card.description}</CardText>
                         <CardLink href={card.freelancerLink} className="cardlink">
                             ClientAccount_Link
@@ -496,6 +499,32 @@ useEffect(()=>{
      );
   } 
   export const CardApplication = ({cardData}) => {
+    console.log(cardData)
+    const params = useParams();
+    const downloadFile=async(fileNames,projectApplicationID)=>{
+      console.log("fileNames")
+      await CheckTokenExpiration();
+      console.log(fileNames)
+      console.log(projectApplicationID)
+  try{
+      console.log(apiLink+'/downloadFile')
+      const response =await axios.get(apiLink+'/downloadApplication/'+projectApplicationID  ,{
+          responseType: 'blob',
+      });
+
+      const fileUrl = URL.createObjectURL(response.data);
+      const link = document.createElement('a');
+      link.href = fileUrl;
+   
+      link.setAttribute('download', fileNames);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+  
+    }catch(error){
+      console.log(error);
+    }
+}
     return ( 
      
         <div className="card-container2">
@@ -521,10 +550,9 @@ useEffect(()=>{
               </CardLink>
 
               <div className="center">
-              <a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
-                        download>
-              <button className="b2"> Click to download the resume</button>
-              </a>
+           
+              <button className="b1" onClick={()=>downloadFile(card.ResumeLink, card.projectApplicationID)}> Click to download the resume</button>
+            
               </div>  
 
               <Link to = "/">

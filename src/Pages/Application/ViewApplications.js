@@ -1,36 +1,84 @@
 import React from "react";
-import { CardApplication } from "../../components/components/components";
+import { CardApplication, CheckTokenExpiration, GetCurrentUser } from "../../components/components/components";
+import axios from "axios";
 import '../PostProject/Post_project.css'
+import { useParams, useSearchParams } from "react-router-dom";
+const apiLink ="http://localhost:8080/api/v1/user";
 
 
 class ViewAllApplications extends React.Component {
     constructor(props){
         super(props);
         this.state = { cardData :[ {
-            jobtype : "Civil Engineer",
-            description:"hello, I am a freelancer and I have worked at Srila.. I can understand what your plan is",
-            hourlyrate:100,
+            projectID:"",
+            jobtype : "",
+            description:"",
+            hourlyrate:"",
             ResumeLink :'resume',
-            freelancerAccountLik:'/portfolio',
+            freelancerAccountLik:"",
             profileImage: "https://picsum.photos/300/200",
-        },
-        {
-            jobtype : "Civil Engineer",
-            description:"hello, I am a freelancer and I have worked at Srila.. I can understand what your plan is",
-            hourlyrate:100,
-            ResumeLink :'resume',
-            freelancerAccountLik:'/portfolio',
-            profileImage: "https://picsum.photos/300/200",
+            projectApplicationID:""
         }] } 
+
+       
+        
     } 
+    componentDidMount() {
+     //   const parms = useParams();
+       // console
+        //const { location } = this.props;
+       // const query = new URLSearchParams(location);
+     //   console.log(query)
+       // const email = query.get('projectID');
+    //   const searchParams = useSearchParams(
+    //let params = queryString.parse(this.props.location.search)
+    const search = window.location.search;
+    const projectId = new URLSearchParams(search).get('projectID');
+    console.log(projectId)
+    
+    console.log(this.state.cardData[0].projectID)
+    this.fetchData(projectId);
+      }
+
+    fetchData =async(projectId) =>{
+        await CheckTokenExpiration();
+        console.log(projectId)
+        try{
+         
+          const response =await axios.get(apiLink+'/ViewAllApplicationCardsForTheProject/'+projectId,{
+            headers: {
+                Authorization: `Bearer ${GetCurrentUser().token}`
+              }});
+          
+              console.log(response.data);
+        
+           if(response.data.Applications) {
+            const cardData = response.data.Applications.map((application) => ({
+              projectID:application.projectID,
+              jobtype:application.selectedSubCategory,
+              description:application.moreDescription,
+              hourlyrate:application.hourlyRate,
+              ResumeLink:application.resumeName,
+              freelancerAccountLik:'/portfolio/'+application.freelancerID,
+              projectApplicationID:application.projectApplicationID
+            }));
+            this.setState({ cardData });
+            console.log("received data");
+          } 
+        }catch(error){
+          console.log(error);
+        }
+      } 
+    
    render(
        
     ) { 
         return (
             
-            <div >
+            <div className="background" >
+              
                     <CardApplication cardData = {this.state.cardData}/>
-                   
+                  
             </div>
         );
     }

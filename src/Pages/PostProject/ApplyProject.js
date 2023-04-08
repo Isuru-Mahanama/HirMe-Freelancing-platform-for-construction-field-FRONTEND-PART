@@ -4,13 +4,14 @@ import { VscAccount } from "react-icons/vsc";
 import { VscMail } from "react-icons/vsc";
 import { FcBusinesswoman } from "react-icons/fc";
 import {  FcBusinessman } from "react-icons/fc"
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import { GetCurrentUser } from "../../components/components/components";
+import { CheckTokenExpiration, GetCurrentUser } from "../../components/components/components";
 import { useNavigate } from "react-router-dom";
 
+
 const apiLink ="http://localhost:8080/api/v1/user";
+
 
 const ApplyProject=()=>{
    
@@ -52,7 +53,9 @@ const ApplyProject=()=>{
         hourlyRate:hourlyRate,
         
     }
-  const fileUploadHandler = () => {
+
+    const fileUploadHandler=async()=>{
+
     const formData = new FormData();
    // formData.append("file", props.value.files);
     formData.append("file",file);
@@ -60,7 +63,8 @@ const ApplyProject=()=>{
    console.log(appliedProjects)
     formData.append("appliedProjects", JSON.stringify(appliedProjects));
   //  console.log(props.value.image)
-    axios
+   await CheckTokenExpiration();
+  axios
       .post(apiLink+"/postApplications", formData, {
         headers: {
           Authorization: `Bearer ${GetCurrentUser().token}`
@@ -68,7 +72,7 @@ const ApplyProject=()=>{
       })
       .then((res) => {
         console.log(res.data);
-        
+        navigate("/viewworkerappliedprojects");
       })
       .catch((err) => {
         console.log(err);
@@ -87,6 +91,7 @@ const ApplyProject=()=>{
   }
 
     const fetchData =async() =>{
+      await CheckTokenExpiration();
         try{
           const response =await axios.get(apiLink+'/getAllProjectDetails/'+passedValue);
           const setCurrencyType = response.data.currencyTypes;
@@ -161,9 +166,9 @@ const ApplyProject=()=>{
                 </div>
                 </div>
                 <div className="buttons">
-                 <Link to ="/viewworkerappliedprojects">
+                 
                 <button className="button" onClick={fileUploadHandler}>Apply</button>
-                </Link>
+               
                 </div>
                 </div>
           

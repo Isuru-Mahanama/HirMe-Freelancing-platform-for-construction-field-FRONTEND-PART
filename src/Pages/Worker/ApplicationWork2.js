@@ -8,27 +8,12 @@ import { MdReceipt} from "react-icons/md";
 import 'react-phone-number-input/style.css';
 import { FcReadingEbook } from "react-icons/fc";
 import { IoAddCircleSharp} from "react-icons/io5";
-import { CategoryPicker, DataPicker, GetCurrentUser } from "../../components/components/components";
+import { CategoryPicker, CheckTokenExpiration, DataPicker, GetCurrentUser } from "../../components/components/components";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 const apiLink ="http://localhost:8080/api/v1/user";
 
-export const Navigate = (props) => {
- 
- 
-  console.log("sggsgs");
-  return (  
-    <div>
-        <div className="buttons">
-          <Link to="/firstPageforworker">
-             <button value={props.value} className="button" onClick={props.fileUploadHandler}>Sublmi</button> 
-             </Link>
-        </div>
-    </div>
-  );
-}
- 
 
 class ApplicationWork2 extends React.Component {
     constructor(props){
@@ -52,14 +37,17 @@ class ApplicationWork2 extends React.Component {
              ],
              Ecategory:[],
              Ccategory:[],
-             Acategory:[]
+             Acategory:[],
+             circle: 3,
+             active:1,
+             worker:false
         };
         this.handleClick = this.handleClick.bind(this);
         //this.handleInputChange = this.handleInputChange.bind(this);
         this.handleClickAward = this.handleClickAward.bind(this);
         
     }
-    
+  //   history = useNavigate();
     setECategory=(selectedList,subcategory)=>{
         console.log({selectedList});
         this.setState({category:"Engineering"})
@@ -107,6 +95,33 @@ class ApplicationWork2 extends React.Component {
         
         this.setState({ education: updatedEducation });
       }
+
+      handleClick1 = () => {
+    
+        if(this.state.active<=0){
+            this.setState({active:0})
+            
+             
+        }else{
+            this.setState({active:this.state.active-1})
+        }  
+      }
+
+       navigateToPreviousPage(){
+        this.handleClick1();
+        console.log(this.state.worker)
+       
+       // this.history("/applicationhire",{ state: { worker:this.state.worker}})
+      }
+      handleCircle = () => {
+    
+        if( this.state.active>=this.state.circle){
+            this.setState({active:this.state.circle})
+       }else{
+        this.setState({active:this.state.active+1})
+       }
+    }
+    
 
       
       updateArray=(e,index,name)=>{
@@ -164,14 +179,14 @@ class ApplicationWork2 extends React.Component {
         console.log("update the array")  
     }
    
-    token = GetCurrentUser();
+  
+   fileUploadHandler = async (props) => {
     
-     fileUploadHandler = (props) => {
-      
+      await CheckTokenExpiration();
       axios
           .post(apiLink+"/postEducationDetails",this.state, {
             headers: {
-              Authorization: "Bearer " + this.token.token
+              Authorization: "Bearer " +  GetCurrentUser().token
             }
           })
           .then((res) => {
@@ -194,7 +209,7 @@ class ApplicationWork2 extends React.Component {
             <div className="background">
 
             <div className="pageUp">
-            <ProgressBar></ProgressBar>
+            <ProgressBar active={this.state.active} circle={this.state.circle}></ProgressBar>
             </div>
 
             <div className="pageDown">
@@ -295,9 +310,19 @@ class ApplicationWork2 extends React.Component {
             </div>
                 </div>
 
-                <Navigate value={this.state} fileUploadHandler={this.fileUploadHandler}></Navigate>
+               
+                
                 
             </div>
+            
+           
+                <Link to="/applicationhire">
+                <button className="button btns" disabled ={this.state.active>0?false:true} onClick={this.navigateToPreviousPage}>Prev</button>
+                </Link>
+
+                <Link to="/firstPageforworker">
+                <button className="button btns " disabled ={this.state.active>=this.state.circle-1?true:false}onClick={this.fileUploadHandler}>Submit</button>
+                </Link>
             </div>
            
         );

@@ -71,7 +71,7 @@ function Selected({value,onChange , onClick}) {
       <select
         name="languageLevel"
         value={value.languageLevel}
-        onClick={onClick}>
+        onChange={onClick}>
         {datalanguageLevel.map(item=>(
           <option key={item.languageLevelID} value={item.languageLevel}>
             {item.languageLevel}
