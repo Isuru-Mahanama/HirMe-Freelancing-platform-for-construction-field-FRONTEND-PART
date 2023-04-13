@@ -42,7 +42,7 @@ function NavigationHire({ value, handleCircle, handleClick1,setClientDetals }){
                 body:JSON.stringify()
 
              }).then(Response => Response.json)
-             
+             console.log(Response)
                .then(data => setup(data))
                .catch(error => console.log(error));
               
@@ -74,7 +74,9 @@ function NavigationHire({ value, handleCircle, handleClick1,setClientDetals }){
             body:JSON.stringify()
 
          }).then(res => res.json())
+        
          .then(data => {
+            console.log(data)
           //  backend stored client data diplaying
           setClientDetals(data.ClientDetails)
             
@@ -101,7 +103,7 @@ class ApplicationHire2 extends React.Component {
         this.state ={
              companyDetails:"",
              websiteLink:"",
-             faceBookLink:"dd",
+             faceBookLink:"",
              instagramLink:"",
              circle: 3,
              active:1,

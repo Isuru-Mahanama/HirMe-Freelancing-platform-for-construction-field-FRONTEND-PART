@@ -106,14 +106,14 @@ class FirstPageForHire extends React.Component {
     return (
       <div className="background " >
          <div className="devideLeft">
-       <SlidebarClient/>
+        <SlidebarClient/> 
         </div>
         <div className="devideRight ">
           <div className="mostright ">
             <NavigationWorker value={this.state}></NavigationWorker>
           </div>
           </div>
-          <SearchBar options={this.state.options}></SearchBar>
+          {/* <SearchBar options={this.state.options}></SearchBar> */}
         <div className="middleright ">
         <div className="col">
           

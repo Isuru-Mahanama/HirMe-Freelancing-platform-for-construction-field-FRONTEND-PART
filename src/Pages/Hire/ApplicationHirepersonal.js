@@ -190,7 +190,7 @@ class ApplicationHire extends React.Component {
         console.log("Hi its fetching data from user")
         await CheckTokenExpiration();
         try{
-          const response =await axios.get(apiLink+'/getalluserandfreelancerDetais',{
+          const response =await axios.get(apiLink+'/getalluserandclientDetais',{
           headers: {
             Authorization: "Bearer " +  GetCurrentUser().token
           }});

@@ -30,6 +30,8 @@ import PostProjectIndex from './Pages/SignUpAndLogin/PostProjectIndex';
 import CreatOnlyEmailForPostProjection from './Pages/SignUpAndLogin/CreatOnlyEmailForPostProjection';
 import Admin from './Admin/admin';
 import ViewAllApplications from './Pages/Application/ViewApplications.js';
+import Scheduling from './Pages/Scheduling/Sheduling';
+
 function App() {
 
     const[isUserLoggedIn,setUserLoggedIn] = useState(false);
@@ -142,9 +144,10 @@ function App() {
             <Route exact path="/admin" element={<Admin/>} >
             
             </Route>
-           
-              
+            <Route exact path="/Scheduling" element={<Scheduling/>} >
             
+            </Route>
+           
               
 
       </Routes>

@@ -51,8 +51,6 @@ const SignupForm = (props) => {
         
           const user = { email ,password};
 
-          
-          
           fetch(apiLink+"/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },

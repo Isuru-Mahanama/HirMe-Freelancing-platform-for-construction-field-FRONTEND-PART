@@ -103,14 +103,14 @@ class AccountPageWorker extends React.Component {
     return (
       <div className="background" >
          <div className="devideLeft">
-        <Slidebar></Slidebar>
+      {/*   <Slidebar></Slidebar> */}
         </div>
         <div className="devideRight">
           <div className="mostright">
             <NavigationWorker></NavigationWorker>
           </div>
           </div>
-          <SearchBar options={this.state.options}></SearchBar>
+          {/* <SearchBar options={this.state.options}></SearchBar> */}
         <div className="middleright">
         <div className="col">
           
