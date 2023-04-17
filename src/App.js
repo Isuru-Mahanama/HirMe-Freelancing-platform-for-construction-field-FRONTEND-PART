@@ -23,7 +23,7 @@ import AccountPageWorker from './Pages/Worker/AccountPageForWorker';
 import TakeMoney from './Pages/PaymentMethod/Payments';
 import ApplyProject from './Pages/PostProject/ApplyProject';
 import PostedProjects from './Pages/PostProject/MyProjects';
-
+import PortfolioFreelancer from './components/Portfolio/PortForlioFreelancer';
 import AppliedProjects from './Pages/PostProject/AppliedProjects';
 import Chat from './components/CattingSection/CattingSction';
 import PostProjectIndex from './Pages/SignUpAndLogin/PostProjectIndex';
@@ -145,6 +145,10 @@ function App() {
             
             </Route>
             <Route exact path="/Scheduling" element={<Scheduling/>} >
+            
+            </Route>
+
+            <Route exact path="/portfolioFreelancer" element={<PortfolioFreelancer/>} >
             
             </Route>
            

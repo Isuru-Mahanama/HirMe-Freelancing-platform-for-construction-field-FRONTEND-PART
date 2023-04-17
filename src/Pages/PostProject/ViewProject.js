@@ -75,6 +75,7 @@ const ViewProject=(prop)=>  {
         await CheckTokenExpiration()
         try{
           const response =await axios.get(apiLink+'/viewallProjectDetails/'+params.projectId);
+          console.log(response.data)
           setData(response.data.project)
           
           setCategoryDetails(response.data.subcategories)
@@ -173,6 +174,25 @@ const ViewProject=(prop)=>  {
                         </tr>
                     </thead>
                  </table>
+
+                 <tr className="table">
+                    <td>Green Design Architect</td>
+                    <td>{10}</td>
+                    <td>{30}</td>
+                    <td>{300}</td>
+                  </tr>
+                  <tr className="table">
+                    <td>Interior Designer</td>
+                    <td>{20}</td>
+                    <td>{40}</td>
+                    <td>{800}</td>
+                  </tr>
+                  <tr className="table">
+                    <td>Structural engineering</td>
+                    <td>{20}</td>
+                    <td>{40}</td>
+                    <td>{800}</td>
+                  </tr>
 
               {/*    {this.state.map((row,index)=>(
                     <tr key={index} className="table">

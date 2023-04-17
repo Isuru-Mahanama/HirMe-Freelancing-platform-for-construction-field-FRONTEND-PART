@@ -11,30 +11,43 @@ import { Link } from "react-router-dom"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { CheckTokenExpiration, GetCurrentUser } from "../../components/components/components";
-
+import Toggle from 'react-toggle'
 
 
 const apiLink = "http://localhost:8080/api/v1/user";
-function NavigationWorker(props){
+function NavigationWorker({value}){
 
+  const handleBaconChange=(event)=> {
+    history("/loginas")
+    // do something with event.target.checked
+  }
   const worker = true;
-  
+  const baconIsReady= true
+
   const history = useNavigate();
   const handleSignUp=(e)=>{
     history("/applicationhire",{ state: { worker:worker}});
+  }
+  const gotoPortfolio=(e)=>{
+    history("/portfolioFreelancer/"+value.freelancerID);
   }
 
   return(<>
          
          <button className="b1"  onClick={(e)=>handleSignUp(e)}>Set up your account!!!!!!</button>
         
-          <Link  to="/setupworker">
-          <button className="b1" >Edit your profile!!!</button>
-          </Link>
+          
      
-          <Link  to="/portfolio">
-          <button className="b1" >Portfolio!!!</button>
-          </Link>
+          
+          <button className="b1" onClick={(e)=>gotoPortfolio(e)}>Portfolio!!!</button>
+         
+          <label>
+          <Toggle
+          defaultChecked={baconIsReady}
+          onChange={(e)=>handleBaconChange(e)} />
+          <span>switch</span>
+          </label>
+         
         
   </>
   )
@@ -49,7 +62,11 @@ class AccountPageWorker extends React.Component {
     City:"",
     education:[],
     moreDetails:"",
-    category:[]
+    category:[],
+    image:[],
+    profileImage:"",
+    baconIsReady: false,
+    freelancerID:""
     
     } ; 
 
@@ -58,7 +75,18 @@ class AccountPageWorker extends React.Component {
     this.fetchData();
     
   }
-   
+  setImage=(e)=>{
+    
+    let files = e.target.files;
+   // console.log(files)
+    let reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+    reader.onload = (e) =>{
+     
+    this.setState({ image: files[0]}, () => { console.log(this.state.image) });
+  
+    }
+  }
     
   
    fetchData =async() =>{
@@ -79,7 +107,10 @@ class AccountPageWorker extends React.Component {
             City:response.data.City,
             education:response.data.FreelancerDetails.freelancerEducationDetails,
             moreDetails:response.data.FreelancerDetails.moreDetail,
-            category:response.data.FreelancerDetails.categoryDetails}
+            category:response.data.FreelancerDetails.categoryDetails,
+            profileImage:response.data.profileImage,
+            freelancerID:response.data.FreelancerDetails.freelancerID
+          }
           )
         
       }
@@ -87,6 +118,7 @@ class AccountPageWorker extends React.Component {
       this.setState(
         { projects:response.data.Projects,
           userName:response.data.UserName,
+          profileImage:response.data.profileImage
         }
         )
      }
@@ -96,6 +128,24 @@ class AccountPageWorker extends React.Component {
     }
   } 
   
+  fileUploadHandler = async (e) => {
+      
+    const formData = new FormData();
+    
+    formData.append("image",this.state.image);
+    
+    await CheckTokenExpiration();
+    axios
+      .post(apiLink+"/postProfileImage", formData, {
+        headers: {
+          Authorization: `Bearer ${GetCurrentUser().token}`
+        }
+      })
+      
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   render(
      
   ) { 
@@ -103,14 +153,14 @@ class AccountPageWorker extends React.Component {
     return (
       <div className="background" >
          <div className="devideLeft">
-      {/*   <Slidebar></Slidebar> */}
+       <Slidebar></Slidebar> 
         </div>
         <div className="devideRight">
           <div className="mostright">
-            <NavigationWorker></NavigationWorker>
+            <NavigationWorker value={this.state}></NavigationWorker>
           </div>
           </div>
-          {/* <SearchBar options={this.state.options}></SearchBar> */}
+          <SearchBar options={this.state.projects} searchallProjects ={true} showcard = {true}></SearchBar> 
         <div className="middleright">
         <div className="col">
           
@@ -177,7 +227,10 @@ class AccountPageWorker extends React.Component {
           </div>
           
           <div className="profile-card">
-          <img className="profile-photo" alt="Sample" src="https://picsum.photos/300/200" /> 
+          <img className="profile-photo" alt="Sample" src="http://localhost:8080/api/v1/user/profileimage.jpg" /> 
+          <input   type="file"  value={this.state.file} onChange={(e)=>this.setImage(e)}/>
+          <button className="button1" onClick={(e)=>this.fileUploadHandler(e)}>Upload a profile image</button>
+         
           <div className="text-profile1">{this.state.userName}</div>
 
           <div className="text-profile">

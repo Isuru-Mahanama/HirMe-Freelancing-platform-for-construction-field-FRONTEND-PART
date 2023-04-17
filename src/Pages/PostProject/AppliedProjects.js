@@ -1,6 +1,6 @@
 import React from "react";
 import '../PostProject/Post_project.css';
-import { GetCurrentUser, MyApplications } from "../../components/components/components";
+import { CheckTokenExpiration, GetCurrentUser, MyApplications } from "../../components/components/components";
 import SearchBar from "../../components/components/searchbar";
 import axios from "axios";
 const apiLink = "http://localhost:8080/api/v1/user";
@@ -31,6 +31,7 @@ class AppliedProjects extends React.Component {
 
     
    fetchData =async() =>{
+        await CheckTokenExpiration();
         try{
           const response =await axios.get(apiLink+"/getAllApplicationDetails",{
             headers: {
@@ -74,8 +75,8 @@ class AppliedProjects extends React.Component {
         return (
             <div className="background">
 
-                    make it to search by date
-                    <SearchBar options={this.state.options}></SearchBar>
+                    
+                   {/*  <SearchBar options={this.state.options}></SearchBar> */}
                      <MyApplications cardData = {this.state.cardData}/>
                   
                  

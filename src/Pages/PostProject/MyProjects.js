@@ -45,7 +45,7 @@ class PostedProjects extends React.Component {
                   description: project.smallDescription,
                   image: project.fileUplod.imagePath,
                
-                  freelancerLink:"/portfolio/"+ response.data.ClientDetails.clientID,
+                  freelancerLink:"/portfolio/"+ project.fk_userID.clientID,
                  // profileImage: project.profileImage,
                   price: project.currencyType,
                   prizeminimum:project.prizeminimum, 
@@ -66,10 +66,27 @@ class PostedProjects extends React.Component {
     render() { 
        
         return (
-            <div className="background">
-                    <CardData cardData={this.state.cardData}/>
-                  
-            </div>
+          <div className="background">
+          {this.state.cardData != null && (
+            <>
+              
+              <div className="flex">
+                {this.state.cardData
+                  .slice(0, 3)
+                  .map((card, index) => <CardData cardData={[card]} key={index} />)}
+              </div>
+              {this.state.cardData
+                .slice(3,6)
+                .map((card, index) => <CardData cardData={[card]} key={index} />)}
+            </>
+          )}
+        </div>
+     
+        
+        
+        
+        
+        
         );
     }
 }

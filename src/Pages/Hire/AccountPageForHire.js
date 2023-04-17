@@ -1,4 +1,4 @@
-
+import Toggle from 'react-toggle'
 import React from "react";
 import  { SlidebarClient } from "../../components/slidebar/slidebar";
 import {CardBody} from 'reactstrap'
@@ -6,24 +6,35 @@ import {CardText} from 'reactstrap'
 import {CardLink} from 'reactstrap'
 import {Card} from 'reactstrap'
 import {CardTitle} from 'reactstrap'
+import "react-toggle/style.css"
 import SearchBar from "../../components/components/searchbar";
 import '../Hire/AccountPageHire.css'
-import { Link } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { CheckTokenExpiration, GetCurrentUser } from "../../components/components/components";
-
-
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 const apiLink = "http://localhost:8080/api/v1/user";
 function NavigationWorker({value}){
 
+  const baconIsReady= true
   const worker = false;
   console.log(value.City)
   const history = useNavigate();
   const handleSignUp=(e)=>{
     history("/applicationhire",{ state: { worker:worker}});
   }
+  const handleBaconChange=(event)=> {
+    history("/loginas")
+    // do something with event.target.checked
+  }
+  const viewPortfolio =(e)=>{
+    history("/portfolio/"+value.clientID)
+  }
+  
+ 
 
   return(<>
          
@@ -31,11 +42,17 @@ function NavigationWorker({value}){
         
          
           {value.City!=="-" && <button className="b1" onClick={(e)=>handleSignUp(e)} >Edit your profile!!!</button>}
-        
-     
-          <Link  to="/portfolio">
-          <button className="b1" >Portfolio!!!</button>
-          </Link>
+          
+    
+          <button className="b1" onClick={(e)=>viewPortfolio(e)} >Portfolio!!!</button>
+          
+          <label>
+          <Toggle
+          defaultChecked={baconIsReady}
+          onChange={(e)=>handleBaconChange(e)} />
+          <span>switch</span>
+          </label>
+         
         
   </>
   )
@@ -51,16 +68,60 @@ class FirstPageForHire extends React.Component {
     language:[],
     userName:"",
     City:"",
+    image:[],
+    profileImage:"",
+    baconIsReady: false,
+    windowWidth: window.innerWidth,
+    clientID:""
   
     } ; 
+   
 
   imageElement = new Image();
    componentDidMount() {
+    window.addEventListener('resize', this.handleResize); // Add event listener for resize
     this.fetchData();
     
   }
-   
-   
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize); // Remove event listener on unmount
+  }
+  handleResize = () => {
+    this.setState({ windowWidth: window.innerWidth }); // Update state with new window width on resize
+  };
+  setImage=(e)=>{
+    
+    let files = e.target.files;
+   // console.log(files)
+    let reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+    reader.onload = (e) =>{
+     
+    this.setState({ image: files[0]}, () => { console.log(this.state.image) });
+  
+    }
+  }
+
+   fileUploadHandler = async (e) => {
+      
+    const formData = new FormData();
+    
+    formData.append("image",this.state.image);
+    
+    await CheckTokenExpiration();
+    axios
+      .post(apiLink+"/postProfileImage", formData, {
+        headers: {
+          Authorization: `Bearer ${GetCurrentUser().token}`
+        }
+      })
+      
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  
   
    fetchData =async() =>{
     await CheckTokenExpiration();
@@ -81,6 +142,8 @@ class FirstPageForHire extends React.Component {
             faceBookLink:response.data.ClientDetails.faceBookLink,
             instagramLink:response.data.ClientDetails.instagramLink,
             websiteLink:response.data.ClientDetails.websiteLink,
+            profileImage:response.data.profileImage,
+            clientID:response.data.ClientDetails.clientID
           }
           )
         
@@ -90,6 +153,7 @@ class FirstPageForHire extends React.Component {
         { projects:response.data.Projects,
           City:response.data.City,
           userName:response.data.UserName,
+           profileImage:response.data.profileImage
         }
         )
      }
@@ -102,21 +166,27 @@ class FirstPageForHire extends React.Component {
   render(
      
   ) { 
-    
+    const isDesktop = this.state.windowWidth >= 1120;
+    console.log("isDesktop")
+    console.log(isDesktop)
     return (
       <div className="background " >
+         {!isDesktop && <SlidebarClient isDesktop={isDesktop}/> }
          <div className="devideLeft">
-        <SlidebarClient/> 
+       {isDesktop && <SlidebarClient isDesktop={isDesktop}/> }
         </div>
         <div className="devideRight ">
           <div className="mostright ">
             <NavigationWorker value={this.state}></NavigationWorker>
           </div>
           </div>
-          {/* <SearchBar options={this.state.options}></SearchBar> */}
+           
+         
+           
         <div className="middleright ">
-        <div className="col">
           
+        <div className="col">
+        <SearchBar options={this.state.projects} searchallProjects ={true} showcard = {true}></SearchBar> 
         { this.state.projects!=null && this.state.projects.slice(0, Math.ceil(this.state.projects.length / 2)).map(item => (
             
             <Card key={item.projectID} className="cards-pack" >
@@ -148,7 +218,7 @@ class FirstPageForHire extends React.Component {
         
             </div>
 
-        <div className="col">
+        <div className="top-margin">
         { this.state.projects!=null  && this.state.projects.slice(Math.ceil(this.state.projects.length / 2)).map(item => (
              
              <Card key={item.projectID} className="cards-pack" >
@@ -178,9 +248,12 @@ class FirstPageForHire extends React.Component {
           ))}
         
           </div>
-          
+        
           <div className="profile-card">
-          <img className="profile-photo" alt="Sample" src="https://picsum.photos/300/200" /> 
+          
+          <img className="profile-photo" alt="Sample" src={this.state.profileImage} /> 
+          <input   type="file"  value={this.state.file} onChange={(e)=>this.setImage(e)}/>
+          <button className="button1" onClick={(e)=>this.fileUploadHandler(e)}>Upload a profile image</button>
           <div className="text-profile1">{this.state.userName}</div>
 
           <div className="text-profile">

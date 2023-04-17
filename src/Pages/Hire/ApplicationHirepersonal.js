@@ -394,9 +394,6 @@ class ApplicationHire extends React.Component {
                 
                 <ForgotNavigate  value={this.state} handleCircle={this.handleCircle} handleClick1={this.handleClick1}></ForgotNavigate>
                
-            
-                
-                
             </div>
         
 

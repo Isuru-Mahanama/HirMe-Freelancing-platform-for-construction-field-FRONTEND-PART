@@ -32,11 +32,12 @@ class ViewAllApplications extends React.Component {
        // const email = query.get('projectID');
     //   const searchParams = useSearchParams(
     //let params = queryString.parse(this.props.location.search)
+    console.log("this.state.cardData[0].projectID")
     const search = window.location.search;
     const projectId = new URLSearchParams(search).get('projectID');
     console.log(projectId)
     
-    console.log(this.state.cardData[0].projectID)
+   
     this.fetchData(projectId);
       }
 

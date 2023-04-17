@@ -47,6 +47,30 @@ class ApplicationWork2 extends React.Component {
         this.handleClickAward = this.handleClickAward.bind(this);
         
     }
+
+    fetchFreelancerDetails=()=>{
+      console.log("this is freelancer page")
+      fetch(apiLink+"/getAllProjectDetails",{
+        method :"GET",
+        headers: { "Content-Type": "application/json" ,
+                  "Authorization": `Bearer ${ GetCurrentUser().token}`},
+        body:JSON.stringify()
+
+     }).then(res => res.json())
+    
+     .then(data => {
+        console.log(data)
+      console.log(data.FreelancerDetails.freelancerEducationDetails)
+    //  setClientDetals(data.ClientDetails)
+        this.setState(
+          {moreDetail:data.FreelancerDetails.moreDetail,
+          })
+      
+     })
+    }
+    componentDidMount(){
+      this.fetchFreelancerDetails();
+    }
   //   history = useNavigate();
     setECategory=(selectedList,subcategory)=>{
         console.log({selectedList});
@@ -67,6 +91,7 @@ class ApplicationWork2 extends React.Component {
   };
 
     setStartDate =(e)=>{
+      console.log(e)
         this.setState({startDate:e});
        }
 
@@ -300,7 +325,7 @@ class ApplicationWork2 extends React.Component {
 
             <label className="date"><VscMail/>From</label>
             <DataPicker required value={this.state.startDate} onChange={this.setStartDate}></DataPicker>
-   
+              
             </div>    
             <div className="inputBox dateTo">
 

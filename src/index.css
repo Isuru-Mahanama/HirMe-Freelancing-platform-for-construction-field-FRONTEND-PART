@@ -59,7 +59,7 @@
   flex-direction: column;
   border-radius: 70%;
   transform: rotate(5deg);
-  top: -310px;
+  top: -410px;
   left: -70px;
   background: rgb(194, 194, 163);
   background: linear-gradient(
@@ -214,7 +214,22 @@ Input:not(:last-of-type){
     direction: "vertical";
     margin: 0.2em;
    }
+    
+   .button1 {
+    display: inline-block;
    
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color:#090807;
+    border: none;
+    border-radius: 15px;
+    margin-left: 2cm;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+    
+  }
    .button {
     display: inline-block;
     padding: 5px 25px;
@@ -254,6 +269,14 @@ Input:not(:last-of-type){
   overflow: hidden;
   text-decoration: none;
   }
+
+  [type='file'] {
+    
+    padding-left: 1.5cm;
+    padding-bottom: 0.3cm;
+    font-size: unset;
+    line-height: inherit;
+}
   .inputhiglight {
     
    
@@ -301,7 +324,7 @@ Input:not(:last-of-type){
     cursor: pointer;
    text-decoration: none;
     outline: none;
-    color: rgb(51, 147, 185);
+    
     background-color:rgb(255, 255, 255);;
     border: none;
     border-radius: 15px;
